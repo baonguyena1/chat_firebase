@@ -13,9 +13,9 @@ target 'ChatFirebase' do
   pod 'RxFirebase/Auth'
   pod 'RxFirebase/Functions'
   pod 'Firebase/Analytics'
-
-  pod 'TextFieldEffects'  # https://github.com/raulriera/TextFieldEffects
+  
   pod 'SwiftLint' # https://github.com/realm/SwiftLint
+  pod 'MBProgressHUD' # https://github.com/jdg/MBProgressHUD
 
   target 'ChatFirebaseTests' do
     inherit! :search_paths
