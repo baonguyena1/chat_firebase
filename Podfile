@@ -6,12 +6,16 @@ target 'ChatFirebase' do
   use_frameworks!
 
   # Pods for ChatFirebase
-  pod 'RxFirebase/Firestore'
+  pod 'RxFirebase/Firestore'  # https://github.com/RxSwiftCommunity/RxFirebase
   pod 'RxFirebase/RemoteConfig'
   pod 'RxFirebase/Database'
   pod 'RxFirebase/Storage'
   pod 'RxFirebase/Auth'
   pod 'RxFirebase/Functions'
+  pod 'Firebase/Analytics'
+
+  pod 'TextFieldEffects'  # https://github.com/raulriera/TextFieldEffects
+  pod 'SwiftLint' # https://github.com/realm/SwiftLint
 
   target 'ChatFirebaseTests' do
     inherit! :search_paths
