@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
-import MBProgressHUD
 
 protocol Reusable {
     static var reuseID: String {get}
@@ -67,15 +64,3 @@ extension ControllerInstance where Self: UIViewController {
 }
 
 extension UIViewController: ControllerInstance { }
-
-extension Reactive where Base: UIView {
-    public var isShowHUD: Binder<Bool> {
-        return Binder<Bool>.init(base.self, scheduler: MainScheduler.instance) { (view, isLoading) in
-            if isLoading {
-                MBProgressHUD.showAdded(to: view, animated: true)
-            } else {
-                MBProgressHUD.hide(for: view, animated: true)
-            }
-        }
-    }
-}

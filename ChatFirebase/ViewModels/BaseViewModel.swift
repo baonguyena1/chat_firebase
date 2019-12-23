@@ -11,16 +11,5 @@ import RxCocoa
 
 protocol BaseViewModel {
     var rx_isLoading: PublishRelay<Bool> { get }
-    
-    func setLoading(_ value: Bool)
-}
-
-extension BaseViewModel {
-    var rx_isLoading: PublishRelay<Bool> {
-        return PublishRelay<Bool>()
-    }
-    
-    func setLoading(_ value: Bool) {
-        rx_isLoading.accept(value)
-    }
+    var rx_error: PublishRelay<String> { get }
 }

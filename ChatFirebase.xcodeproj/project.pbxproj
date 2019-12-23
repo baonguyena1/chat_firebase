@@ -46,6 +46,16 @@
 		9B59C46C23AC6C62004EFF80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B4218C423AC5C8E007F2041 /* LaunchScreen.storyboard */; };
 		9B59C46D23AC6C62004EFF80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B59C45323AC62C6004EFF80 /* GoogleService-Info.plist */; };
 		9B59C46E23AC6C62004EFF80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B4218C223AC5C8E007F2041 /* Assets.xcassets */; };
+		9BE54FE823B0AEE1007CFA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE54FE723B0AEE1007CFA48 /* Main.storyboard */; };
+		9BE54FE923B0AEE1007CFA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE54FE723B0AEE1007CFA48 /* Main.storyboard */; };
+		9BE54FEB23B0B09C007CFA48 /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FEA23B0B09C007CFA48 /* FireBaseManager.swift */; };
+		9BE54FEC23B0B09C007CFA48 /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FEA23B0B09C007CFA48 /* FireBaseManager.swift */; };
+		9BE54FEE23B0B12F007CFA48 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FED23B0B12F007CFA48 /* Logger.swift */; };
+		9BE54FEF23B0B12F007CFA48 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FED23B0B12F007CFA48 /* Logger.swift */; };
+		9BE54FF123B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF023B0B5BA007CFA48 /* Reactive+Helper.swift */; };
+		9BE54FF223B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF023B0B5BA007CFA48 /* Reactive+Helper.swift */; };
+		9BE54FF423B0BF82007CFA48 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */; };
+		9BE54FF523B0BF82007CFA48 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */; };
 		A2D3935D4A449CFC4AB62B7F /* Pods_ChatFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1FF3D52656B8A6A1AF3040 /* Pods_ChatFirebase.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +109,11 @@
 		9B4218DD23AC5C8E007F2041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B59C45323AC62C6004EFF80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B59C47423AC6C62004EFF80 /* ChatFirebase staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChatFirebase staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BE54FE723B0AEE1007CFA48 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9BE54FEA23B0B09C007CFA48 /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseManager.swift; sourceTree = "<group>"; };
+		9BE54FED23B0B12F007CFA48 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		9BE54FF023B0B5BA007CFA48 /* Reactive+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Helper.swift"; sourceTree = "<group>"; };
+		9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		B4F2B8AEC860B854AF434528 /* Pods-ChatFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase.release.xcconfig"; path = "Target Support Files/Pods-ChatFirebase/Pods-ChatFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		BD3BF077FA6CBBB957282394 /* Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChatFirebase-ChatFirebaseUITests/Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E9A34DE416BDDDB6F72572 /* Pods_ChatFirebase_ChatFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatFirebase_ChatFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +171,7 @@
 		9B1055B723AC71DF009C1AF5 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				9BE54FED23B0B12F007CFA48 /* Logger.swift */,
 				9B1055B823AC71FC009C1AF5 /* ApplicationNavigator.swift */,
 			);
 			path = Utilities;
@@ -251,6 +267,7 @@
 				9B4218B923AC5C8C007F2041 /* AppDelegate.swift */,
 				9B4218C423AC5C8E007F2041 /* LaunchScreen.storyboard */,
 				9B1055AE23AC6EB2009C1AF5 /* Authorization.storyboard */,
+				9BE54FE723B0AEE1007CFA48 /* Main.storyboard */,
 				9B59C45223AC62BC004EFF80 /* Resources */,
 				9B59C45823AC6AA4004EFF80 /* Infos */,
 				9B59C45723AC6A8E004EFF80 /* Constants */,
@@ -280,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				9B1055BB23AC7274009C1AF5 /* Authorization */,
+				9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -289,6 +307,7 @@
 			children = (
 				9B1055BF23AC8186009C1AF5 /* UIView+Helper.swift */,
 				9B1055D223ACC74F009C1AF5 /* String+Helper.swift */,
+				9BE54FF023B0B5BA007CFA48 /* Reactive+Helper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +331,7 @@
 		9B59C45F23AC6B62004EFF80 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9BE54FEA23B0B09C007CFA48 /* FireBaseManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -469,6 +489,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BE54FE823B0AEE1007CFA48 /* Main.storyboard in Resources */,
 				9B1055AF23AC6EB2009C1AF5 /* Authorization.storyboard in Resources */,
 				9B1055AC23AC6DE8009C1AF5 /* .swiftlint.yml in Resources */,
 				9B4218C623AC5C8E007F2041 /* LaunchScreen.storyboard in Resources */,
@@ -496,6 +517,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BE54FE923B0AEE1007CFA48 /* Main.storyboard in Resources */,
 				9B1055B023AC6EB2009C1AF5 /* Authorization.storyboard in Resources */,
 				9B1055AD23AC6DE8009C1AF5 /* .swiftlint.yml in Resources */,
 				9B59C46C23AC6C62004EFF80 /* LaunchScreen.storyboard in Resources */,
@@ -633,14 +655,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BE54FEB23B0B09C007CFA48 /* FireBaseManager.swift in Sources */,
 				9B1055C023AC8186009C1AF5 /* UIView+Helper.swift in Sources */,
+				9BE54FF123B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */,
 				9B1055D023ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
 				9B1055B923AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
+				9BE54FF423B0BF82007CFA48 /* UserListViewController.swift in Sources */,
 				9B1055D323ACC74F009C1AF5 /* String+Helper.swift in Sources */,
 				9B1055C323ACA27C009C1AF5 /* SignUpViewController.swift in Sources */,
 				9B1055C623ACA32D009C1AF5 /* Constant.swift in Sources */,
 				9B1055CD23ACA8B4009C1AF5 /* SignUpViewModel.swift in Sources */,
 				9B4218BA23AC5C8C007F2041 /* AppDelegate.swift in Sources */,
+				9BE54FEE23B0B12F007CFA48 /* Logger.swift in Sources */,
 				9B1055BD23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
 				9B1055B223AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
 				9B1055B523AC718C009C1AF5 /* Enums.swift in Sources */,
@@ -667,14 +693,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BE54FEC23B0B09C007CFA48 /* FireBaseManager.swift in Sources */,
 				9B1055C123AC8186009C1AF5 /* UIView+Helper.swift in Sources */,
+				9BE54FF223B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */,
 				9B1055D123ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
 				9B1055BA23AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
+				9BE54FF523B0BF82007CFA48 /* UserListViewController.swift in Sources */,
 				9B1055D423ACC74F009C1AF5 /* String+Helper.swift in Sources */,
 				9B1055C423ACA27C009C1AF5 /* SignUpViewController.swift in Sources */,
 				9B1055C723ACA32D009C1AF5 /* Constant.swift in Sources */,
 				9B1055CE23ACA8B4009C1AF5 /* SignUpViewModel.swift in Sources */,
 				9B59C46723AC6C62004EFF80 /* AppDelegate.swift in Sources */,
+				9BE54FEF23B0B12F007CFA48 /* Logger.swift in Sources */,
 				9B1055BE23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
 				9B1055B323AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
 				9B1055B623AC718C009C1AF5 /* Enums.swift in Sources */,

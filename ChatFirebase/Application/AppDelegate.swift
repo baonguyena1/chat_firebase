@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         appNavigator = ApplicationNavigator(window: self.window)
-        appNavigator.showAuthorization()
+        appNavigator.checkIfUserIsSignedIn()
         
         return true
     }

@@ -14,9 +14,35 @@ class ApplicationNavigator {
     init(window: UIWindow?) {
         self.window = window
     }
+    
+    func checkIfUserIsSignedIn() {
+        let auth = FireBaseManager.shared.auth
+        FireBaseManager.shared.signOut()
+        if auth.currentUser == nil {
+            showAuthorization()
+        } else {
+            showUserList()
+        }
+        auth.addStateDidChangeListener { [weak self] (auth, user) in
+            if user == nil {
+                self?.showAuthorization()
+            } else {
+                self?.showUserList()
+            }
+        }
+    }
+    
     func showAuthorization() {
         let signInViewController = SignInViewController.instantiate(name: StoryboardName.Authorization.rawValue)
         let navigationController = UINavigationController(rootViewController: signInViewController)
+        navigationController.navigationBar.isHidden = true
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+    }
+    
+    func showUserList() {
+        let userListViewController = UserListViewController.instantiate(name: StoryboardName.Main.rawValue)
+        let navigationController = UINavigationController(rootViewController: userListViewController)
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
