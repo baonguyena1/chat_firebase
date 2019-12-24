@@ -39,10 +39,10 @@ class SignUpViewController: UIViewController {
     
     private func setupViewModel() {
         viewModel = SignUpViewModel()
-        _ = nameTextField.rx.text.compactMap { $0 }.bind(to: viewModel.nameText)
-        _ = emailTextField.rx.text.compactMap { $0 }.bind(to: viewModel.emailText)
-        _ = passwordTextField.rx.text.compactMap { $0 }.bind(to: viewModel.passwordText)
-        _ = confirmPasswordTextField.rx.text.compactMap { $0 }.bind(to: viewModel.confirmPasswordText)
+        _ = nameTextField.rx.text.orEmpty.bind(to: viewModel.nameText)
+        _ = emailTextField.rx.text.orEmpty.bind(to: viewModel.emailText)
+        _ = passwordTextField.rx.text.orEmpty.bind(to: viewModel.passwordText)
+        _ = confirmPasswordTextField.rx.text.orEmpty.bind(to: viewModel.confirmPasswordText)
         
         viewModel.isValid
             .bind(to: signUpButton.rx.isEnabled)

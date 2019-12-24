@@ -56,6 +56,10 @@
 		9BE54FF223B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF023B0B5BA007CFA48 /* Reactive+Helper.swift */; };
 		9BE54FF423B0BF82007CFA48 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */; };
 		9BE54FF523B0BF82007CFA48 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */; };
+		9BE54FF723B0D3EE007CFA48 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF623B0D3EE007CFA48 /* SignInViewModel.swift */; };
+		9BE54FF823B0D3EE007CFA48 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF623B0D3EE007CFA48 /* SignInViewModel.swift */; };
+		9BE54FFA23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */; };
+		9BE54FFB23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */; };
 		A2D3935D4A449CFC4AB62B7F /* Pods_ChatFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1FF3D52656B8A6A1AF3040 /* Pods_ChatFirebase.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +118,8 @@
 		9BE54FED23B0B12F007CFA48 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9BE54FF023B0B5BA007CFA48 /* Reactive+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Helper.swift"; sourceTree = "<group>"; };
 		9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		9BE54FF623B0D3EE007CFA48 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		B4F2B8AEC860B854AF434528 /* Pods-ChatFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase.release.xcconfig"; path = "Target Support Files/Pods-ChatFirebase/Pods-ChatFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		BD3BF077FA6CBBB957282394 /* Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChatFirebase-ChatFirebaseUITests/Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E9A34DE416BDDDB6F72572 /* Pods_ChatFirebase_ChatFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatFirebase_ChatFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +195,7 @@
 		9B1055CB23ACA899009C1AF5 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
+				9BE54FF623B0D3EE007CFA48 /* SignInViewModel.swift */,
 				9B1055CC23ACA8B4009C1AF5 /* SignUpViewModel.swift */,
 			);
 			path = Authorization;
@@ -296,6 +303,7 @@
 		9B59C45B23AC6B3F004EFF80 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */,
 				9B1055BB23AC7274009C1AF5 /* Authorization */,
 				9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */,
 			);
@@ -658,7 +666,9 @@
 				9BE54FEB23B0B09C007CFA48 /* FireBaseManager.swift in Sources */,
 				9B1055C023AC8186009C1AF5 /* UIView+Helper.swift in Sources */,
 				9BE54FF123B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */,
+				9BE54FFA23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */,
 				9B1055D023ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
+				9BE54FF723B0D3EE007CFA48 /* SignInViewModel.swift in Sources */,
 				9B1055B923AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
 				9BE54FF423B0BF82007CFA48 /* UserListViewController.swift in Sources */,
 				9B1055D323ACC74F009C1AF5 /* String+Helper.swift in Sources */,
@@ -696,7 +706,9 @@
 				9BE54FEC23B0B09C007CFA48 /* FireBaseManager.swift in Sources */,
 				9B1055C123AC8186009C1AF5 /* UIView+Helper.swift in Sources */,
 				9BE54FF223B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */,
+				9BE54FFB23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */,
 				9B1055D123ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
+				9BE54FF823B0D3EE007CFA48 /* SignInViewModel.swift in Sources */,
 				9B1055BA23AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
 				9BE54FF523B0BF82007CFA48 /* UserListViewController.swift in Sources */,
 				9B1055D423ACC74F009C1AF5 /* String+Helper.swift in Sources */,

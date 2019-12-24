@@ -11,3 +11,7 @@ import Foundation
 struct Segue {
     static let kSignUp = "signUpSegue"
 }
+
+struct KeyPath {
+    static let kDisplayName = "displayName"
+}

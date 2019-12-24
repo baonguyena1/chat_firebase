@@ -52,7 +52,7 @@ class SignUpViewModel: BaseViewModel {
         let usersCollection = FireBaseManager.shared.usersCollection
         usersCollection
             .document(user.uid)
-            .setData(["displayName": name]) { [weak self] (error) in
+            .setData([KeyPath.kDisplayName: name]) { [weak self] (error) in
                 if let error = error {
                     Logger.error(error.localizedDescription)
                     self?.rx_error.accept(error.localizedDescription)

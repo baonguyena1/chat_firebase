@@ -80,34 +80,36 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37D-x1-WAg">
-                                                                <rect key="frame" x="0.0" y="136.5" width="324" height="40"/>
-                                                                <color key="backgroundColor" name="PrimaryColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="40" id="6e4-s7-pe3"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                                <state key="normal" title="Sign in">
-                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                </state>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="6"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <action selector="signInTapped:" destination="4hx-KC-AMx" eventType="touchUpInside" id="Na2-wv-tYM"/>
-                                                                </connections>
-                                                            </button>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XAN-JY-D2m">
+                                                                <rect key="frame" x="0.0" y="136.5" width="334" height="40"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37D-x1-WAg">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                                                        <color key="backgroundColor" name="PrimaryColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="40" id="6e4-s7-pe3"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                                        <state key="normal" title="Sign in">
+                                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </state>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                <real key="value" value="6"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="37D-x1-WAg" firstAttribute="trailing" secondItem="a37-Br-VLy" secondAttribute="trailing" id="2VR-Jd-kmW"/>
-                                                            <constraint firstAttribute="bottom" secondItem="37D-x1-WAg" secondAttribute="bottom" id="Pe7-SW-2jg"/>
-                                                            <constraint firstItem="37D-x1-WAg" firstAttribute="leading" secondItem="a37-Br-VLy" secondAttribute="leading" id="PeZ-fU-5C8"/>
+                                                            <constraint firstItem="XAN-JY-D2m" firstAttribute="leading" secondItem="wmv-GV-8cA" secondAttribute="leading" id="012-va-nxg"/>
+                                                            <constraint firstItem="XAN-JY-D2m" firstAttribute="top" secondItem="a37-Br-VLy" secondAttribute="bottom" constant="40" id="ABa-Oz-Eo5"/>
+                                                            <constraint firstAttribute="trailing" secondItem="XAN-JY-D2m" secondAttribute="trailing" id="HRE-ej-UBF"/>
                                                             <constraint firstAttribute="trailing" secondItem="a37-Br-VLy" secondAttribute="trailing" constant="10" id="VEC-FN-zQd"/>
                                                             <constraint firstItem="a37-Br-VLy" firstAttribute="leading" secondItem="wmv-GV-8cA" secondAttribute="leading" id="VuP-ZR-WgM"/>
-                                                            <constraint firstItem="37D-x1-WAg" firstAttribute="top" secondItem="a37-Br-VLy" secondAttribute="bottom" constant="40" id="XwD-iK-HIK"/>
+                                                            <constraint firstAttribute="bottom" secondItem="XAN-JY-D2m" secondAttribute="bottom" id="XfR-h9-QmK"/>
                                                             <constraint firstItem="a37-Br-VLy" firstAttribute="top" secondItem="wmv-GV-8cA" secondAttribute="top" id="i9T-Z0-Iai"/>
                                                         </constraints>
                                                     </view>
@@ -119,7 +121,7 @@
                                                     <constraint firstItem="wmv-GV-8cA" firstAttribute="leading" secondItem="Dgx-4u-w9w" secondAttribute="leading" constant="40" id="vom-LA-bNg"/>
                                                 </constraints>
                                                 <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="iUl-k1-iUu" appends="YES" id="Gjj-lX-xfx"/>
+                                                    <outletCollection property="gestureRecognizers" destination="CsH-BW-EjR" appends="YES" id="SNG-Fi-YQh"/>
                                                 </connections>
                                             </view>
                                         </subviews>
@@ -183,6 +185,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="8Kt-lI-0Vy" id="lSh-Bh-UFP"/>
                         <outlet property="passwordTextField" destination="b6u-dW-9vZ" id="vv6-hh-F8M"/>
+                        <outlet property="signInButton" destination="37D-x1-WAg" id="Jo3-wJ-Abq"/>
                         <segue destination="KIa-jO-PHx" kind="show" identifier="signUpSegue" id="twV-8r-ca4"/>
                     </connections>
                 </viewController>
@@ -192,7 +195,11 @@
                         <action selector="signUp:" destination="4hx-KC-AMx" id="dRR-ap-oT4"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="iUl-k1-iUu"/>
+                <tapGestureRecognizer id="CsH-BW-EjR">
+                    <connections>
+                        <action selector="viewTapped:" destination="4hx-KC-AMx" id="Nkl-Yu-41U"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="915.94202898550736" y="121.875"/>
         </scene>

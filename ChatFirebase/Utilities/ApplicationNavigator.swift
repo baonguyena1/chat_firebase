@@ -21,13 +21,13 @@ class ApplicationNavigator {
         if auth.currentUser == nil {
             showAuthorization()
         } else {
-            showUserList()
+            showMainTabBar()
         }
         auth.addStateDidChangeListener { [weak self] (auth, user) in
             if user == nil {
                 self?.showAuthorization()
             } else {
-                self?.showUserList()
+                self?.showMainTabBar()
             }
         }
     }
@@ -40,11 +40,9 @@ class ApplicationNavigator {
         window?.makeKeyAndVisible()
     }
     
-    func showUserList() {
-        let userListViewController = UserListViewController.instantiate(name: StoryboardName.Main.rawValue)
-        let navigationController = UINavigationController(rootViewController: userListViewController)
-        navigationController.navigationBar.isHidden = true
-        window?.rootViewController = navigationController
+    func showMainTabBar() {
+        let mainTabBarViewController = MainTabBarViewController.instantiate(name: StoryboardName.Main.rawValue)
+        window?.rootViewController = mainTabBarViewController
         window?.makeKeyAndVisible()
     }
 }
