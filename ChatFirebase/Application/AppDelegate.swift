@@ -7,21 +7,24 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseCore
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    private var appNavigator: ApplicationNavigator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        appNavigator = ApplicationNavigator(window: self.window)
-        appNavigator.checkIfUserIsSignedIn()
+        ApplicationNavigator.shared.setWindow(window: window)
+        ApplicationNavigator.shared.checkIfUserIsSignedIn()
         
         return true
     }

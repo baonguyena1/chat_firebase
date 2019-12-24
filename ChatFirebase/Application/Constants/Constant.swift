@@ -10,8 +10,10 @@ import Foundation
 
 struct Segue {
     static let kSignUp = "signUpSegue"
+    static let kUpdateUserInfo = "updateUserInfoSegue"
 }
 
 struct KeyPath {
     static let kDisplayName = "displayName"
+    static let kAvatar = "avatar"
 }

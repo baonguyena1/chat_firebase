@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 class FireBaseManager {
     
@@ -24,6 +25,10 @@ class FireBaseManager {
     
     lazy var usersCollection: CollectionReference = {
         return firestore.collection("users")
+    }()
+    
+    lazy var userProfileStorage = {
+        return Storage.storage().reference().child("user_profiles")
     }()
     
     func signOut() {

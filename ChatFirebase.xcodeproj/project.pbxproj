@@ -60,6 +60,12 @@
 		9BE54FF823B0D3EE007CFA48 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF623B0D3EE007CFA48 /* SignInViewModel.swift */; };
 		9BE54FFA23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */; };
 		9BE54FFB23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */; };
+		9BE5500023B1BEA0007CFA48 /* UpdateUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FFF23B1BEA0007CFA48 /* UpdateUserInfoViewController.swift */; };
+		9BE5500123B1BEA0007CFA48 /* UpdateUserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FFF23B1BEA0007CFA48 /* UpdateUserInfoViewController.swift */; };
+		9BE5500323B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5500223B1C2D7007CFA48 /* UpdateUserInforViewModel.swift */; };
+		9BE5500423B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5500223B1C2D7007CFA48 /* UpdateUserInforViewModel.swift */; };
+		9BE5500623B1C9A9007CFA48 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5500523B1C9A9007CFA48 /* ImagePickerController.swift */; };
+		9BE5500723B1C9A9007CFA48 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5500523B1C9A9007CFA48 /* ImagePickerController.swift */; };
 		A2D3935D4A449CFC4AB62B7F /* Pods_ChatFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1FF3D52656B8A6A1AF3040 /* Pods_ChatFirebase.framework */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +126,9 @@
 		9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		9BE54FF623B0D3EE007CFA48 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		9BE54FFF23B1BEA0007CFA48 /* UpdateUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoViewController.swift; sourceTree = "<group>"; };
+		9BE5500223B1C2D7007CFA48 /* UpdateUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInforViewModel.swift; sourceTree = "<group>"; };
+		9BE5500523B1C9A9007CFA48 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		B4F2B8AEC860B854AF434528 /* Pods-ChatFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase.release.xcconfig"; path = "Target Support Files/Pods-ChatFirebase/Pods-ChatFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		BD3BF077FA6CBBB957282394 /* Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChatFirebase-ChatFirebaseUITests/Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E9A34DE416BDDDB6F72572 /* Pods_ChatFirebase_ChatFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatFirebase_ChatFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +188,7 @@
 			children = (
 				9BE54FED23B0B12F007CFA48 /* Logger.swift */,
 				9B1055B823AC71FC009C1AF5 /* ApplicationNavigator.swift */,
+				9BE5500523B1C9A9007CFA48 /* ImagePickerController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -188,6 +198,7 @@
 			children = (
 				9B1055BC23AC7332009C1AF5 /* SignInViewController.swift */,
 				9B1055C223ACA27C009C1AF5 /* SignUpViewController.swift */,
+				9BE54FFF23B1BEA0007CFA48 /* UpdateUserInfoViewController.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -197,6 +208,7 @@
 			children = (
 				9BE54FF623B0D3EE007CFA48 /* SignInViewModel.swift */,
 				9B1055CC23ACA8B4009C1AF5 /* SignUpViewModel.swift */,
+				9BE5500223B1C2D7007CFA48 /* UpdateUserInforViewModel.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -667,7 +679,10 @@
 				9B1055C023AC8186009C1AF5 /* UIView+Helper.swift in Sources */,
 				9BE54FF123B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */,
 				9BE54FFA23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */,
+				9BE5500023B1BEA0007CFA48 /* UpdateUserInfoViewController.swift in Sources */,
+				9BE5500323B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */,
 				9B1055D023ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
+				9BE5500623B1C9A9007CFA48 /* ImagePickerController.swift in Sources */,
 				9BE54FF723B0D3EE007CFA48 /* SignInViewModel.swift in Sources */,
 				9B1055B923AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
 				9BE54FF423B0BF82007CFA48 /* UserListViewController.swift in Sources */,
@@ -707,7 +722,10 @@
 				9B1055C123AC8186009C1AF5 /* UIView+Helper.swift in Sources */,
 				9BE54FF223B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */,
 				9BE54FFB23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */,
+				9BE5500123B1BEA0007CFA48 /* UpdateUserInfoViewController.swift in Sources */,
+				9BE5500423B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */,
 				9B1055D123ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
+				9BE5500723B1C9A9007CFA48 /* ImagePickerController.swift in Sources */,
 				9BE54FF823B0D3EE007CFA48 /* SignInViewModel.swift in Sources */,
 				9B1055BA23AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
 				9BE54FF523B0BF82007CFA48 /* UserListViewController.swift in Sources */,

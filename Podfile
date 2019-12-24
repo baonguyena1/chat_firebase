@@ -12,10 +12,11 @@ target 'ChatFirebase' do
   pod 'RxFirebase/Storage'
   pod 'RxFirebase/Auth'
   pod 'RxFirebase/Functions'
-  pod 'Firebase/Analytics'
   
   pod 'SwiftLint' # https://github.com/realm/SwiftLint
   pod 'MBProgressHUD' # https://github.com/jdg/MBProgressHUD
+  pod 'YPImagePicker' # https://github.com/Yummypets/YPImagePicker
+  pod 'IQKeyboardManagerSwift' # https://github.com/hackiftekhar/IQKeyboardManager
 
   target 'ChatFirebaseTests' do
     inherit! :search_paths

@@ -16,8 +16,10 @@ class SignInViewModel: BaseViewModel {
     
     private let bag = DisposeBag()
     
-    var emailSubject = PublishSubject<String>()
-    var passwordSubject = PublishSubject<String>()
+    var emailSubject = BehaviorSubject<String>(value: "")
+    var passwordSubject = BehaviorSubject<String>(value: "")
+    
+    var loginSubject = PublishSubject<Void>()
     
     var isValid: Observable<Bool> {
         return Observable.combineLatest(emailSubject.asObservable(), passwordSubject.asObservable()) { (email, password) in
@@ -29,8 +31,9 @@ class SignInViewModel: BaseViewModel {
         let auth = FireBaseManager.shared.auth
         rx_isLoading.accept(true)
         auth.rx.signIn(withEmail: email, password: password)
-            .subscribe(onNext: { (result) in
+            .subscribe(onNext: { [weak self] (result) in
                 Logger.log("\(result)")
+                self?.loginSubject.onNext(())
             }, onError: { [weak self] (error) in
                 Logger.error(error.localizedDescription)
                 self?.rx_error.accept(error.localizedDescription)

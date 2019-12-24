@@ -13,8 +13,6 @@ import FirebaseAuth
 import MBProgressHUD
 
 class SignUpViewController: UIViewController {
-    
-    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
@@ -39,22 +37,17 @@ class SignUpViewController: UIViewController {
     
     private func setupViewModel() {
         viewModel = SignUpViewModel()
-        _ = nameTextField.rx.text.orEmpty.bind(to: viewModel.nameText)
         _ = emailTextField.rx.text.orEmpty.bind(to: viewModel.emailText)
         _ = passwordTextField.rx.text.orEmpty.bind(to: viewModel.passwordText)
         _ = confirmPasswordTextField.rx.text.orEmpty.bind(to: viewModel.confirmPasswordText)
-        
-        viewModel.isValid
-            .bind(to: signUpButton.rx.isEnabled)
-            .disposed(by: bag)
+        viewModel.isValid.map { !$0 }.bind(to: signUpButton.rx.isHidden).disposed(by: bag)
         
         signUpButton.rx.controlEvent(.touchUpInside)
             .subscribe { [weak self] (_) in
                 guard let `self` = self,
                     let email = self.emailTextField.text,
-                    let password = self.passwordTextField.text,
-                    let name = self.nameTextField.text else { return }
-                self.signUp(email: email, password: password, name: name)
+                    let password = self.passwordTextField.text else { return }
+                self.signUp(email: email, password: password)
             }
         .disposed(by: bag)
         
@@ -66,9 +59,39 @@ class SignUpViewController: UIViewController {
                 self?.showError(message: error)
             })
             .disposed(by: bag)
+        
+        viewModel.user
+            .subscribe(onNext: { [weak self] (user) in
+                self?.performSegue(withIdentifier: Segue.kUpdateUserInfo, sender: user.uid)
+            })
+            .disposed(by: bag)
     }
     
-    private func signUp(email: String, password: String, name: String) {
-        viewModel.singUp(email: email, password: password, name: name)
+    private func signUp(email: String, password: String) {
+        viewModel.singUp(email: email, password: password)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let updateUserInforViewController = segue.destination as? UpdateUserInfoViewController {
+            if let userId = sender as? String {
+                updateUserInforViewController.userId = userId
+            }
+        }
+    }
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case let tf where tf == emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case let tf where tf == passwordTextField:
+            confirmPasswordTextField.becomeFirstResponder()
+        case let tf where tf == confirmPasswordTextField:
+            confirmPasswordTextField.resignFirstResponder()
+        default:
+        break
+        }
+        return true
     }
 }

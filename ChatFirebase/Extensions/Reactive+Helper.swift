@@ -26,7 +26,7 @@ extension Reactive where Base: UIView {
 extension UIViewController {
     func showError(title: String = "OK", message: String) {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: title, style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: title, style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
 }

@@ -65,9 +65,26 @@ class SignInViewController: UIViewController {
                 self?.showError(message: error)
             })
             .disposed(by: bag)
+        
+        viewModel.loginSubject
+            .subscribe { (_) in
+                ApplicationNavigator.shared.showMainTabBar()
+            }
+        .disposed(by: bag)
     }
     
     private func signIn(email: String, password: String) {
         viewModel.signIn(email: email, password: password)
+    }
+}
+
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            passwordTextField.resignFirstResponder()
+        }
+        return true
     }
 }

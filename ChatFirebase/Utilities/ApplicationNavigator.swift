@@ -9,26 +9,22 @@
 import UIKit
 
 class ApplicationNavigator {
+    static let shared = ApplicationNavigator()
+    
     private weak var window: UIWindow?
     
-    init(window: UIWindow?) {
+    func setWindow(window: UIWindow?) {
         self.window = window
     }
     
     func checkIfUserIsSignedIn() {
+        assert(window != nil)
         let auth = FireBaseManager.shared.auth
         FireBaseManager.shared.signOut()
         if auth.currentUser == nil {
             showAuthorization()
         } else {
             showMainTabBar()
-        }
-        auth.addStateDidChangeListener { [weak self] (auth, user) in
-            if user == nil {
-                self?.showAuthorization()
-            } else {
-                self?.showMainTabBar()
-            }
         }
     }
     

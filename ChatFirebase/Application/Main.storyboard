@@ -64,7 +64,7 @@
         <scene sceneID="x9K-K5-Lvl">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pVc-Dq-ZmS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_message" id="X86-Ck-dcJ"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_message_tabbar" id="X86-Ck-dcJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="z5w-VE-7l4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -83,7 +83,7 @@
         <scene sceneID="jyT-4s-xtx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cfo-YZ-shU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_user" id="yv0-1n-rds"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_user_tabbar" id="yv0-1n-rds"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oGu-aH-BFb">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -100,8 +100,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_message" width="30" height="26"/>
-        <image name="ic_user" width="26.5" height="30"/>
+        <image name="ic_message_tabbar" width="30" height="26"/>
+        <image name="ic_user_tabbar" width="26.5" height="30"/>
         <namedColor name="PrimaryColor">
             <color red="1" green="0.53700000047683716" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
