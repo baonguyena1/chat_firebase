@@ -20,7 +20,6 @@ class ApplicationNavigator {
     func checkIfUserIsSignedIn() {
         assert(window != nil)
         let auth = FireBaseManager.shared.auth
-        FireBaseManager.shared.signOut()
         if auth.currentUser == nil {
             showAuthorization()
         } else {

@@ -66,6 +66,20 @@
 		9BE5500423B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5500223B1C2D7007CFA48 /* UpdateUserInforViewModel.swift */; };
 		9BE5500623B1C9A9007CFA48 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5500523B1C9A9007CFA48 /* ImagePickerController.swift */; };
 		9BE5500723B1C9A9007CFA48 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5500523B1C9A9007CFA48 /* ImagePickerController.swift */; };
+		9BEDD0A423B304B200157805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0A323B304B100157805 /* SceneDelegate.swift */; };
+		9BEDD0A523B304B200157805 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0A323B304B100157805 /* SceneDelegate.swift */; };
+		9BEDD0A923B30A3C00157805 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BEDD0AC23B30A3C00157805 /* Localizable.strings */; };
+		9BEDD0AA23B30A3C00157805 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9BEDD0AC23B30A3C00157805 /* Localizable.strings */; };
+		9BEDD0AF23B3216D00157805 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0AE23B3216D00157805 /* Member.swift */; };
+		9BEDD0B023B3216D00157805 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0AE23B3216D00157805 /* Member.swift */; };
+		9BEDD0B423B33F5400157805 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0B323B33F5400157805 /* UserListViewModel.swift */; };
+		9BEDD0B523B33F5400157805 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0B323B33F5400157805 /* UserListViewModel.swift */; };
+		9BEDD0B723B342ED00157805 /* Date+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0B623B342ED00157805 /* Date+Helper.swift */; };
+		9BEDD0B823B342ED00157805 /* Date+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0B623B342ED00157805 /* Date+Helper.swift */; };
+		9BEDD0BB23B347E000157805 /* MemberViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0BA23B347E000157805 /* MemberViewCell.swift */; };
+		9BEDD0BC23B347E000157805 /* MemberViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0BA23B347E000157805 /* MemberViewCell.swift */; };
+		9BEDD0BE23B3487300157805 /* UIImageView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0BD23B3487300157805 /* UIImageView+Helper.swift */; };
+		9BEDD0BF23B3487300157805 /* UIImageView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0BD23B3487300157805 /* UIImageView+Helper.swift */; };
 		A2D3935D4A449CFC4AB62B7F /* Pods_ChatFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1FF3D52656B8A6A1AF3040 /* Pods_ChatFirebase.framework */; };
 /* End PBXBuildFile section */
 
@@ -129,6 +143,14 @@
 		9BE54FFF23B1BEA0007CFA48 /* UpdateUserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoViewController.swift; sourceTree = "<group>"; };
 		9BE5500223B1C2D7007CFA48 /* UpdateUserInforViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInforViewModel.swift; sourceTree = "<group>"; };
 		9BE5500523B1C9A9007CFA48 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
+		9BEDD0A323B304B100157805 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9BEDD0AB23B30A3C00157805 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9BEDD0AD23B30A5F00157805 /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		9BEDD0AE23B3216D00157805 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		9BEDD0B323B33F5400157805 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
+		9BEDD0B623B342ED00157805 /* Date+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helper.swift"; sourceTree = "<group>"; };
+		9BEDD0BA23B347E000157805 /* MemberViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewCell.swift; sourceTree = "<group>"; };
+		9BEDD0BD23B3487300157805 /* UIImageView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helper.swift"; sourceTree = "<group>"; };
 		B4F2B8AEC860B854AF434528 /* Pods-ChatFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase.release.xcconfig"; path = "Target Support Files/Pods-ChatFirebase/Pods-ChatFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		BD3BF077FA6CBBB957282394 /* Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChatFirebase-ChatFirebaseUITests/Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E9A34DE416BDDDB6F72572 /* Pods_ChatFirebase_ChatFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatFirebase_ChatFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,6 +265,7 @@
 				9B59C45623AC6A82004EFF80 /* Application */,
 				9B59C45B23AC6B3F004EFF80 /* Controllers */,
 				9B59C45E23AC6B57004EFF80 /* ViewModels */,
+				9B1055CF23ACA8BE009C1AF5 /* BaseViewModel.swift */,
 				9B59C46123AC6B72004EFF80 /* Views */,
 				9B59C45F23AC6B62004EFF80 /* Services */,
 				9B1055B723AC71DF009C1AF5 /* Utilities */,
@@ -276,6 +299,7 @@
 			children = (
 				9B4218C223AC5C8E007F2041 /* Assets.xcassets */,
 				9B1055C823ACA5D1009C1AF5 /* Colors.xcassets */,
+				9BEDD0AC23B30A3C00157805 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -284,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				9B4218B923AC5C8C007F2041 /* AppDelegate.swift */,
+				9BEDD0A323B304B100157805 /* SceneDelegate.swift */,
 				9B4218C423AC5C8E007F2041 /* LaunchScreen.storyboard */,
 				9B1055AE23AC6EB2009C1AF5 /* Authorization.storyboard */,
 				9BE54FE723B0AEE1007CFA48 /* Main.storyboard */,
@@ -315,9 +340,9 @@
 		9B59C45B23AC6B3F004EFF80 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9BEDD0B123B33CBD00157805 /* Friends */,
 				9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */,
 				9B1055BB23AC7274009C1AF5 /* Authorization */,
-				9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -328,6 +353,8 @@
 				9B1055BF23AC8186009C1AF5 /* UIView+Helper.swift */,
 				9B1055D223ACC74F009C1AF5 /* String+Helper.swift */,
 				9BE54FF023B0B5BA007CFA48 /* Reactive+Helper.swift */,
+				9BEDD0B623B342ED00157805 /* Date+Helper.swift */,
+				9BEDD0BD23B3487300157805 /* UIImageView+Helper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -335,6 +362,7 @@
 		9B59C45D23AC6B51004EFF80 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9BEDD0AE23B3216D00157805 /* Member.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -342,7 +370,7 @@
 		9B59C45E23AC6B57004EFF80 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				9B1055CF23ACA8BE009C1AF5 /* BaseViewModel.swift */,
+				9BEDD0B223B33F3500157805 /* Friend */,
 				9B1055CB23ACA899009C1AF5 /* Authorization */,
 			);
 			path = ViewModels;
@@ -367,8 +395,33 @@
 		9B59C46123AC6B72004EFF80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9BEDD0B923B347C000157805 /* Friends */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9BEDD0B123B33CBD00157805 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				9BE54FF323B0BF82007CFA48 /* UserListViewController.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		9BEDD0B223B33F3500157805 /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				9BEDD0B323B33F5400157805 /* UserListViewModel.swift */,
+			);
+			path = Friend;
+			sourceTree = "<group>";
+		};
+		9BEDD0B923B347C000157805 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				9BEDD0BA23B347E000157805 /* MemberViewCell.swift */,
+			);
+			path = Friends;
 			sourceTree = "<group>";
 		};
 		DD489057288F8179E15F8F4D /* Frameworks */ = {
@@ -490,6 +543,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"vi-VN",
 			);
 			mainGroup = 9B4218AD23AC5C8C007F2041;
 			productRefGroup = 9B4218B723AC5C8C007F2041 /* Products */;
@@ -514,6 +568,7 @@
 				9B1055AC23AC6DE8009C1AF5 /* .swiftlint.yml in Resources */,
 				9B4218C623AC5C8E007F2041 /* LaunchScreen.storyboard in Resources */,
 				9B1055C923ACA5D1009C1AF5 /* Colors.xcassets in Resources */,
+				9BEDD0A923B30A3C00157805 /* Localizable.strings in Resources */,
 				9B59C45423AC62C6004EFF80 /* GoogleService-Info.plist in Resources */,
 				9B4218C323AC5C8E007F2041 /* Assets.xcassets in Resources */,
 			);
@@ -542,6 +597,7 @@
 				9B1055AD23AC6DE8009C1AF5 /* .swiftlint.yml in Resources */,
 				9B59C46C23AC6C62004EFF80 /* LaunchScreen.storyboard in Resources */,
 				9B1055CA23ACA5D1009C1AF5 /* Colors.xcassets in Resources */,
+				9BEDD0AA23B30A3C00157805 /* Localizable.strings in Resources */,
 				9B59C46D23AC6C62004EFF80 /* GoogleService-Info.plist in Resources */,
 				9B59C46E23AC6C62004EFF80 /* Assets.xcassets in Resources */,
 			);
@@ -680,10 +736,13 @@
 				9BE54FF123B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */,
 				9BE54FFA23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */,
 				9BE5500023B1BEA0007CFA48 /* UpdateUserInfoViewController.swift in Sources */,
+				9BEDD0B723B342ED00157805 /* Date+Helper.swift in Sources */,
 				9BE5500323B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */,
 				9B1055D023ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
 				9BE5500623B1C9A9007CFA48 /* ImagePickerController.swift in Sources */,
+				9BEDD0A423B304B200157805 /* SceneDelegate.swift in Sources */,
 				9BE54FF723B0D3EE007CFA48 /* SignInViewModel.swift in Sources */,
+				9BEDD0AF23B3216D00157805 /* Member.swift in Sources */,
 				9B1055B923AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
 				9BE54FF423B0BF82007CFA48 /* UserListViewController.swift in Sources */,
 				9B1055D323ACC74F009C1AF5 /* String+Helper.swift in Sources */,
@@ -691,9 +750,12 @@
 				9B1055C623ACA32D009C1AF5 /* Constant.swift in Sources */,
 				9B1055CD23ACA8B4009C1AF5 /* SignUpViewModel.swift in Sources */,
 				9B4218BA23AC5C8C007F2041 /* AppDelegate.swift in Sources */,
+				9BEDD0BB23B347E000157805 /* MemberViewCell.swift in Sources */,
 				9BE54FEE23B0B12F007CFA48 /* Logger.swift in Sources */,
 				9B1055BD23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
 				9B1055B223AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
+				9BEDD0B423B33F5400157805 /* UserListViewModel.swift in Sources */,
+				9BEDD0BE23B3487300157805 /* UIImageView+Helper.swift in Sources */,
 				9B1055B523AC718C009C1AF5 /* Enums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -723,10 +785,13 @@
 				9BE54FF223B0B5BA007CFA48 /* Reactive+Helper.swift in Sources */,
 				9BE54FFB23B1A648007CFA48 /* MainTabBarViewController.swift in Sources */,
 				9BE5500123B1BEA0007CFA48 /* UpdateUserInfoViewController.swift in Sources */,
+				9BEDD0B823B342ED00157805 /* Date+Helper.swift in Sources */,
 				9BE5500423B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */,
 				9B1055D123ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
 				9BE5500723B1C9A9007CFA48 /* ImagePickerController.swift in Sources */,
+				9BEDD0A523B304B200157805 /* SceneDelegate.swift in Sources */,
 				9BE54FF823B0D3EE007CFA48 /* SignInViewModel.swift in Sources */,
+				9BEDD0B023B3216D00157805 /* Member.swift in Sources */,
 				9B1055BA23AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
 				9BE54FF523B0BF82007CFA48 /* UserListViewController.swift in Sources */,
 				9B1055D423ACC74F009C1AF5 /* String+Helper.swift in Sources */,
@@ -734,9 +799,12 @@
 				9B1055C723ACA32D009C1AF5 /* Constant.swift in Sources */,
 				9B1055CE23ACA8B4009C1AF5 /* SignUpViewModel.swift in Sources */,
 				9B59C46723AC6C62004EFF80 /* AppDelegate.swift in Sources */,
+				9BEDD0BC23B347E000157805 /* MemberViewCell.swift in Sources */,
 				9BE54FEF23B0B12F007CFA48 /* Logger.swift in Sources */,
 				9B1055BE23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
 				9B1055B323AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
+				9BEDD0B523B33F5400157805 /* UserListViewModel.swift in Sources */,
+				9BEDD0BF23B3487300157805 /* UIImageView+Helper.swift in Sources */,
 				9B1055B623AC718C009C1AF5 /* Enums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,6 +833,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		9BEDD0AC23B30A3C00157805 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9BEDD0AB23B30A3C00157805 /* en */,
+				9BEDD0AD23B30A5F00157805 /* vi-VN */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -772,6 +849,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -832,6 +910,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

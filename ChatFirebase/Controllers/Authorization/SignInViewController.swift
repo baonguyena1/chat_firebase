@@ -8,12 +8,14 @@
 
 import UIKit
 import RxSwift
+import ActiveLabel
 
 class SignInViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signUpLabel: ActiveLabel!
     
     var viewModel: SignInViewModel!
     
@@ -21,6 +23,8 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
         
         initialViewModel()
         
@@ -32,12 +36,33 @@ class SignInViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    @IBAction func signUp(_ sender: UITapGestureRecognizer) {
-        self.performSegue(withIdentifier: Segue.kSignUp, sender: self)
-    }
-    
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    private func setupUI() {
+        let customType = ActiveType.custom(pattern: "\\sSign Up\\b")
+        signUpLabel.customize { (label) in
+            
+            label.textColor = .lightGray
+            label.text = Localizable.kDontHaveAccountSignUp
+            label.enabledTypes = [customType]
+            label.configureLinkAttribute = { type, attribute, isSelected in
+                var atts = attribute
+                switch type {
+                    case customType:
+                        atts[.font] = UIFont.systemFont(ofSize: 15, weight: .medium)
+                        atts[.foregroundColor] = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+                    default:
+                    break
+                }
+                return atts
+            }
+            label.handleCustomTap(for: customType) { [weak self] (element) in
+                self?.performSegue(withIdentifier: Segue.kSignUp, sender: self)
+            }
+        }
+        
     }
     
     private func initialViewModel() {

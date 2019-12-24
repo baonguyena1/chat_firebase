@@ -154,15 +154,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OSn-K5-O6E">
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have account? Sign Up" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRT-QH-Epb">
-                                        <rect key="frame" x="108" y="16" width="198" height="18"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have account? Sign Up" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRT-QH-Epb" customClass="ActiveLabel" customModule="ActiveLabel">
+                                        <rect key="frame" x="0.0" y="16" width="414" height="18"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="oo2-lI-cP0" appends="YES" id="xYq-tf-uKg"/>
-                                        </connections>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -171,7 +168,7 @@
                                     <constraint firstItem="CRT-QH-Epb" firstAttribute="centerY" secondItem="OSn-K5-O6E" secondAttribute="centerY" id="BaD-Iy-cbI"/>
                                     <constraint firstItem="CRT-QH-Epb" firstAttribute="centerX" secondItem="OSn-K5-O6E" secondAttribute="centerX" id="b1Y-5d-mkj"/>
                                     <constraint firstAttribute="bottom" secondItem="CRT-QH-Epb" secondAttribute="bottom" constant="16" id="c2c-3D-Ncs"/>
-                                    <constraint firstItem="CRT-QH-Epb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OSn-K5-O6E" secondAttribute="leading" priority="250" constant="40" id="kBO-jq-9je"/>
+                                    <constraint firstItem="CRT-QH-Epb" firstAttribute="leading" secondItem="OSn-K5-O6E" secondAttribute="leading" id="kBO-jq-9je"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -192,15 +189,11 @@
                         <outlet property="emailTextField" destination="8Kt-lI-0Vy" id="lSh-Bh-UFP"/>
                         <outlet property="passwordTextField" destination="b6u-dW-9vZ" id="vv6-hh-F8M"/>
                         <outlet property="signInButton" destination="37D-x1-WAg" id="Jo3-wJ-Abq"/>
+                        <outlet property="signUpLabel" destination="CRT-QH-Epb" id="ve4-TO-IqQ"/>
                         <segue destination="KIa-jO-PHx" kind="show" identifier="signUpSegue" id="twV-8r-ca4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSP-nh-rSm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="oo2-lI-cP0">
-                    <connections>
-                        <action selector="signUp:" destination="4hx-KC-AMx" id="dRR-ap-oT4"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <tapGestureRecognizer id="CsH-BW-EjR">
                     <connections>
                         <action selector="viewTapped:" destination="4hx-KC-AMx" id="Nkl-Yu-41U"/>
@@ -448,7 +441,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="FPO-7z-0A1">
+                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="FPO-7z-0A1">
                                                                 <rect key="frame" x="87" y="0.0" width="160" height="160"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
@@ -526,11 +519,6 @@
                                         <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="6"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -547,13 +535,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3qe-i6-5bE"/>
                     </view>
-                    <navigationItem key="navigationItem" id="TgU-mo-mEP">
-                        <barButtonItem key="rightBarButtonItem" title="Skip" id="7cQ-fQ-Xa8">
-                            <connections>
-                                <action selector="skipTapped:" destination="qEZ-c9-l2t" id="Lgz-J2-H1h"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="TgU-mo-mEP"/>
                     <connections>
                         <outlet property="avatarImageView" destination="FPO-7z-0A1" id="YzL-db-ufd"/>
                         <outlet property="doneButton" destination="gVb-Hy-38X" id="IRq-MS-7eX"/>
@@ -599,13 +581,13 @@
     <resources>
         <image name="ic_user" width="148.5" height="169.5"/>
         <namedColor name="BorderColor">
-            <color red="0.92199999094009399" green="0.90200001001358032" blue="0.90200001001358032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PrimaryColor">
-            <color red="1" green="0.53700000047683716" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.53333333333333333" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SeparatorColor">
-            <color red="0.98039215686274506" green="0.93333333333333335" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
