@@ -26,11 +26,15 @@ class UpdateUserInfoViewController: UIViewController {
         super.viewDidLoad()
         
         assert(userId != nil)
-        self.navigationItem.leftBarButtonItems = nil
         
         initialViewModel()
         
         initialReactive()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     @IBAction func chooseImageTapped(_ sender: UITapGestureRecognizer) {
@@ -39,10 +43,6 @@ class UpdateUserInfoViewController: UIViewController {
     
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
-    }
-    
-    @IBAction func skipTapped(_ sender: UIBarButtonItem) {
-        viewModel.updatedInfoStatus.accept(true)
     }
     
     private func initialViewModel() {
@@ -79,8 +79,9 @@ class UpdateUserInfoViewController: UIViewController {
             .subscribe { [weak self] (_) in
                 guard let `self` = self,
                     let image = self.avatarImageView.image,
-                    let name = self.nameTextField.text else { return }
-                self.viewModel.updateUserInfo(userId: self.userId, image: image, name: name)
+                    let name = self.nameTextField.text,
+                    let email = FireBaseManager.shared.auth.currentUser?.email else { return }
+                self.viewModel.updateUserInfo(userId: self.userId, image: image, name: name, email: email)
             }
             .disposed(by: bag)
     }

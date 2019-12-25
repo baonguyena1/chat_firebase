@@ -29,11 +29,15 @@ class UpdateUserInforViewModel: BaseViewModel {
         }
     }
     
-    func updateUserInfo(userId: String, image: UIImage, name: String) {
+    func updateUserInfo(userId: String, image: UIImage, name: String, email: String) {
         let imageName = UUID().uuidString.lowercased()
         let reference = FireBaseManager.shared.userProfileStorage.child(userId).child(imageName + ".png")
         var values: [String: Any] = [
-            KeyPath.kDisplayName: name
+            KeyPath.kId: userId,
+            KeyPath.kEmail: email,
+            KeyPath.kDisplayName: name,
+            KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
+            KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970
         ]
         
         func uploadInfo() {

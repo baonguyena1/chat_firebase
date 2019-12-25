@@ -17,6 +17,11 @@ target 'ChatFirebase' do
   pod 'MBProgressHUD' # https://github.com/jdg/MBProgressHUD
   pod 'YPImagePicker' # https://github.com/Yummypets/YPImagePicker
   pod 'IQKeyboardManagerSwift' # https://github.com/hackiftekhar/IQKeyboardManager
+  pod 'Swinject' # https://github.com/Swinject/Swinject
+  pod 'Kingfisher' # https://github.com/onevcat/Kingfisher
+  pod 'ActiveLabel' # https://github.com/optonaut/ActiveLabel.swift
+  pod 'DZNEmptyDataSet' # https://github.com/dzenbot/DZNEmptyDataSet
+  pod "RxGesture" # https://github.com/RxSwiftCommunity/RxGesture
 
   target 'ChatFirebaseTests' do
     inherit! :search_paths
