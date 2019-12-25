@@ -27,10 +27,14 @@ struct KeyPath {
 
 struct ImageAsset {
     static let kPlaceholderMessageEmpty = "placeholder_message_empty"
+    static let kIcMember = "ic_member"
 }
 
 struct Localizable {
     static let kDontHaveAccountSignUp = NSLocalizedString("Don't have account? Sign Up", comment: "")
-    static let kNoMessages = "No Messages"
-    static let kWhenYouHaveMessagesYoullSeeThemHere = "When you have messages, you'll see them here."
+    static let kNoMessages = NSLocalizedString("No Messages", comment: "")
+    static let kWhenYouHaveMessagesYoullSeeThemHere = NSLocalizedString("When you have messages, you'll see them here.", comment: "")
+    static let kAreYouSureWantToSignOut = NSLocalizedString("Are you sure want to Sign Out?", comment: "")
+    static let kYes = NSLocalizedString("Yes", comment: "")
+    static let kNo = NSLocalizedString("No", comment: "")
 }

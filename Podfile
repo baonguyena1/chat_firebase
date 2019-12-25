@@ -21,6 +21,7 @@ target 'ChatFirebase' do
   pod 'Kingfisher' # https://github.com/onevcat/Kingfisher
   pod 'ActiveLabel' # https://github.com/optonaut/ActiveLabel.swift
   pod 'DZNEmptyDataSet' # https://github.com/dzenbot/DZNEmptyDataSet
+  pod "RxGesture" # https://github.com/RxSwiftCommunity/RxGesture
 
   target 'ChatFirebaseTests' do
     inherit! :search_paths

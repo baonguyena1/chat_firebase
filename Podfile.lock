@@ -315,6 +315,9 @@ PODS:
     - FirebaseStorage (~> 3)
     - RxCocoa (~> 5)
     - RxSwift (~> 5)
+  - RxGesture (3.0.1):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
   - RxRelay (5.0.1):
     - RxSwift (~> 5)
   - RxSwift (5.0.1)
@@ -337,6 +340,7 @@ DEPENDENCIES:
   - RxFirebase/Functions
   - RxFirebase/RemoteConfig
   - RxFirebase/Storage
+  - RxGesture
   - SwiftLint
   - Swinject
   - YPImagePicker
@@ -381,6 +385,7 @@ SPEC REPOS:
     - RxFirebaseFunctions
     - RxFirebaseRemoteConfig
     - RxFirebaseStorage
+    - RxGesture
     - RxRelay
     - RxSwift
     - SteviaLayout
@@ -427,6 +432,7 @@ SPEC CHECKSUMS:
   RxFirebaseFunctions: c32622f9bb7c75c01a2489a38e376b5038e2d6f3
   RxFirebaseRemoteConfig: 0ed07be283650b572cb07bb8b940f08546c4b792
   RxFirebaseStorage: 271184ff8f8d3660bfc751dcafdbb4dd01d0b8a1
+  RxGesture: a3f8dd6adf078110ed5e1c9c30d09d705a09852e
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
@@ -434,6 +440,6 @@ SPEC CHECKSUMS:
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   YPImagePicker: 7a34eabd0ef544ae8fbf9785c3df9ec5bbf242e3
 
-PODFILE CHECKSUM: 70f738f3018dfd6a3dd7a4de9c04abc035a822b7
+PODFILE CHECKSUM: 2b0fe1f66808ac08ed50035a5a9b91b87636c4d2
 
 COCOAPODS: 1.8.3

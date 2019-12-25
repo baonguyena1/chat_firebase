@@ -27,13 +27,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmv-GV-8cA">
-                                                        <rect key="frame" x="40" y="318" width="334" height="176.5"/>
+                                                        <rect key="frame" x="40" y="328" width="334" height="156.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a37-Br-VLy">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="96.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="76.5"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TYk-Ee-Iez">
-                                                                        <rect key="frame" x="10" y="10" width="304" height="76.5"/>
+                                                                        <rect key="frame" x="10" y="0.0" width="304" height="76.5"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8Kt-lI-0Vy">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="304" height="36"/>
@@ -70,9 +70,9 @@
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="TYk-Ee-Iez" secondAttribute="trailing" constant="10" id="0ER-o6-hDw"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="TYk-Ee-Iez" secondAttribute="bottom" constant="10" id="2xP-Wb-loA"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="TYk-Ee-Iez" secondAttribute="bottom" id="2xP-Wb-loA"/>
                                                                     <constraint firstItem="TYk-Ee-Iez" firstAttribute="leading" secondItem="a37-Br-VLy" secondAttribute="leading" constant="10" id="BpC-Ac-Bxm"/>
-                                                                    <constraint firstItem="TYk-Ee-Iez" firstAttribute="top" secondItem="a37-Br-VLy" secondAttribute="top" constant="10" id="rr3-cH-m3Q"/>
+                                                                    <constraint firstItem="TYk-Ee-Iez" firstAttribute="top" secondItem="a37-Br-VLy" secondAttribute="top" id="rr3-cH-m3Q"/>
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -87,7 +87,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XAN-JY-D2m">
-                                                                <rect key="frame" x="0.0" y="136.5" width="334" height="40"/>
+                                                                <rect key="frame" x="0.0" y="116.5" width="334" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37D-x1-WAg">
                                                                         <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
@@ -220,13 +220,13 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9Y-8E-nMb">
-                                                        <rect key="frame" x="40" y="295.5" width="334" height="217"/>
+                                                        <rect key="frame" x="40" y="305.5" width="334" height="197"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTf-B2-Jph">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="137"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="117"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="71H-uQ-FVX">
-                                                                        <rect key="frame" x="10" y="10" width="304" height="117"/>
+                                                                        <rect key="frame" x="10" y="0.0" width="304" height="117"/>
                                                                         <subviews>
                                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QIK-iK-Gjb">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="304" height="36"/>
@@ -280,10 +280,10 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="bottom" secondItem="71H-uQ-FVX" secondAttribute="bottom" constant="10" id="FZj-KX-Izl"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="71H-uQ-FVX" secondAttribute="bottom" id="FZj-KX-Izl"/>
                                                                     <constraint firstItem="71H-uQ-FVX" firstAttribute="leading" secondItem="hTf-B2-Jph" secondAttribute="leading" constant="10" id="VJL-k9-LWP"/>
                                                                     <constraint firstAttribute="trailing" secondItem="71H-uQ-FVX" secondAttribute="trailing" constant="10" id="hG2-S4-pa2"/>
-                                                                    <constraint firstItem="71H-uQ-FVX" firstAttribute="top" secondItem="hTf-B2-Jph" secondAttribute="top" constant="10" id="m9s-bZ-eLz"/>
+                                                                    <constraint firstItem="71H-uQ-FVX" firstAttribute="top" secondItem="hTf-B2-Jph" secondAttribute="top" id="m9s-bZ-eLz"/>
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -298,7 +298,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEg-oE-0LQ">
-                                                                <rect key="frame" x="0.0" y="177" width="324" height="40"/>
+                                                                <rect key="frame" x="0.0" y="157" width="324" height="40"/>
                                                                 <color key="backgroundColor" name="PrimaryColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="qrh-kP-liZ"/>
@@ -405,6 +405,28 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51s-pW-b9Z">
                                                         <rect key="frame" x="40" y="60" width="334" height="256"/>
                                                         <subviews>
+                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_photo" translatesAutoresizingMaskIntoConstraints="NO" id="FPO-7z-0A1">
+                                                                <rect key="frame" x="87" y="0.0" width="160" height="160"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="160" id="DUk-Er-GYh"/>
+                                                                    <constraint firstAttribute="width" secondItem="FPO-7z-0A1" secondAttribute="height" multiplier="1:1" id="RRa-Er-eS3"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="4"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" name="BorderColor"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <integer key="value" value="80"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="AJs-i5-Iwp" appends="YES" id="V34-ZY-4JN"/>
+                                                                </connections>
+                                                            </imageView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ec-d9-3WR">
                                                                 <rect key="frame" x="0.0" y="220" width="324" height="36"/>
                                                                 <subviews>
@@ -441,28 +463,6 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
-                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_user" translatesAutoresizingMaskIntoConstraints="NO" id="FPO-7z-0A1">
-                                                                <rect key="frame" x="87" y="0.0" width="160" height="160"/>
-                                                                <gestureRecognizers/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="160" id="DUk-Er-GYh"/>
-                                                                    <constraint firstAttribute="width" secondItem="FPO-7z-0A1" secondAttribute="height" multiplier="1:1" id="RRa-Er-eS3"/>
-                                                                </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="4"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" name="BorderColor"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <integer key="value" value="80"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                                <connections>
-                                                                    <outletCollection property="gestureRecognizers" destination="AJs-i5-Iwp" appends="YES" id="V34-ZY-4JN"/>
-                                                                </connections>
-                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -579,7 +579,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_user" width="148.5" height="169.5"/>
+        <image name="empty_photo" width="100" height="100"/>
         <namedColor name="BorderColor">
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

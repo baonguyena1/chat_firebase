@@ -80,6 +80,10 @@
 		9BEDD0BC23B347E000157805 /* MemberViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0BA23B347E000157805 /* MemberViewCell.swift */; };
 		9BEDD0BE23B3487300157805 /* UIImageView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0BD23B3487300157805 /* UIImageView+Helper.swift */; };
 		9BEDD0BF23B3487300157805 /* UIImageView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0BD23B3487300157805 /* UIImageView+Helper.swift */; };
+		9BEDD0C523B35EE100157805 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0C423B35EE100157805 /* SettingViewController.swift */; };
+		9BEDD0C623B35EE100157805 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0C423B35EE100157805 /* SettingViewController.swift */; };
+		9BEDD0C923B360D200157805 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0C823B360D200157805 /* SettingViewModel.swift */; };
+		9BEDD0CA23B360D200157805 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0C823B360D200157805 /* SettingViewModel.swift */; };
 		A2D3935D4A449CFC4AB62B7F /* Pods_ChatFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1FF3D52656B8A6A1AF3040 /* Pods_ChatFirebase.framework */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +155,8 @@
 		9BEDD0B623B342ED00157805 /* Date+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helper.swift"; sourceTree = "<group>"; };
 		9BEDD0BA23B347E000157805 /* MemberViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewCell.swift; sourceTree = "<group>"; };
 		9BEDD0BD23B3487300157805 /* UIImageView+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Helper.swift"; sourceTree = "<group>"; };
+		9BEDD0C423B35EE100157805 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		9BEDD0C823B360D200157805 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		B4F2B8AEC860B854AF434528 /* Pods-ChatFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase.release.xcconfig"; path = "Target Support Files/Pods-ChatFirebase/Pods-ChatFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		BD3BF077FA6CBBB957282394 /* Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChatFirebase-ChatFirebaseUITests/Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F3E9A34DE416BDDDB6F72572 /* Pods_ChatFirebase_ChatFirebaseUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatFirebase_ChatFirebaseUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,6 +346,7 @@
 		9B59C45B23AC6B3F004EFF80 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9BEDD0C023B3594500157805 /* Setting */,
 				9BEDD0B123B33CBD00157805 /* Friends */,
 				9BE54FF923B1A648007CFA48 /* MainTabBarViewController.swift */,
 				9B1055BB23AC7274009C1AF5 /* Authorization */,
@@ -370,6 +377,7 @@
 		9B59C45E23AC6B57004EFF80 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				9BEDD0C723B360BF00157805 /* Setting */,
 				9BEDD0B223B33F3500157805 /* Friend */,
 				9B1055CB23ACA899009C1AF5 /* Authorization */,
 			);
@@ -422,6 +430,22 @@
 				9BEDD0BA23B347E000157805 /* MemberViewCell.swift */,
 			);
 			path = Friends;
+			sourceTree = "<group>";
+		};
+		9BEDD0C023B3594500157805 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				9BEDD0C423B35EE100157805 /* SettingViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		9BEDD0C723B360BF00157805 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				9BEDD0C823B360D200157805 /* SettingViewModel.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		DD489057288F8179E15F8F4D /* Frameworks */ = {
@@ -746,6 +770,7 @@
 				9B1055B923AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
 				9BE54FF423B0BF82007CFA48 /* UserListViewController.swift in Sources */,
 				9B1055D323ACC74F009C1AF5 /* String+Helper.swift in Sources */,
+				9BEDD0C923B360D200157805 /* SettingViewModel.swift in Sources */,
 				9B1055C323ACA27C009C1AF5 /* SignUpViewController.swift in Sources */,
 				9B1055C623ACA32D009C1AF5 /* Constant.swift in Sources */,
 				9B1055CD23ACA8B4009C1AF5 /* SignUpViewModel.swift in Sources */,
@@ -754,6 +779,7 @@
 				9BE54FEE23B0B12F007CFA48 /* Logger.swift in Sources */,
 				9B1055BD23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
 				9B1055B223AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
+				9BEDD0C523B35EE100157805 /* SettingViewController.swift in Sources */,
 				9BEDD0B423B33F5400157805 /* UserListViewModel.swift in Sources */,
 				9BEDD0BE23B3487300157805 /* UIImageView+Helper.swift in Sources */,
 				9B1055B523AC718C009C1AF5 /* Enums.swift in Sources */,
@@ -795,6 +821,7 @@
 				9B1055BA23AC71FC009C1AF5 /* ApplicationNavigator.swift in Sources */,
 				9BE54FF523B0BF82007CFA48 /* UserListViewController.swift in Sources */,
 				9B1055D423ACC74F009C1AF5 /* String+Helper.swift in Sources */,
+				9BEDD0CA23B360D200157805 /* SettingViewModel.swift in Sources */,
 				9B1055C423ACA27C009C1AF5 /* SignUpViewController.swift in Sources */,
 				9B1055C723ACA32D009C1AF5 /* Constant.swift in Sources */,
 				9B1055CE23ACA8B4009C1AF5 /* SignUpViewModel.swift in Sources */,
@@ -803,6 +830,7 @@
 				9BE54FEF23B0B12F007CFA48 /* Logger.swift in Sources */,
 				9B1055BE23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
 				9B1055B323AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
+				9BEDD0C623B35EE100157805 /* SettingViewController.swift in Sources */,
 				9BEDD0B523B33F5400157805 /* UserListViewModel.swift in Sources */,
 				9BEDD0BF23B3487300157805 /* UIImageView+Helper.swift in Sources */,
 				9B1055B623AC718C009C1AF5 /* Enums.swift in Sources */,
