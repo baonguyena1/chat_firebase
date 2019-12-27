@@ -1,5 +1,5 @@
 //
-//  UserListViewController.swift
+//  FriendListViewController.swift
 //  ChatFirebase
 //
 //  Created by Bao Nguyen on 12/23/19.
@@ -11,7 +11,7 @@ import DZNEmptyDataSet
 import RxFirebase
 import RxSwift
 
-class UserListViewController: UIViewController {
+class FriendListViewController: UIViewController {
 
     @IBOutlet weak var userTableView: UITableView!
     
@@ -19,7 +19,7 @@ class UserListViewController: UIViewController {
     
     private let viewModel = UserListViewModel()
     
-    private var members = [Member]() {
+    private var members = [User]() {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.userTableView.reloadData()
@@ -27,12 +27,16 @@ class UserListViewController: UIViewController {
         }
     }
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialTableView()
         
         initialReactive()
+        
+        initialSearchController()
         
         observeMembers()
     }
@@ -52,10 +56,34 @@ class UserListViewController: UIViewController {
                 self?.members = members
             })
             .disposed(by: bag)
+        
+        userTableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] (indexPath) in
+                guard let `self` = self else { return }
+                let friend = self.members[indexPath.row]
+                self.performSegue(withIdentifier: Segue.kFriendToSingleChat, sender: friend)
+            })
+            .disposed(by: bag)
+    }
+    
+    private func initialSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = Localizable.kSearchFriends
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? SingleChatViewController {
+            if let friend = sender as? User {
+                destination.receiverUser = friend
+            }
+        }
     }
 }
 
-extension UserListViewController: UITableViewDataSource {
+extension FriendListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return members.count
     }
@@ -67,9 +95,9 @@ extension UserListViewController: UITableViewDataSource {
     }
 }
 
-extension UserListViewController: DZNEmptyDataSetSource {
+extension FriendListViewController: DZNEmptyDataSetSource {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return UIImage(named: ImageAsset.kPlaceholderMessageEmpty)!
+        return ImageAssets.placeholder_message_empty!
     }
     
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
@@ -94,5 +122,11 @@ extension UserListViewController: DZNEmptyDataSetSource {
     
     func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         return 30.0
+    }
+}
+
+extension FriendListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
 }

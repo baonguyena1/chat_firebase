@@ -25,7 +25,7 @@ class SignUpViewModel: BaseViewModel {
     
     private var bag = DisposeBag()
     
-    private(set) var user = PublishRelay<User>()
+    private(set) var userId = PublishRelay<String>()
     
     private(set) lazy var rx_isLoading = PublishRelay<Bool>()
     private(set) lazy var rx_error = PublishRelay<String>()
@@ -36,7 +36,7 @@ class SignUpViewModel: BaseViewModel {
         rx_isLoading.accept(true)
         auth.rx.createUser(withEmail: email, password: password)
             .subscribe(onNext: { [weak self] (result) in
-                self?.user.accept(result.user)
+                self?.userId.accept(result.user.uid)
             }, onError: { [weak self] (error) in
                 self?.rx_error.accept(error.localizedDescription)
                 self?.rx_isLoading.accept(false)

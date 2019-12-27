@@ -16,7 +16,7 @@ class SettingViewModel: BaseViewModel {
     private(set) lazy var rx_error = PublishRelay<String>()
     
     private(set) lazy var signOutEvent = PublishRelay<Void>()
-    private(set) lazy var profile = PublishRelay<Member>()
+    private(set) lazy var profile = PublishRelay<User>()
     
     private let bag = DisposeBag()
     
@@ -26,7 +26,7 @@ class SettingViewModel: BaseViewModel {
             .listen()
             .subscribe(onNext: { [weak self] (snapshot) in
                 if let data = snapshot.data() {
-                    let profile = Member(json: data)
+                    let profile = User(json: data)
                     self?.profile.accept(profile)
                 }
             }, onError: { (error) in

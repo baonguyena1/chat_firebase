@@ -70,7 +70,7 @@ class SettingViewController: UIViewController {
             .disposed(by: bag)
     }
     
-    private func showProfileInfo(_ profile: Member) {
+    private func showProfileInfo(_ profile: User) {
         if let avatar = profile.avatar {
             userAvatarImageView.setImage(with: avatar)            
         }

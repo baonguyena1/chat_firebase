@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RxFirebase
 import FirebaseCore
 import IQKeyboardManagerSwift
 import Kingfisher
@@ -23,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.disabledToolbarClasses.append(SingleChatViewController.self)
+        IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(SingleChatViewController.self)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         ApplicationNavigator.shared.setWindow(window: window)

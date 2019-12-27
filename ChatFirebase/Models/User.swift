@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Member: Codable {
+struct User: Codable {
     var id: String!
     var avatar: String?
     var displayName: String?

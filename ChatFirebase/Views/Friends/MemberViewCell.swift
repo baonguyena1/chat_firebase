@@ -25,7 +25,7 @@ class MemberViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    var member: Member! {
+    var member: User! {
         didSet {
             setupUI()
         }
