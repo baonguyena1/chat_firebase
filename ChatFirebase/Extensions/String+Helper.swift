@@ -14,4 +14,8 @@ extension String {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", regex)
         return emailTest.evaluate(with: self)
     }
+    
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
 }

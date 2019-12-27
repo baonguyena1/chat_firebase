@@ -22,6 +22,7 @@ target 'ChatFirebase' do
   pod 'ActiveLabel' # https://github.com/optonaut/ActiveLabel.swift
   pod 'DZNEmptyDataSet' # https://github.com/dzenbot/DZNEmptyDataSet
   pod "RxGesture" # https://github.com/RxSwiftCommunity/RxGesture
+  pod 'MessageKit' # https://github.com/MessageKit/MessageKit
 
   target 'ChatFirebaseTests' do
     inherit! :search_paths

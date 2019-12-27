@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Tab Bar View Controller-->
+        <scene sceneID="GUk-tP-0Wh">
+            <objects>
+                <tabBarController storyboardIdentifier="MainTabBarViewController" id="8oZ-Om-LR0" customClass="MainTabBarViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="odT-f9-TZR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="PrimaryColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="M6q-iQ-yhr" kind="relationship" relationship="viewControllers" id="eS8-Zk-hlx"/>
+                        <segue destination="7uf-xJ-WJT" kind="relationship" relationship="viewControllers" id="JfD-Yh-hJ8"/>
+                        <segue destination="uVt-VL-AGc" kind="relationship" relationship="viewControllers" id="L63-tl-RJd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sH9-FQ-THp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1584" y="-171"/>
+        </scene>
+        <!--ConversationRootNavigation-->
+        <scene sceneID="luA-Rg-U3h">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Chat" referencedIdentifier="ConversationRootNavigation" id="M6q-iQ-yhr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="NtM-e3-IIc"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="31q-T9-Y6a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-670" y="-352"/>
+        </scene>
+        <!--FriendRootNavigation-->
+        <scene sceneID="jlD-cp-ryN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Friend" referencedIdentifier="FriendRootNavigation" id="7uf-xJ-WJT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="5dA-yS-qbm"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Flj-Al-wf4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-699" y="-241"/>
+        </scene>
+        <!--SettingRootNavigation-->
+        <scene sceneID="vB1-fd-8lF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Setting" referencedIdentifier="SettingRootNavigation" id="uVt-VL-AGc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="5en-hN-k8v"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gKE-dH-2dw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-695" y="-69"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="PrimaryColor">
+            <color red="1" green="0.53333333333333333" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

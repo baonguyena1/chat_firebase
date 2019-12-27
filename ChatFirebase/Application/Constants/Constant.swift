@@ -11,9 +11,12 @@ import Foundation
 typealias JSON = [String: Any]
 typealias JSONArray = [JSON]
 
+let kMaximumChatCharactor = 140
+
 struct Segue {
     static let kSignUp = "signUpSegue"
     static let kUpdateUserInfo = "updateUserInfoSegue"
+    static let kFriendToSingleChat = "friendToSingleChatSeque"
 }
 
 struct KeyPath {
@@ -23,18 +26,26 @@ struct KeyPath {
     static let kEmail = "email"
     static let kCreatedAt = "created_at"
     static let kUpdatedAt = "updated_at"
-}
-
-struct ImageAsset {
-    static let kPlaceholderMessageEmpty = "placeholder_message_empty"
-    static let kIcMember = "ic_member"
+    static let kUid = "uid"
+    static let kMembers = "members"
+    static let kLastMessageSent = "last_message_sent"
+    static let kName = "name"
+    static let kConversations = "conversations"
+    static let kSender = "sender"
+    static let kMessage = "message"
+    static let kMessageType = "message_type"
 }
 
 struct Localizable {
-    static let kDontHaveAccountSignUp = NSLocalizedString("Don't have account? Sign Up", comment: "")
-    static let kNoMessages = NSLocalizedString("No Messages", comment: "")
-    static let kWhenYouHaveMessagesYoullSeeThemHere = NSLocalizedString("When you have messages, you'll see them here.", comment: "")
-    static let kAreYouSureWantToSignOut = NSLocalizedString("Are you sure want to Sign Out?", comment: "")
-    static let kYes = NSLocalizedString("Yes", comment: "")
-    static let kNo = NSLocalizedString("No", comment: "")
+    static let kDontHaveAccountSignUp = "Don't have account? Sign Up".localized
+    static let kNoMessages = "No Messages".localized
+    static let kWhenYouHaveMessagesYoullSeeThemHere = "When you have messages, you'll see them here.".localized
+    static let kAreYouSureWantToSignOut = "Are you sure want to Sign Out?".localized
+    static let kYes = "Yes".localized
+    static let kNo = "No".localized
+    static let kSearchConversations = "Search Conversations".localized
+    static let kSearchFriends = "Search Friends".localized
+    static let kSending = "Sending...".localized
+    static let kCancel = "Cancel".localized
+    static let kAa = "Aa".localized
 }

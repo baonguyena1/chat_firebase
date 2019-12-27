@@ -264,10 +264,13 @@ PODS:
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.21.0)
   - GTMSessionFetcher/Core (1.3.0)
+  - InputBarAccessoryView (4.2.2)
   - IQKeyboardManagerSwift (6.5.4)
   - Kingfisher (4.10.1)
   - leveldb-library (1.22)
   - MBProgressHUD (1.1.0)
+  - MessageKit (3.0.0):
+    - InputBarAccessoryView (~> 4.2.2)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -334,6 +337,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Kingfisher
   - MBProgressHUD
+  - MessageKit
   - RxFirebase/Auth
   - RxFirebase/Database
   - RxFirebase/Firestore
@@ -370,10 +374,12 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - InputBarAccessoryView
     - IQKeyboardManagerSwift
     - Kingfisher
     - leveldb-library
     - MBProgressHUD
+    - MessageKit
     - nanopb
     - Protobuf
     - PryntTrimmerView
@@ -417,10 +423,12 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
+  InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   PryntTrimmerView: 67e67573ffd4c073f1308effa66aefd0cfa667a0
@@ -440,6 +448,6 @@ SPEC CHECKSUMS:
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   YPImagePicker: 7a34eabd0ef544ae8fbf9785c3df9ec5bbf242e3
 
-PODFILE CHECKSUM: 2b0fe1f66808ac08ed50035a5a9b91b87636c4d2
+PODFILE CHECKSUM: 044b53c61c1881c505f08d3f1992159a540f6611
 
 COCOAPODS: 1.8.3

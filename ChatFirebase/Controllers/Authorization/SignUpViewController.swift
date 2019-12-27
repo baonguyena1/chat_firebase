@@ -60,9 +60,9 @@ class SignUpViewController: UIViewController {
             })
             .disposed(by: bag)
         
-        viewModel.user
-            .subscribe(onNext: { [weak self] (user) in
-                self?.performSegue(withIdentifier: Segue.kUpdateUserInfo, sender: user.uid)
+        viewModel.userId
+            .subscribe(onNext: { [weak self] (userId) in
+                self?.performSegue(withIdentifier: Segue.kUpdateUserInfo, sender: userId)
             })
             .disposed(by: bag)
     }

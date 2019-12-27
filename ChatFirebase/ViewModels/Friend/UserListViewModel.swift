@@ -14,7 +14,7 @@ class UserListViewModel {
     
     private let bag = DisposeBag()
     
-    private(set) var members = BehaviorRelay<[Member]>(value: [])
+    private(set) var members = BehaviorRelay<[User]>(value: [])
     
     func observeMembers() {
         let auth = FireBaseManager.shared.auth
@@ -25,7 +25,7 @@ class UserListViewModel {
                 guard let `self` = self else { return }
                 var currents = self.members.value
                 snapshot.documentChanges.forEach { (diff) in
-                    let member = Member(json: diff.document.data())
+                    let member = User(json: diff.document.data())
                     switch diff.type {
                         case .added:
                             if member.id != auth.currentUser?.uid {

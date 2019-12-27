@@ -24,11 +24,23 @@ class FireBaseManager {
     }()
     
     lazy var usersCollection: CollectionReference = {
-        return firestore.collection("users")
+        return firestore.collection(FireBaseName.kUsers)
+    }()
+    
+    lazy var conversationsCollection: CollectionReference = {
+        return firestore.collection(FireBaseName.kConversations)
+    }()
+    
+    lazy var roomsCollection: CollectionReference = {
+        return firestore.collection(FireBaseName.kRooms)
+    }()
+    
+    lazy var userChatsCollection: CollectionReference = {
+        return firestore.collection(FireBaseName.kUserChats)
     }()
     
     lazy var userProfileStorage = {
-        return Storage.storage().reference().child("user_profiles")
+        return Storage.storage().reference().child(FireBaseName.kUserProfiles)
     }()
     
     func signOut() {
