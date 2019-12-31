@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxFirebase
 import FirebaseStorage
+import FirebaseFirestore
 
 class UpdateUserInforViewModel: BaseViewModel {
     
@@ -33,71 +34,58 @@ class UpdateUserInforViewModel: BaseViewModel {
         let imageName = UUID().uuidString.lowercased()
         let reference = FireBaseManager.shared.userProfileStorage.child(userId).child(imageName + ".png")
         var values: [String: Any] = [
-            KeyPath.kId: userId,
+            KeyPath.kDocumentID: userId,
             KeyPath.kEmail: email,
             KeyPath.kDisplayName: name,
             KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
             KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970
         ]
         
-        func uploadInfo() {
-            let userReference = FireBaseManager.shared.usersCollection.document(userId)
-            userReference.rx
-                .setData(values)
-                .subscribe(onNext: { [weak self] (_) in
-                    self?.updatedInfoStatus.accept(true)
-                    }, onError: { [weak self] (error) in
-                        Logger.error(error.localizedDescription)
-                        self?.rx_error.accept(error.localizedDescription)
-                        self?.rx_isLoading.accept(false)
-                    }, onCompleted: { [weak self] in
-                        self?.rx_isLoading.accept(false)
-                })
-                .disposed(by: bag)
-        }
-        
         rx_isLoading.accept(true)
-        uploadImage(image, reference: reference) { [weak self] status in
-            if status {
-                self?.getUrl(reference: reference) { url in
-                    if !url.isEmpty {
-                        values[KeyPath.kAvatar] = url
-                    }
-                    uploadInfo()
+        uploadImage(image, reference: reference)
+            .flatMapLatest { (status) -> Observable<String> in
+                if status {
+                    return self.getUrl(reference: reference)
+                } else {
+                    return Observable.just("")
                 }
-            } else {
-                uploadInfo()
             }
-        }
+            .flatMapLatest { (avatarUrl) -> Observable<Void> in
+                if !avatarUrl.isEmpty {
+                    values[KeyPath.kAvatar] = avatarUrl
+                }
+                let user = FireBaseManager.shared.usersCollection.document(userId)
+                return self.uploadUserInfo(values, document: user)
+            }
+            .subscribe(onNext: { [weak self] () in
+                self?.updatedInfoStatus.accept(true)
+            }, onError: { [weak self] (error) in
+                Logger.error(error.localizedDescription)
+                self?.rx_error.accept(error.localizedDescription)
+                self?.rx_isLoading.accept(false)
+            }, onCompleted: { [weak self] in
+                self?.rx_isLoading.accept(false)
+            })
+            .disposed(by: bag)
+
     }
     
-    private func uploadImage(_ image: UIImage, reference: StorageReference, completion: @escaping ((Bool) -> Void)) {
+    private func uploadImage(_ image: UIImage, reference: StorageReference) -> Observable<Bool> {
         guard let imageData = image.pngData() else {
-            return completion(false)
+            return Observable.just(false)
         }
-        var status = false
-        reference.rx.putData(imageData)
-            .subscribe(onNext: { (metaData) in
-                status = true
-            }, onError: { (error) in
-                Logger.error(error.localizedDescription)
-            }, onCompleted: {
-                completion(status)
-            })
-            .disposed(by: bag)
+        return reference.rx.putData(imageData)
+            .map { _ in true }
     }
     
-    private func getUrl(reference: StorageReference, completion: @escaping ((String) -> Void)) {
-        var urlString = ""
-        reference.rx
+    private func getUrl(reference: StorageReference) -> Observable<String> {
+        return reference.rx
             .downloadURL()
-            .subscribe(onNext: { (url) in
-                urlString = url.absoluteString
-            }, onError: { (error) in
-                Logger.error(error.localizedDescription)
-            }, onCompleted: {
-                completion(urlString)
-            })
-            .disposed(by: bag)
+            .map { $0.absoluteString }
     }
+    
+    private func uploadUserInfo(_ values: [String: Any], document: DocumentReference) -> Observable<Void> {
+        return document.rx.setData(values, merge: true)
+    }
+    
 }

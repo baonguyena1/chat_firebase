@@ -405,10 +405,10 @@ extension SingleChatViewController {
     
     private func createConversation() -> Single<String> {
         var members: [String] = [String]()
-        if let senderId = LoginUserManager.shared.profile.value.id {
+        if let senderId = LoginUserManager.shared.user.value.documentID {
             members.append(senderId)
         }
-        if let receiverId = receiverUser.id {
+        if let receiverId = receiverUser.documentID {
             members.append(receiverId)
         }
         
@@ -433,7 +433,7 @@ extension SingleChatViewController {
     
     private func createUserChat(conversation: String) -> Single<String> {
         let senderId: String = currentSender().senderId
-        let receiverId: String = receiverUser.id
+        let receiverId: String = receiverUser.documentID
         return Single.create { [weak self] (single) -> Disposable in
             
             guard let `self` = self else { return Disposables.create() }
@@ -470,7 +470,7 @@ extension SingleChatViewController {
     }
     
     private func createMessage(data: [Any], conversation: String) {
-        let message = FireBaseManager.shared.roomsCollection.document(conversation).collection(FireBaseName.kMessages)
+        let messages = FireBaseManager.shared.messagesCollection(conversation: conversation)
         for component in data {
             if let str = component as? String {
                 let content: [String: Any] = [
@@ -480,16 +480,28 @@ extension SingleChatViewController {
                     KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
                     KeyPath.kMessageType: ChatType.text.rawValue
                 ]
-                message.rx
+                messages.rx
                     .addDocument(data: content)
-                    .subscribe { (event) in
-                        Logger.log("\(event)")
-                    }
-                .disposed(by: bag)
+                    .subscribe(onNext: { [weak self] (document) in
+                        self?.updateLastMessageSent(messageId: document.documentID, conversation: conversation)
+                    }, onError: { (error) in
+                        Logger.error(error.localizedDescription)
+                    })
+                    .disposed(by: bag)
             }
         }
     }
     
+    private func updateLastMessageSent(messageId: String, conversation: String) {
+        let document = FireBaseManager.shared.conversationsCollection.document(conversation)
+        document.rx.updateData([
+                KeyPath.kLastMessageId: messageId
+            ])
+            .subscribe { (event) in
+                Logger.log("\(event)")
+            }
+            .disposed(by: bag)
+    }
 }
 
 extension SingleChatViewController {

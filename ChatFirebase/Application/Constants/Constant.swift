@@ -22,18 +22,19 @@ struct Segue {
 struct KeyPath {
     static let kDisplayName = "displayName"
     static let kAvatar = "avatar"
-    static let kId = "id"
     static let kEmail = "email"
     static let kCreatedAt = "created_at"
     static let kUpdatedAt = "updated_at"
     static let kUid = "uid"
     static let kMembers = "members"
-    static let kLastMessageSent = "last_message_sent"
+    static let kLastMessageId = "last_message_id"
+    static let kLastMessage = "last_message"
     static let kName = "name"
     static let kConversations = "conversations"
     static let kSender = "sender"
     static let kMessage = "message"
     static let kMessageType = "message_type"
+    static let kDocumentID = "documentID"
 }
 
 struct Localizable {

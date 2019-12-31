@@ -13,7 +13,7 @@ import RxCocoa
 class LoginUserManager {
     static let shared = LoginUserManager()
     
-    private(set) lazy var profile = BehaviorRelay<User>(value: User(json: [:]))
+    private(set) lazy var user = BehaviorRelay<User>(value: User(from: [:]))
     
     private let bag = DisposeBag()
     
@@ -30,8 +30,8 @@ class LoginUserManager {
             .listen()
             .subscribe(onNext: { [weak self] (snapshot) in
                 if let data = snapshot.data() {
-                    let profile = User(json: data)
-                    self?.profile.accept(profile)
+                    let profile = User(from: data)
+                    self?.user.accept(profile)
                 }
                 }, onError: { (error) in
                     Logger.error(error.localizedDescription)
