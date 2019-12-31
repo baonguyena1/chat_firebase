@@ -38,26 +38,37 @@ class ConversationViewModel {
     }
     
     private func observeConversation(conversation: String) -> Observable<Conversation?> {
-        return FireBaseManager.shared.conversationsCollection.document(conversation).rx
-            .listen()
-            .flatMapLatest{ [weak self] (snapshot) -> Observable<Conversation?> in
-                
-                guard let `self` = self, var data = snapshot.data() else {
-                    return  Observable.just(nil)
+        let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
+        return FireBaseManager.shared.documentExists(docRef: conversationRef)
+            .flatMap { (exists) -> Observable<Conversation?> in
+                if !exists {
+                    return .just(nil)
                 }
-                data[KeyPath.kDocumentID] = snapshot.documentID
-                let conversation = Conversation(from: data)
-                let users = self.getUsers(listUser: conversation.members)
-                let message = self.getMessage(messageId: conversation.lastMessageId, conversation: conversation.documentID)
-                return Observable.zip(users, message)
-                    .flatMap { (arg) -> Observable<Conversation?> in
-
-                        let (users, message) = arg
-                        conversation.users = users
-                        conversation.lastMessage = message
-                        return Observable.just(conversation)
-                }
+                return conversationRef.rx
+                    .listen()
+                    .flatMapLatest{ [weak self] (snapshot) -> Observable<Conversation?> in
+                        
+                        guard let `self` = self, var data = snapshot.data() else {
+                            return  Observable.just(nil)
+                        }
+                        data[KeyPath.kDocumentID] = snapshot.documentID
+                        let conversation = Conversation(from: data)
+                        if conversation.members.isEmpty || conversation.lastMessageId.isEmpty {
+                            return .just(nil)
+                        }
+                        let users = self.getUsers(listUser: conversation.members)
+                        let message = self.getMessage(messageId: conversation.lastMessageId, conversation: conversation.documentID)
+                        return Observable.zip(users, message)
+                            .flatMap { (arg) -> Observable<Conversation?> in
+                                
+                                let (users, message) = arg
+                                conversation.users = users
+                                conversation.lastMessage = message
+                                return Observable.just(conversation)
+                        }
+                    }
             }
+        
     }
     
     private func getUsers(listUser: [String]) -> Observable<[User]> {

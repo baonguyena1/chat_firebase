@@ -11,7 +11,7 @@ import Foundation
 class Message: FireBaseModel {
     var message: String!
     var messagaType: String!
-    var sender: String!
+    var senderId: String!
     
     required init(from json: JSON) {
         if let message = json[KeyPath.kMessage] as? String {
@@ -26,10 +26,10 @@ class Message: FireBaseModel {
             self.messagaType = ""
         }
         
-        if let sender = json[KeyPath.kSender] as? String {
-            self.sender = sender
+        if let senderId = json[KeyPath.kSenderId] as? String {
+            self.senderId = senderId
         } else {
-            self.sender = ""
+            self.senderId = ""
         }
         super.init(from: json)
     }

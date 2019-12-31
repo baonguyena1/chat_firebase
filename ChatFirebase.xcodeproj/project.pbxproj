@@ -64,6 +64,8 @@
 		9B7E995F23BAFA1300EB7E2E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E995D23BAFA1300EB7E2E /* Message.swift */; };
 		9B7E996123BAFAC300EB7E2E /* FireBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */; };
 		9B7E996223BAFAC300EB7E2E /* FireBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */; };
+		9B7E996423BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */; };
+		9B7E996523BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */; };
 		9BE54FE823B0AEE1007CFA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE54FE723B0AEE1007CFA48 /* Main.storyboard */; };
 		9BE54FE923B0AEE1007CFA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE54FE723B0AEE1007CFA48 /* Main.storyboard */; };
 		9BE54FEB23B0B09C007CFA48 /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FEA23B0B09C007CFA48 /* FireBaseManager.swift */; };
@@ -180,6 +182,7 @@
 		9B5F7D1423BA0F1A00E82772 /* ConversationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCell.swift; sourceTree = "<group>"; };
 		9B7E995D23BAFA1300EB7E2E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseModel.swift; sourceTree = "<group>"; };
+		9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChatViewModel.swift; sourceTree = "<group>"; };
 		9BE54FE723B0AEE1007CFA48 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9BE54FEA23B0B09C007CFA48 /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseManager.swift; sourceTree = "<group>"; };
 		9BE54FED23B0B12F007CFA48 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -469,6 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				9B5F7D0E23B9FCE200E82772 /* ConversationViewModel.swift */,
+				9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -905,6 +909,7 @@
 				9BE85A1923B5DDF500ACCBC4 /* CustomMessagesFlowLayout.swift in Sources */,
 				9B5F7D0823B99E8000E82772 /* LoginUserManager.swift in Sources */,
 				9B1055BD23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
+				9B7E996423BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */,
 				9B1055B223AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
 				9BEDD0C523B35EE100157805 /* SettingViewController.swift in Sources */,
 				9BEDD0B423B33F5400157805 /* UserListViewModel.swift in Sources */,
@@ -970,6 +975,7 @@
 				9BE85A1A23B5DDF500ACCBC4 /* CustomMessagesFlowLayout.swift in Sources */,
 				9B5F7D0923B99E8000E82772 /* LoginUserManager.swift in Sources */,
 				9B1055BE23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
+				9B7E996523BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */,
 				9B1055B323AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
 				9BEDD0C623B35EE100157805 /* SettingViewController.swift in Sources */,
 				9BEDD0B523B33F5400157805 /* UserListViewModel.swift in Sources */,
