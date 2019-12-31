@@ -8,18 +8,18 @@
 
 import Foundation
 
-struct User: Codable {
-    var id: String!
+class User: Codable {
+    var documentID: String!
     var avatar: String?
     var displayName: String?
     var email: String?
     var createdAt: Double!
     var updatedAt: Double!
     
-    init(json: JSON) {
+    init(from json: JSON) {
         self.avatar = json[KeyPath.kAvatar] as? String
         self.displayName = json[KeyPath.kDisplayName] as? String
-        self.id = (json[KeyPath.kId] as? String) ?? ""
+        self.documentID = (json[KeyPath.kDocumentID] as? String) ?? ""
         self.email = json[KeyPath.kEmail] as? String
         self.createdAt = (json[KeyPath.kCreatedAt] as? Double) ?? Date().milisecondTimeIntervalSince1970
         self.updatedAt = (json[KeyPath.kCreatedAt] as? Double) ?? Date().milisecondTimeIntervalSince1970

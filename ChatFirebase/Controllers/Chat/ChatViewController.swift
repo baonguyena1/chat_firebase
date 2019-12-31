@@ -17,7 +17,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
         return .lightContent
     }
     
-    var messageList: [Message] = []
+    var messageList: [ChatMessage] = []
     
     let refreshControl = UIRefreshControl()
     
@@ -77,7 +77,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     
     // MARK: - Helpers
     
-    func insertMessage(_ message: Message) {
+    func insertMessage(_ message: ChatMessage) {
         messageList.append(message)
         // Reload last section to update header/footer labels and insert a new one
         messagesCollectionView.performBatchUpdates({
@@ -104,8 +104,8 @@ class ChatViewController: MessagesViewController, MessagesDataSource {
     // MARK: - MessagesDataSource
     
     func currentSender() -> SenderType {
-        let loginUser = LoginUserManager.shared.profile.value
-        return SenderUser(senderId: loginUser.id, displayName: loginUser.displayName ?? "")
+        let loginUser = LoginUserManager.shared.user.value
+        return SenderUser(senderId: loginUser.documentID, displayName: loginUser.displayName ?? "")
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {

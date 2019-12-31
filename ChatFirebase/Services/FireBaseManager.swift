@@ -43,6 +43,14 @@ class FireBaseManager {
         return Storage.storage().reference().child(FireBaseName.kUserProfiles)
     }()
     
+    func messagesCollection(conversation: String) -> CollectionReference {
+        FireBaseManager.shared.roomsCollection.document(conversation).collection(FireBaseName.kMessages)
+    }
+    
+    func messageDocument(inConversation conversation: String, messageId: String) -> DocumentReference {
+        return messagesCollection(conversation: conversation).document(messageId)
+    }
+    
     func signOut() {
         do {
             try auth.signOut()

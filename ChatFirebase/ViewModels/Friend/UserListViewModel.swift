@@ -25,18 +25,18 @@ class UserListViewModel {
                 guard let `self` = self else { return }
                 var currents = self.members.value
                 snapshot.documentChanges.forEach { (diff) in
-                    let member = User(json: diff.document.data())
+                    let member = User(from: diff.document.data())
                     switch diff.type {
                         case .added:
-                            if member.id != auth.currentUser?.uid {
+                            if member.documentID != auth.currentUser?.uid {
                                 currents.append(member)
                             }
                         case .modified:
-                            if let index = currents.firstIndex(where: { $0.id == member.id }) {
+                            if let index = currents.firstIndex(where: { $0.documentID == member.documentID }) {
                                 currents[index] = member
                             }
                         case .removed:
-                            if let index = currents.firstIndex(where: { $0.id == member.id }) {
+                            if let index = currents.firstIndex(where: { $0.documentID == member.documentID }) {
                                 currents.remove(at: index)
                         }
                     }

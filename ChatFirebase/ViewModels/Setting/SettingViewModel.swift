@@ -26,7 +26,7 @@ class SettingViewModel: BaseViewModel {
             .listen()
             .subscribe(onNext: { [weak self] (snapshot) in
                 if let data = snapshot.data() {
-                    let profile = User(json: data)
+                    let profile = User(from: data)
                     self?.profile.accept(profile)
                 }
             }, onError: { (error) in
