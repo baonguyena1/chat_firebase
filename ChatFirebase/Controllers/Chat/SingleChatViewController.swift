@@ -22,10 +22,14 @@ final class SingleChatViewController: ChatViewController {
     
     private let bag = DisposeBag()
     
+    private let viewModel = SingleChatViewModel()
+    
     override func viewDidLoad() {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
 //        messagesCollectionView.register(CustomCell.self)
         super.viewDidLoad()
+        
+        initialReactive()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -386,121 +390,16 @@ extension SingleChatViewController: MessagesLayoutDelegate {
 extension SingleChatViewController {
     
     override func sendMessages(_ data: [Any]) {
-        createConversation()
-            .flatMap { self.createUserChat(conversation: $0) }
-            .subscribe(onSuccess: { [weak self] (conversationId) in
-                self?.createMessage(data: data, conversation: conversationId)
-                self?.finishSentMessage()
-            }) { [weak self] (error) in
-                Logger.error(error.localizedDescription)
-                self?.finishSentMessage()
-            }
-        .disposed(by: bag)
+        var members: [String] = [currentSender().senderId]
+        if let receiverId = receiverUser.documentID {
+            members.append(receiverId)
+        }
+        viewModel.initialConversation(members: members, sender: currentSender().senderId, data: data)
     }
     
     private func finishSentMessage() {
         self.messageInputBar.sendButton.stopAnimating()
         self.messageInputBar.inputTextView.placeholder = Localizable.kAa
-    }
-    
-    private func createConversation() -> Single<String> {
-        var members: [String] = [String]()
-        if let senderId = LoginUserManager.shared.user.value.documentID {
-            members.append(senderId)
-        }
-        if let receiverId = receiverUser.documentID {
-            members.append(receiverId)
-        }
-        
-        return Single.create { [weak self] (single) -> Disposable in
-            
-            guard let `self` = self else { return Disposables.create() }
-            let conversationsCollection = FireBaseManager.shared.conversationsCollection
-            conversationsCollection.rx
-                .addDocument(data: [
-                    KeyPath.kMembers: members
-                ])
-                .subscribe(onNext: { (document) in
-                    single(.success(document.documentID))
-                }, onError: { (error) in
-                    Logger.error(error.localizedDescription)
-                    single(.error(error))
-                })
-                .disposed(by: self.bag)
-            return Disposables.create()
-        }
-    }
-    
-    private func createUserChat(conversation: String) -> Single<String> {
-        let senderId: String = currentSender().senderId
-        let receiverId: String = receiverUser.documentID
-        return Single.create { [weak self] (single) -> Disposable in
-            
-            guard let `self` = self else { return Disposables.create() }
-            Observable
-                .zip(self.createUserChats(conversationId: conversation, userId: senderId).asObservable(),
-                     self.createUserChats(conversationId: conversation, userId: receiverId).asObservable()) { _,_ in
-                        return ()
-                }
-                .subscribe(onNext: { () in
-                    single(.success(conversation))
-                }, onError: { (error) in
-                    single(.error(error))
-                }).disposed(by: self.bag)
-            return Disposables.create {}
-        }
-    }
-    
-    private func createUserChats(conversationId: String, userId: String) -> Single<Void> {
-        let userChat = FireBaseManager.shared.userChatsCollection.document(userId)
-        return Single.create { [weak self] (single) -> Disposable in
-            
-            guard let `self` = self else { return Disposables.create() }
-            userChat.rx.setData([
-                KeyPath.kConversations: [conversationId]
-                ], merge: true)
-                .subscribe(onNext: { () in
-                    single(.success(()))
-                }, onError: { (error) in
-                    single(.error(error))
-                })
-                .disposed(by: self.bag)
-            return Disposables.create()
-        }
-    }
-    
-    private func createMessage(data: [Any], conversation: String) {
-        let messages = FireBaseManager.shared.messagesCollection(conversation: conversation)
-        for component in data {
-            if let str = component as? String {
-                let content: [String: Any] = [
-                    KeyPath.kSender: currentSender().senderId,
-                    KeyPath.kMessage: str,
-                    KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
-                    KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
-                    KeyPath.kMessageType: ChatType.text.rawValue
-                ]
-                messages.rx
-                    .addDocument(data: content)
-                    .subscribe(onNext: { [weak self] (document) in
-                        self?.updateLastMessageSent(messageId: document.documentID, conversation: conversation)
-                    }, onError: { (error) in
-                        Logger.error(error.localizedDescription)
-                    })
-                    .disposed(by: bag)
-            }
-        }
-    }
-    
-    private func updateLastMessageSent(messageId: String, conversation: String) {
-        let document = FireBaseManager.shared.conversationsCollection.document(conversation)
-        document.rx.updateData([
-                KeyPath.kLastMessageId: messageId
-            ])
-            .subscribe { (event) in
-                Logger.log("\(event)")
-            }
-            .disposed(by: bag)
     }
 }
 
@@ -511,4 +410,23 @@ extension SingleChatViewController {
         let initials = "\(firstName?.first ?? "A")\(lastName?.first ?? "A")"
         return Avatar(image: #imageLiteral(resourceName: "girl_phone"), initials: initials)
     }
+}
+
+extension SingleChatViewController {
+    
+    func initialReactive() {
+        viewModel.sentMessageStatus
+            .filter { !$0 }
+            .subscribe(onNext: { [weak self] (_) in
+                self?.finishSentMessage()
+            })
+            .disposed(by: bag)
+        
+        viewModel.conversationId
+            .subscribe(onNext: { [weak self] (conversationId) in
+                print(conversationId)
+            })
+            .disposed(by: bag)
+    }
+    
 }

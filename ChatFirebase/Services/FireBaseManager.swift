@@ -10,6 +10,8 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import RxFirebase
+import RxSwift
 
 class FireBaseManager {
     
@@ -44,11 +46,17 @@ class FireBaseManager {
     }()
     
     func messagesCollection(conversation: String) -> CollectionReference {
-        FireBaseManager.shared.roomsCollection.document(conversation).collection(FireBaseName.kMessages)
+        return FireBaseManager.shared.roomsCollection.document(conversation).collection(FireBaseName.kMessages)
     }
     
     func messageDocument(inConversation conversation: String, messageId: String) -> DocumentReference {
         return messagesCollection(conversation: conversation).document(messageId)
+    }
+    
+    func documentExists(docRef: DocumentReference) -> Observable<Bool> {
+        docRef.rx.getDocument()
+            .flatMap { Observable.just($0.exists) }
+            .catchErrorJustReturn(false)
     }
     
     func signOut() {
