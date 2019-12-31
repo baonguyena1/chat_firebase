@@ -70,7 +70,7 @@ struct MessageContactItem: ContactItem {
     
 }
 
-struct ChatMessage: MessageType {
+class ChatMessage: MessageType {
 
     var messageId: String
     var sender: SenderType {
@@ -88,43 +88,43 @@ struct ChatMessage: MessageType {
         self.sentDate = date
     }
     
-    init(custom: Any?, user: SenderUser, messageId: String, date: Date) {
+    convenience init(custom: Any?, user: SenderUser, messageId: String, date: Date) {
         self.init(kind: .custom(custom), user: user, messageId: messageId, date: date)
     }
     
-    init(text: String, user: SenderUser, messageId: String, date: Date) {
+    convenience init(text: String, user: SenderUser, messageId: String, date: Date) {
         self.init(kind: .text(text), user: user, messageId: messageId, date: date)
     }
     
-    init(attributedText: NSAttributedString, user: SenderUser, messageId: String, date: Date) {
+    convenience init(attributedText: NSAttributedString, user: SenderUser, messageId: String, date: Date) {
         self.init(kind: .attributedText(attributedText), user: user, messageId: messageId, date: date)
     }
     
-    init(image: UIImage, user: SenderUser, messageId: String, date: Date) {
+    convenience init(image: UIImage, user: SenderUser, messageId: String, date: Date) {
         let mediaItem = ImageMediaItem(image: image)
         self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
     }
     
-    init(thumbnail: UIImage, user: SenderUser, messageId: String, date: Date) {
+    convenience init(thumbnail: UIImage, user: SenderUser, messageId: String, date: Date) {
         let mediaItem = ImageMediaItem(image: thumbnail)
         self.init(kind: .video(mediaItem), user: user, messageId: messageId, date: date)
     }
     
-    init(location: CLLocation, user: SenderUser, messageId: String, date: Date) {
+    convenience init(location: CLLocation, user: SenderUser, messageId: String, date: Date) {
         let locationItem = CoordinateItem(location: location)
         self.init(kind: .location(locationItem), user: user, messageId: messageId, date: date)
     }
     
-    init(emoji: String, user: SenderUser, messageId: String, date: Date) {
+    convenience init(emoji: String, user: SenderUser, messageId: String, date: Date) {
         self.init(kind: .emoji(emoji), user: user, messageId: messageId, date: date)
     }
     
-    init(audioURL: URL, user: SenderUser, messageId: String, date: Date) {
+    convenience init(audioURL: URL, user: SenderUser, messageId: String, date: Date) {
         let audioItem = MessageAudiotem(url: audioURL)
         self.init(kind: .audio(audioItem), user: user, messageId: messageId, date: date)
     }
     
-    init(contact: MessageContactItem, user: SenderUser, messageId: String, date: Date) {
+    convenience init(contact: MessageContactItem, user: SenderUser, messageId: String, date: Date) {
         self.init(kind: .contact(contact), user: user, messageId: messageId, date: date)
     }
 }

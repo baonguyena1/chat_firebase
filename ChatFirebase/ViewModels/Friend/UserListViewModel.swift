@@ -25,26 +25,35 @@ class UserListViewModel {
                 guard let `self` = self else { return }
                 var currents = self.members.value
                 snapshot.documentChanges.forEach { (diff) in
-                    let member = User(from: diff.document.data())
+                    var data = diff.document.data()
+                    data[KeyPath.kDocumentID] = diff.document.documentID
+                    let user = User(from: data)
                     switch diff.type {
                         case .added:
-                            if member.documentID != auth.currentUser?.uid {
-                                currents.append(member)
+                            if user.documentID != auth.currentUser?.uid {
+                                currents.append(user)
                             }
                         case .modified:
-                            if let index = currents.firstIndex(where: { $0.documentID == member.documentID }) {
-                                currents[index] = member
+                            if let index = currents.firstIndex(where: { $0.documentID == user.documentID }) {
+                                currents[index] = user
                             }
                         case .removed:
-                            if let index = currents.firstIndex(where: { $0.documentID == member.documentID }) {
+                            if let index = currents.firstIndex(where: { $0.documentID == user.documentID }) {
                                 currents.remove(at: index)
                         }
                     }
-                    self.members.accept(currents)
                 }
+                self.setUsers(users: currents)
                 }, onError: { (error) in
                     Logger.error(error.localizedDescription)
             })
             .disposed(by: bag)
+    }
+    
+    private func setUsers(users: [User]) {
+        let list = users.sorted { (u1, u2) -> Bool in
+            u1.createdAt > u2.createdAt
+        }
+        self.members.accept(list)
     }
 }

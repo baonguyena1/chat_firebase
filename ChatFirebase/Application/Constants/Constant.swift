@@ -17,6 +17,7 @@ struct Segue {
     static let kSignUp = "signUpSegue"
     static let kUpdateUserInfo = "updateUserInfoSegue"
     static let kFriendToSingleChat = "friendToSingleChatSeque"
+    static let kConversationToSingleChat = "conversationToSingleChatSegue"
 }
 
 struct KeyPath {

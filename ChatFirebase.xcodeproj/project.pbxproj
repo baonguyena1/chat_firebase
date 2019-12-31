@@ -46,8 +46,8 @@
 		9B59C46C23AC6C62004EFF80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B4218C423AC5C8E007F2041 /* LaunchScreen.storyboard */; };
 		9B59C46D23AC6C62004EFF80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B59C45323AC62C6004EFF80 /* GoogleService-Info.plist */; };
 		9B59C46E23AC6C62004EFF80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B4218C223AC5C8E007F2041 /* Assets.xcassets */; };
-		9B5F7D0223B991D200E82772 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0123B991D200E82772 /* Chat.storyboard */; };
-		9B5F7D0323B991D200E82772 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0123B991D200E82772 /* Chat.storyboard */; };
+		9B5F7D0223B991D200E82772 /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0123B991D200E82772 /* Conversation.storyboard */; };
+		9B5F7D0323B991D200E82772 /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0123B991D200E82772 /* Conversation.storyboard */; };
 		9B5F7D0523B998D500E82772 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0423B998D500E82772 /* ConversationViewController.swift */; };
 		9B5F7D0623B998D500E82772 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0423B998D500E82772 /* ConversationViewController.swift */; };
 		9B5F7D0823B99E8000E82772 /* LoginUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0723B99E8000E82772 /* LoginUserManager.swift */; };
@@ -66,6 +66,10 @@
 		9B7E996223BAFAC300EB7E2E /* FireBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */; };
 		9B7E996423BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */; };
 		9B7E996523BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */; };
+		9BDC412223BB3A5E00016B81 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDC412123BB3A5E00016B81 /* Chat.storyboard */; };
+		9BDC412323BB3A5E00016B81 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDC412123BB3A5E00016B81 /* Chat.storyboard */; };
+		9BDC412523BB4E9800016B81 /* Double+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC412423BB4E9800016B81 /* Double+Helper.swift */; };
+		9BDC412623BB4E9800016B81 /* Double+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDC412423BB4E9800016B81 /* Double+Helper.swift */; };
 		9BE54FE823B0AEE1007CFA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE54FE723B0AEE1007CFA48 /* Main.storyboard */; };
 		9BE54FE923B0AEE1007CFA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE54FE723B0AEE1007CFA48 /* Main.storyboard */; };
 		9BE54FEB23B0B09C007CFA48 /* FireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE54FEA23B0B09C007CFA48 /* FireBaseManager.swift */; };
@@ -173,7 +177,7 @@
 		9B4218DD23AC5C8E007F2041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B59C45323AC62C6004EFF80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B59C47423AC6C62004EFF80 /* ChatFirebase staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChatFirebase staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B5F7D0123B991D200E82772 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		9B5F7D0123B991D200E82772 /* Conversation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversation.storyboard; sourceTree = "<group>"; };
 		9B5F7D0423B998D500E82772 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		9B5F7D0723B99E8000E82772 /* LoginUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserManager.swift; sourceTree = "<group>"; };
 		9B5F7D0A23B9F9DE00E82772 /* FirebaseName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseName.swift; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 		9B7E995D23BAFA1300EB7E2E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseModel.swift; sourceTree = "<group>"; };
 		9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChatViewModel.swift; sourceTree = "<group>"; };
+		9BDC412123BB3A5E00016B81 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		9BDC412423BB4E9800016B81 /* Double+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Helper.swift"; sourceTree = "<group>"; };
 		9BE54FE723B0AEE1007CFA48 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9BE54FEA23B0B09C007CFA48 /* FireBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseManager.swift; sourceTree = "<group>"; };
 		9BE54FED23B0B12F007CFA48 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -418,6 +424,7 @@
 				9BEDD0B623B342ED00157805 /* Date+Helper.swift */,
 				9BEDD0BD23B3487300157805 /* UIImageView+Helper.swift */,
 				9BE85A1B23B5DE4700ACCBC4 /* UIViewController+Helper.swift */,
+				9BDC412423BB4E9800016B81 /* Double+Helper.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -504,7 +511,8 @@
 				9BE54FE723B0AEE1007CFA48 /* Main.storyboard */,
 				9BE85A1E23B5E1B700ACCBC4 /* Friend.storyboard */,
 				9BEDF8CC23B5E37D007590A6 /* Setting.storyboard */,
-				9B5F7D0123B991D200E82772 /* Chat.storyboard */,
+				9B5F7D0123B991D200E82772 /* Conversation.storyboard */,
+				9BDC412123BB3A5E00016B81 /* Chat.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -700,11 +708,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BE54FE823B0AEE1007CFA48 /* Main.storyboard in Resources */,
-				9B5F7D0223B991D200E82772 /* Chat.storyboard in Resources */,
+				9B5F7D0223B991D200E82772 /* Conversation.storyboard in Resources */,
 				9B1055AF23AC6EB2009C1AF5 /* Authorization.storyboard in Resources */,
 				9B1055AC23AC6DE8009C1AF5 /* .swiftlint.yml in Resources */,
 				9BE85A1F23B5E1B700ACCBC4 /* Friend.storyboard in Resources */,
 				9B4218C623AC5C8E007F2041 /* LaunchScreen.storyboard in Resources */,
+				9BDC412223BB3A5E00016B81 /* Chat.storyboard in Resources */,
 				9B1055C923ACA5D1009C1AF5 /* Colors.xcassets in Resources */,
 				9BEDF8CD23B5E37D007590A6 /* Setting.storyboard in Resources */,
 				9BEDD0A923B30A3C00157805 /* Localizable.strings in Resources */,
@@ -732,11 +741,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BE54FE923B0AEE1007CFA48 /* Main.storyboard in Resources */,
-				9B5F7D0323B991D200E82772 /* Chat.storyboard in Resources */,
+				9B5F7D0323B991D200E82772 /* Conversation.storyboard in Resources */,
 				9B1055B023AC6EB2009C1AF5 /* Authorization.storyboard in Resources */,
 				9B1055AD23AC6DE8009C1AF5 /* .swiftlint.yml in Resources */,
 				9BE85A2023B5E1B700ACCBC4 /* Friend.storyboard in Resources */,
 				9B59C46C23AC6C62004EFF80 /* LaunchScreen.storyboard in Resources */,
+				9BDC412323BB3A5E00016B81 /* Chat.storyboard in Resources */,
 				9B1055CA23ACA5D1009C1AF5 /* Colors.xcassets in Resources */,
 				9BEDF8CE23B5E37D007590A6 /* Setting.storyboard in Resources */,
 				9BEDD0AA23B30A3C00157805 /* Localizable.strings in Resources */,
@@ -909,6 +919,7 @@
 				9BE85A1923B5DDF500ACCBC4 /* CustomMessagesFlowLayout.swift in Sources */,
 				9B5F7D0823B99E8000E82772 /* LoginUserManager.swift in Sources */,
 				9B1055BD23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
+				9BDC412523BB4E9800016B81 /* Double+Helper.swift in Sources */,
 				9B7E996423BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */,
 				9B1055B223AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
 				9BEDD0C523B35EE100157805 /* SettingViewController.swift in Sources */,
@@ -975,6 +986,7 @@
 				9BE85A1A23B5DDF500ACCBC4 /* CustomMessagesFlowLayout.swift in Sources */,
 				9B5F7D0923B99E8000E82772 /* LoginUserManager.swift in Sources */,
 				9B1055BE23AC7332009C1AF5 /* SignInViewController.swift in Sources */,
+				9BDC412623BB4E9800016B81 /* Double+Helper.swift in Sources */,
 				9B7E996523BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */,
 				9B1055B323AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
 				9BEDD0C623B35EE100157805 /* SettingViewController.swift in Sources */,

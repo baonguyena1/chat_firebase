@@ -42,6 +42,14 @@ class ConversationViewController: UIViewController {
         observerConversation()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? SingleChatViewController {
+            if let conversationId = sender as? String {
+                destination.conversationId = conversationId
+            }
+        }
+    }
+    
     private func initialTableView() {
         converstionTableView.emptyDataSetSource = self
         converstionTableView.tableFooterView = UIView()
@@ -71,13 +79,13 @@ class ConversationViewController: UIViewController {
             })
             .disposed(by: bag)
         
-//        userTableView.rx.itemSelected
-//            .subscribe(onNext: { [weak self] (indexPath) in
-//                guard let `self` = self else { return }
-//                let friend = self.members[indexPath.row]
-//                self.performSegue(withIdentifier: Segue.kFriendToSingleChat, sender: friend)
-//            })
-//            .disposed(by: bag)
+        converstionTableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] (indexPath) in
+                guard let `self` = self else { return }
+                let conversationId = self.conversations[indexPath.row].documentID
+                self.performSegue(withIdentifier: Segue.kConversationToSingleChat, sender: conversationId)
+            })
+            .disposed(by: bag)
     }
 }
 
