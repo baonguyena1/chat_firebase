@@ -10,13 +10,30 @@ import Foundation
 import RxSwift
 import RxCocoa
 import FirebaseFirestore
+import MessageKit
 
 class SingleChatViewModel {
     
     private let bag = DisposeBag()
     
-    private(set) var conversationId = BehaviorRelay<String>(value: "")
+    private(set) var newConversationId = PublishRelay<String>()
+    
     private(set) var sentMessageStatus = PublishRelay<Bool>()
+    
+    private(set) var initialChatStatus = PublishRelay<Bool>()
+    
+    private(set) var conversation = PublishRelay<Conversation>()
+    
+    
+    private(set) var chatMessages = BehaviorRelay<[ChatMessage]>(value: [])
+    
+    private var messages = [Message]()
+
+    private var sender: SenderUser
+    
+    init(sender: SenderUser) {
+        self.sender = sender
+    }
     
     func initialConversation(members: [String], sender: String, data: [Any]) {
         self.sentMessageStatus.accept(true)
@@ -28,13 +45,83 @@ class SingleChatViewModel {
             .flatMap { conversationId in self.createUserChat(listUser: members, conversationId: conversationId).map { conversationId } }
             .flatMap { conversationId in self.createMessages(datas: data, sender: sender, conversationId: conversationId).map { conversationId } }
             .subscribe(onNext: { [weak self] (conversationId) in
-                self?.conversationId.accept(conversationId)
+                self?.newConversationId.accept(conversationId)
             }, onError: { (error) in
                 Logger.error(error.localizedDescription)
             }, onCompleted: { [weak self] in
                 self?.sentMessageStatus.accept(false)
             })
             .disposed(by: bag)
+    }
+    
+    func observeConversation(conversationId: String) {
+        FireBaseManager.shared.observeConversation(conversation: conversationId)
+            .compactMap { $0 }
+            .subscribe(onNext: { [weak self] (conversation) in
+                self?.conversation.accept(conversation)
+            }, onError: { (error) in
+                Logger.error(error.localizedDescription)
+            }, onCompleted: {
+                
+            })
+        .disposed(by: bag)
+    }
+    
+    func observeMessages(inConversation id: String) {
+        let messagesCollection = FireBaseManager.shared.messagesCollection(conversation: id)
+        messagesCollection.rx
+            .listen()
+            .subscribe(onNext: { [weak self] (snapshot) in
+                
+                guard let `self` = self else { return }
+                var currentMessages = self.messages
+                snapshot.documentChanges.forEach { (change) in
+                    let document = change.document
+                    var data = document.data()
+                    data[KeyPath.kDocumentID] = document.documentID
+                    let message = Message(from: data)
+                    
+                    switch change.type {
+                        case .added:
+                            currentMessages.append(message)
+                        case.modified:
+                            if let index = currentMessages.firstIndex(where: { $0.documentID == message.documentID }) {
+                                currentMessages[index] = message
+                            }
+                        case .removed:
+                            if let index = currentMessages.firstIndex(where: { $0.documentID == message.documentID }) {
+                                currentMessages.remove(at: index)
+                            }
+                    }
+                }
+                self.setMessages(messages: currentMessages)
+            }, onError: { (error) in
+                Logger.error(error.localizedDescription)
+            }, onCompleted: {
+                
+            })
+            .disposed(by: bag)
+    }
+    
+    func message(id: String) -> Message {
+        if let message = self.messages.first(where: { $0.documentID == id }) {
+            return message
+        }
+        fatalError()
+    }
+    
+    private func setMessages(messages: [Message]) {
+        let list = messages.sorted { (m1, m2) -> Bool in
+            m1.createdAt < m2.createdAt
+        }
+        self.messages = list
+        let chatMessages: [ChatMessage] = list.compactMap {
+            if $0.messagaType == ChatType.text.rawValue {
+                return ChatMessage(text: $0.message, user: sender, messageId: $0.documentID, date: $0.createdAt.date)
+            }
+            return nil
+        }
+        self.chatMessages.accept(chatMessages)
     }
     
     /// Create new conversation, return the conversation ID

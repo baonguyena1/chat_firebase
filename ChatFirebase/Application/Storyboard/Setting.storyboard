@@ -201,7 +201,7 @@
     </scenes>
     <resources>
         <image name="ic_sign_out" width="20" height="22"/>
-        <image name="ic_user_tabbar" width="26.5" height="30"/>
+        <image name="ic_user_tabbar" width="18" height="20.5"/>
         <image name="member" width="50" height="50"/>
         <namedColor name="SeparatorColor">
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

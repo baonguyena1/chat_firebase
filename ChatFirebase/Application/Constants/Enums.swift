@@ -13,6 +13,7 @@ enum StoryboardName: String {
     case Authorization
     case Friend
     case Setting
+    case Conversation
     case Chat
 }
 

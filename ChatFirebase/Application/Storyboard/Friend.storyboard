@@ -93,28 +93,22 @@
                     <navigationItem key="navigationItem" title="People" id="BoZ-F0-gcx"/>
                     <connections>
                         <outlet property="userTableView" destination="vYU-CY-NhV" id="129-a4-JS2"/>
-                        <segue destination="pS7-Mr-2rv" kind="show" identifier="friendToSingleChatSeque" id="2Fg-9N-ygh"/>
+                        <segue destination="2En-rq-Zbx" kind="show" identifier="friendToSingleChatSeque" id="Gcb-ks-d9m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MGM-KZ-Jcg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="244.92753623188409" y="-496.20535714285711"/>
         </scene>
-        <!--Single Chat View Controller-->
-        <scene sceneID="HAC-gX-PvH">
+        <!--SingleChatViewController-->
+        <scene sceneID="mas-YJ-7Sv">
             <objects>
-                <viewController storyboardIdentifier="SingleChatViewController" id="pS7-Mr-2rv" customClass="SingleChatViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nfL-mz-Gtm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="1B2-tq-Sen"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Ves-SW-Hha"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bY8-BW-dCE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Chat" referencedIdentifier="SingleChatViewController" id="2En-rq-Zbx" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="bDU-Eb-pv3"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TdE-pW-qCc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104" y="-495"/>
+            <point key="canvasLocation" x="940" y="-496"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CIY-ha-hTL">

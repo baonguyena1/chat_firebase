@@ -18,18 +18,24 @@ final class SingleChatViewController: ChatViewController {
     
     let outgoingAvatarOverlap: CGFloat = 17.5
     
-    var receiverUser: User!
+    var conversationId: String?
     
     private let bag = DisposeBag()
     
-    private let viewModel = SingleChatViewModel()
+    private var viewModel: SingleChatViewModel!
+    
+    private var conversation: Conversation?
     
     override func viewDidLoad() {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
 //        messagesCollectionView.register(CustomCell.self)
         super.viewDidLoad()
         
+        initialViewModel()
+        
         initialReactive()
+        
+        initialData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -390,10 +396,7 @@ extension SingleChatViewController: MessagesLayoutDelegate {
 extension SingleChatViewController {
     
     override func sendMessages(_ data: [Any]) {
-        var members: [String] = [currentSender().senderId]
-        if let receiverId = receiverUser.documentID {
-            members.append(receiverId)
-        }
+        let members: [String] = conversation?.members.compactMap { $0 } ?? []
         viewModel.initialConversation(members: members, sender: currentSender().senderId, data: data)
     }
     
@@ -414,7 +417,11 @@ extension SingleChatViewController {
 
 extension SingleChatViewController {
     
-    func initialReactive() {
+    private func initialViewModel() {
+        viewModel = SingleChatViewModel(sender: currentSender() as! SenderUser)
+    }
+    
+    private func initialReactive() {
         viewModel.sentMessageStatus
             .filter { !$0 }
             .subscribe(onNext: { [weak self] (_) in
@@ -422,11 +429,39 @@ extension SingleChatViewController {
             })
             .disposed(by: bag)
         
-        viewModel.conversationId
+        // Observe conversation id when create the new conversation
+        viewModel.newConversationId
             .subscribe(onNext: { [weak self] (conversationId) in
-                print(conversationId)
+                self?.setConversationId(id: conversationId)
+            })
+            .disposed(by: bag)
+        
+        // Observe conversation when get the conversation
+        viewModel.conversation
+            .subscribe(onNext: { [weak self] (conversation) in
+                self?.viewModel.observeMessages(inConversation: conversation.documentID)
+            })
+            .disposed(by: bag)
+        
+        viewModel.chatMessages
+            .subscribe(onNext: { [weak self] (messages) in
+                self?.messageList.removeAll()
+                messages.forEach {
+                    self?.insertMessage($0)
+                }
             })
             .disposed(by: bag)
     }
     
+    private func initialData() {
+        if conversationId != nil {
+            viewModel.observeConversation(conversationId: conversationId!)
+        }
+    }
+    
+    private func setConversationId(id: String) {
+        Logger.log("\(id)")
+        self.conversationId = id
+        viewModel.observeConversation(conversationId: id)
+    }
 }
