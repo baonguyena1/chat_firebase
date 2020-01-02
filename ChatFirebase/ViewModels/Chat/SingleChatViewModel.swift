@@ -89,7 +89,11 @@ class SingleChatViewModel {
 
                     switch change.type {
                         case .added:
-                            currentMessages.append(message)
+                            if let index = currentMessages.firstIndex(where: { $0.documentID == message.documentID }) {
+                                currentMessages[index] = message
+                            } else {
+                                currentMessages.append(message)                                
+                            }
                             currentMessages.sort { (m1, m2) -> Bool in
                                 return m1.createdAt < m2.createdAt
                             }
@@ -144,11 +148,14 @@ class SingleChatViewModel {
     }
     
     func createNewMessages(sender: String, conversation: String, data: [Any]) {
+        self.sentMessageStatus.accept(true)
         createMessages(sender: sender, conversation: conversation, data: data)
             .subscribe(onNext: { (_) in
                 Logger.log("")
             }, onError: { (error) in
                 Logger.error(error.localizedDescription)
+            }, onCompleted: { [weak self] in
+                self?.sentMessageStatus.accept(true)
             })
             .disposed(by: bag)
     }

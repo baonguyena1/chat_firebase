@@ -308,8 +308,13 @@ extension SingleChatViewController: MessagesDisplayDelegate {
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        let avatar = getAvatarFor(sender: message.sender)
-        avatarView.set(avatar: avatar)
+        if let user = self.conversation?.users.first(where: { $0.documentID == message.sender.senderId }) {
+            let url = URL(string: user.avatar ?? "")
+            avatarView.kf.setImage(with: url, placeholder: nil)
+        } else {
+            let avatar = getAvatarFor(sender: message.sender)
+            avatarView.set(avatar: avatar)
+        }
         avatarView.isHidden = isNextMessageSameSender(at: indexPath)
         avatarView.layer.borderWidth = 2
         avatarView.layer.borderColor = ColorAssets.primaryColor.cgColor
@@ -420,7 +425,7 @@ extension SingleChatViewController {
         let firstName = sender.displayName.components(separatedBy: " ").first
         let lastName = sender.displayName.components(separatedBy: " ").last
         let initials = "\(firstName?.first ?? "A")\(lastName?.first ?? "A")"
-        return Avatar(image: #imageLiteral(resourceName: "girl_phone"), initials: initials)
+        return Avatar(image: nil, initials: initials)
     }
 }
 
