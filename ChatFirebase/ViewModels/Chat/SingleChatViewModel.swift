@@ -155,7 +155,7 @@ class SingleChatViewModel {
             }, onError: { (error) in
                 Logger.error(error.localizedDescription)
             }, onCompleted: { [weak self] in
-                self?.sentMessageStatus.accept(true)
+                self?.sentMessageStatus.accept(false)
             })
             .disposed(by: bag)
     }
