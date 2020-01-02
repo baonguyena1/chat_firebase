@@ -18,13 +18,13 @@ final class SingleChatViewController: ChatViewController {
     
     let outgoingAvatarOverlap: CGFloat = 17.5
     
-    var conversationId: String?
-    
     private let bag = DisposeBag()
     
     private var viewModel: SingleChatViewModel!
     
     private var conversation: Conversation?
+    
+    var chatAccession: ChatAccession!
     
     override func viewDidLoad() {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
@@ -86,8 +86,8 @@ final class SingleChatViewController: ChatViewController {
         layout?.setMessageOutgoingAvatarSize(.zero)
         layout?.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
         layout?.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
-        
-        // Set outgoing avatar to overlap with the message bubble
+
+        // Set incoming avatar to overlap with the message bubble
         layout?.setMessageIncomingMessageTopLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: UIEdgeInsets(top: 0, left: 18, bottom: outgoingAvatarOverlap, right: 0)))
         layout?.setMessageIncomingAvatarSize(CGSize(width: 30, height: 30))
         layout?.setMessageIncomingMessagePadding(UIEdgeInsets(top: -outgoingAvatarOverlap, left: -18, bottom: outgoingAvatarOverlap, right: 18))
@@ -97,6 +97,7 @@ final class SingleChatViewController: ChatViewController {
         layout?.setMessageIncomingAccessoryViewPosition(.messageBottom)
         layout?.setMessageOutgoingAccessoryViewSize(CGSize(width: 30, height: 30))
         layout?.setMessageOutgoingAccessoryViewPadding(HorizontalEdgeInsets(left: 0, right: 8))
+        layout?.setMessageOutgoingAccessoryViewPosition(.messageBottom)
         
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -314,23 +315,23 @@ extension SingleChatViewController: MessagesDisplayDelegate {
         avatarView.layer.borderColor = ColorAssets.primaryColor.cgColor
     }
     
-    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        // Cells are reused, so only add a button here once. For real use you would need to
-        // ensure any subviews are removed if not needed
-        accessoryView.subviews.forEach { $0.removeFromSuperview() }
-        accessoryView.backgroundColor = .clear
-        
-        let shouldShow = Int.random(in: 0...10) == 0
-        guard shouldShow else { return }
-        
-        let button = UIButton(type: .infoLight)
-        button.tintColor = ColorAssets.primaryColor
-        accessoryView.addSubview(button)
-        button.frame = accessoryView.bounds
-        button.isUserInteractionEnabled = false // respond to accessoryView tap through `MessageCellDelegate`
-        accessoryView.layer.cornerRadius = accessoryView.frame.height / 2
-        accessoryView.backgroundColor = ColorAssets.primaryColor.withAlphaComponent(0.3)
-    }
+//    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+//        // Cells are reused, so only add a button here once. For real use you would need to
+//        // ensure any subviews are removed if not needed
+//        accessoryView.subviews.forEach { $0.removeFromSuperview() }
+//        accessoryView.backgroundColor = .clear
+//        
+//        let shouldShow = Int.random(in: 0...10) == 0
+//        guard shouldShow else { return }
+//        
+//        let button = UIButton(type: .infoLight)
+//        button.tintColor = ColorAssets.primaryColor
+//        accessoryView.addSubview(button)
+//        button.frame = accessoryView.bounds
+//        button.isUserInteractionEnabled = false // respond to accessoryView tap through `MessageCellDelegate`
+//        accessoryView.layer.cornerRadius = accessoryView.frame.height / 2
+//        accessoryView.backgroundColor = ColorAssets.primaryColor.withAlphaComponent(0.3)
+//    }
     
     // MARK: - Location Messages
     
@@ -396,8 +397,16 @@ extension SingleChatViewController: MessagesLayoutDelegate {
 extension SingleChatViewController {
     
     override func sendMessages(_ data: [Any]) {
-        let members: [String] = conversation?.members.compactMap { $0 } ?? []
-        viewModel.initialConversation(members: members, sender: currentSender().senderId, data: data)
+        guard let chatAccession = self.chatAccession else {
+            return
+        }
+        switch chatAccession {
+            case .history(let conversationId):
+                viewModel.createNewMessages(sender: currentSender().senderId, conversation: conversationId, data: data)
+            case .friend(let friendId):   // Initial new conversation
+                let members = [currentSender().senderId, friendId]
+                viewModel.initialConversation(members: members, sender: currentSender().senderId, data: data)
+        }
     }
     
     private func finishSentMessage() {
@@ -430,7 +439,7 @@ extension SingleChatViewController {
             .disposed(by: bag)
         
         // Observe conversation id when create the new conversation
-        viewModel.newConversationId
+        viewModel.conversationId
             .subscribe(onNext: { [weak self] (conversationId) in
                 self?.setConversationId(id: conversationId)
             })
@@ -439,29 +448,46 @@ extension SingleChatViewController {
         // Observe conversation when get the conversation
         viewModel.conversation
             .subscribe(onNext: { [weak self] (conversation) in
+                self?.conversation = conversation
                 self?.viewModel.observeMessages(inConversation: conversation.documentID)
             })
             .disposed(by: bag)
         
-        viewModel.chatMessages
+        viewModel.messages
             .subscribe(onNext: { [weak self] (messages) in
-                self?.messageList.removeAll()
-                messages.forEach {
-                    self?.insertMessage($0)
+                let list = messages.compactMap { self?.chatMessageFromMessage($0) }
+                self?.messageList = list
+                DispatchQueue.main.async { [weak self] in
+                    self?.messagesCollectionView.reloadData()
+                    self?.messagesCollectionView.scrollToBottom(animated: true)
                 }
             })
             .disposed(by: bag)
     }
     
+    private func chatMessageFromMessage(_ message: Message) -> ChatMessage {
+        guard let user = self.conversation?.users.first(where: { message.senderId == $0.documentID } ) else { fatalError() }
+        let sender = SenderUser(senderId: user.documentID, displayName: user.displayName ?? "")
+        return ChatMessage(text: message.message, user: sender, messageId: message.documentID, date: message.createdAt.date)
+    }
+    
     private func initialData() {
-        if conversationId != nil {
-            viewModel.observeConversation(conversationId: conversationId!)
+        Logger.log("\(chatAccession)")
+        guard let chatAccession = self.chatAccession else {
+            return
+        }
+        switch chatAccession {
+            case .history(let conversationId):
+                viewModel.observeConversation(conversationId: conversationId)
+            case .friend(let friendId): // Check conversation exist
+                viewModel.getHistoryLog(sender: currentSender().senderId, receiver: friendId)
+            break
         }
     }
     
     private func setConversationId(id: String) {
         Logger.log("\(id)")
-        self.conversationId = id
+        self.chatAccession = .history(conversationId: id)
         viewModel.observeConversation(conversationId: id)
     }
 }

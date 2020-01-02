@@ -54,9 +54,13 @@ class FireBaseManager {
     }
     
     func documentExists(docRef: DocumentReference) -> Observable<Bool> {
-        docRef.rx.getDocument()
+        getDocument(docRef: docRef)
             .flatMap { Observable.just($0.exists) }
             .catchErrorJustReturn(false)
+    }
+    
+    func getDocument(docRef: DocumentReference) -> Observable<DocumentSnapshot> {
+        return docRef.rx.getDocument()
     }
     
     func signOut() {
@@ -129,4 +133,5 @@ class FireBaseManager {
                 return nil
         }
     }
+    
 }

@@ -21,6 +21,11 @@ enum ChatType: String {
     case text = "TEXT"
 }
 
+enum ChatAccession {
+    case history(conversationId: String)
+    case friend(friendId: String)
+}
+
 enum ColorAssets {
     static let borderColor = UIColor(named: "BorderColor")!
     static let grayColor = UIColor(named: "GrayColor")!

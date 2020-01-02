@@ -33,7 +33,7 @@ class MemberViewCell: UITableViewCell {
     
     private func setupUI() {
         if let avatar = member.avatar {
-            avatarImageView.setImage(with: avatar)
+            avatarImageView.setImage(with: avatar, placeholder: nil)
         }
         displayNameLabel.text = member.displayName
         descriptionLabel.text = member.email

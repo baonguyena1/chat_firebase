@@ -45,7 +45,7 @@ class ConversationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? SingleChatViewController {
             if let conversationId = sender as? String {
-                destination.conversationId = conversationId
+                destination.chatAccession = .history(conversationId: conversationId)
             }
         }
     }
