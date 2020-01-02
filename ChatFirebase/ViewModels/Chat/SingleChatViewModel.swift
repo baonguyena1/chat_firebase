@@ -12,11 +12,17 @@ import RxCocoa
 import FirebaseFirestore
 import MessageKit
 
+//enum MessageChange {
+//    case added(message: [Message])
+//    case modified(message: Message)
+//    case removed (message: Message)
+//}
+
 class SingleChatViewModel {
     
     private let bag = DisposeBag()
     
-    private(set) var newConversationId = PublishRelay<String>()
+    private(set) var conversationId = PublishRelay<String>()
     
     private(set) var sentMessageStatus = PublishRelay<Bool>()
     
@@ -24,10 +30,9 @@ class SingleChatViewModel {
     
     private(set) var conversation = PublishRelay<Conversation>()
     
+//    private(set) var messagesChange = PublishRelay<MessageChange>()
     
-    private(set) var chatMessages = BehaviorRelay<[ChatMessage]>(value: [])
-    
-    private var messages = [Message]()
+    private(set) var messages = BehaviorRelay<[Message]>(value: [])
 
     private var sender: SenderUser
     
@@ -43,9 +48,9 @@ class SingleChatViewModel {
                 KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970
             ])
             .flatMap { conversationId in self.createUserChat(listUser: members, conversationId: conversationId).map { conversationId } }
-            .flatMap { conversationId in self.createMessages(datas: data, sender: sender, conversationId: conversationId).map { conversationId } }
+            .flatMap { conversationId in self.createMessages(sender: sender, conversation: conversationId, data: data).map { conversationId } }
             .subscribe(onNext: { [weak self] (conversationId) in
-                self?.newConversationId.accept(conversationId)
+                self?.conversationId.accept(conversationId)
             }, onError: { (error) in
                 Logger.error(error.localizedDescription)
             }, onCompleted: { [weak self] in
@@ -74,17 +79,21 @@ class SingleChatViewModel {
             .subscribe(onNext: { [weak self] (snapshot) in
                 
                 guard let `self` = self else { return }
-                var currentMessages = self.messages
+                var currentMessages = self.messages.value
+
                 snapshot.documentChanges.forEach { (change) in
                     let document = change.document
                     var data = document.data()
                     data[KeyPath.kDocumentID] = document.documentID
                     let message = Message(from: data)
-                    
+
                     switch change.type {
                         case .added:
                             currentMessages.append(message)
-                        case.modified:
+                            currentMessages.sort { (m1, m2) -> Bool in
+                                return m1.createdAt < m2.createdAt
+                            }
+                        case .modified:
                             if let index = currentMessages.firstIndex(where: { $0.documentID == message.documentID }) {
                                 currentMessages[index] = message
                             }
@@ -94,7 +103,8 @@ class SingleChatViewModel {
                             }
                     }
                 }
-                self.setMessages(messages: currentMessages)
+                
+                self.messages.accept(currentMessages)
             }, onError: { (error) in
                 Logger.error(error.localizedDescription)
             }, onCompleted: {
@@ -103,25 +113,73 @@ class SingleChatViewModel {
             .disposed(by: bag)
     }
     
-    func message(id: String) -> Message {
-        if let message = self.messages.first(where: { $0.documentID == id }) {
-            return message
-        }
-        fatalError()
+    func getHistoryLog(sender: String, receiver: String) {
+        let senderChatRef = FireBaseManager.shared.userChatsCollection.document(sender)
+        let receiertChatRef = FireBaseManager.shared.userChatsCollection.document(receiver)
+        Observable.zip(FireBaseManager.shared.documentExists(docRef: senderChatRef),
+                       FireBaseManager.shared.documentExists(docRef: receiertChatRef))
+            .flatMap { (doc1, doc2) -> Observable<[String]> in
+                if doc1 && doc2 {
+                    return Observable.zip(self.getConversationUserChat(docRef: senderChatRef),
+                                          self.getConversationUserChat(docRef: receiertChatRef))
+                        .flatMap { (arg) -> Observable<[String]> in
+                            
+                            let (r1, r2) = arg
+                            return .just(Array(r1.intersection(r2)))
+                    }
+                }
+                return .just([])
+            }
+            .flatMap { (listConversation) -> Observable<String?> in
+                return self.findConversationBetween(sender: sender, receiver: receiver, inList: listConversation)
+            }
+            .compactMap { $0 }
+            .subscribe(onNext: { [weak self] (conversationId) in
+                Logger.log("\(conversationId)")
+                self?.conversationId.accept(conversationId)
+            }, onError: { (error) in
+                Logger.error(error.localizedDescription)
+            })
+            .disposed(by: bag)
     }
     
-    private func setMessages(messages: [Message]) {
-        let list = messages.sorted { (m1, m2) -> Bool in
-            m1.createdAt < m2.createdAt
-        }
-        self.messages = list
-        let chatMessages: [ChatMessage] = list.compactMap {
-            if $0.messagaType == ChatType.text.rawValue {
-                return ChatMessage(text: $0.message, user: sender, messageId: $0.documentID, date: $0.createdAt.date)
+    func createNewMessages(sender: String, conversation: String, data: [Any]) {
+        createMessages(sender: sender, conversation: conversation, data: data)
+            .subscribe(onNext: { (_) in
+                Logger.log("")
+            }, onError: { (error) in
+                Logger.error(error.localizedDescription)
+            })
+            .disposed(by: bag)
+    }
+    
+    // Find conversation between two user
+    private func getConversationUserChat(docRef: DocumentReference) -> Observable<Set<String>> {
+        FireBaseManager.shared.getDocument(docRef: docRef)
+            .compactMap { (snapshot) -> Set<String> in
+                var results = Set<String>()
+                if let data = snapshot.data(), let conversations = data[KeyPath.kConversations] as? [String] {
+                    results = Set(conversations)
+                }
+                return results
             }
-            return nil
+    }
+    
+    private func findConversationBetween(sender: String, receiver: String, inList list: [String]) -> Observable<String?> {
+        let conversations = list.map { (docId) -> Observable<DocumentSnapshot> in
+            let docRef = FireBaseManager.shared.conversationsCollection.document(docId)
+            return FireBaseManager.shared.getDocument(docRef: docRef)
         }
-        self.chatMessages.accept(chatMessages)
+        return Observable.zip(conversations)
+            .flatMap { (snapshots) -> Observable<String?> in
+                for snapshot in snapshots where snapshot.data() != nil {
+                    let data = snapshot.data()!
+                    if let members = data[KeyPath.kMembers] as? [String], members.count == 2, members.contains(sender), members.contains(receiver) {
+                        return .just(snapshot.documentID)
+                    }
+                }
+                return .just(nil)
+        }
     }
     
     /// Create new conversation, return the conversation ID
@@ -153,17 +211,17 @@ class SingleChatViewModel {
             }
     }
     
-    private func createMessages(datas: [Any], sender: String, conversationId: String) -> Observable<Void> {
-        let actions = datas.map {
-            self.createMessage(sender: sender, data: $0, conversationId: conversationId)
-                .flatMap { self.updateLastMessage(toConversation: conversationId, messageId: $0) }
+    private func createMessages(sender: String, conversation: String, data: [Any]) -> Observable<Void> {
+        let actions = data.map {
+            self.createMessage(sender: sender, conversationId: conversation, data: $0)
+                .flatMap { self.updateLastMessage(toConversation: conversation, messageId: $0) }
         }
         return Observable.merge(actions)
     }
     
     /// Create message in conversation
     /// - Parameter data:
-    private func createMessage(sender: String, data: Any, conversationId: String) -> Observable<String> {
+    private func createMessage(sender: String, conversationId: String, data: Any) -> Observable<String> {
         let messages = FireBaseManager.shared.messagesCollection(conversation: conversationId)
         if let str = data as? String {
             let content: [String: Any] = [
@@ -186,5 +244,6 @@ class SingleChatViewModel {
         ]
         return conversation.rx.updateData(data)
     }
+    
     
 }
