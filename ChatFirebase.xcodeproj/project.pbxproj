@@ -64,6 +64,10 @@
 		9B5F7D1623BA0F1A00E82772 /* ConversationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D1423BA0F1A00E82772 /* ConversationViewCell.swift */; };
 		9B7249CB23BEDB380016FA91 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249CA23BEDB380016FA91 /* EditProfileViewModel.swift */; };
 		9B7249CC23BEDB380016FA91 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249CA23BEDB380016FA91 /* EditProfileViewModel.swift */; };
+		9B7249CE23BF165F0016FA91 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249CD23BF165F0016FA91 /* ChangePasswordViewController.swift */; };
+		9B7249CF23BF165F0016FA91 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249CD23BF165F0016FA91 /* ChangePasswordViewController.swift */; };
+		9B7249D123BF172D0016FA91 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249D023BF172D0016FA91 /* ChangePasswordViewModel.swift */; };
+		9B7249D223BF172D0016FA91 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249D023BF172D0016FA91 /* ChangePasswordViewModel.swift */; };
 		9B7E995E23BAFA1300EB7E2E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E995D23BAFA1300EB7E2E /* Message.swift */; };
 		9B7E995F23BAFA1300EB7E2E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E995D23BAFA1300EB7E2E /* Message.swift */; };
 		9B7E996123BAFAC300EB7E2E /* FireBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */; };
@@ -190,6 +194,8 @@
 		9B5F7D1123BA053700E82772 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		9B5F7D1423BA0F1A00E82772 /* ConversationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCell.swift; sourceTree = "<group>"; };
 		9B7249CA23BEDB380016FA91 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		9B7249CD23BF165F0016FA91 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		9B7249D023BF172D0016FA91 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		9B7E995D23BAFA1300EB7E2E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseModel.swift; sourceTree = "<group>"; };
 		9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChatViewModel.swift; sourceTree = "<group>"; };
@@ -552,6 +558,7 @@
 			children = (
 				9BEDD0C423B35EE100157805 /* SettingViewController.swift */,
 				9B15637E23BDFCF2003B8170 /* EditProfileViewController.swift */,
+				9B7249CD23BF165F0016FA91 /* ChangePasswordViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -561,6 +568,7 @@
 			children = (
 				9BEDD0C823B360D200157805 /* SettingViewModel.swift */,
 				9B7249CA23BEDB380016FA91 /* EditProfileViewModel.swift */,
+				9B7249D023BF172D0016FA91 /* ChangePasswordViewModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -904,6 +912,7 @@
 				9B5F7D0B23B9F9DE00E82772 /* FirebaseName.swift in Sources */,
 				9BFDE61723B370A300EA3886 /* SingleChatViewController.swift in Sources */,
 				9BEDD0B723B342ED00157805 /* Date+Helper.swift in Sources */,
+				9B7249D123BF172D0016FA91 /* ChangePasswordViewModel.swift in Sources */,
 				9BE5500323B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */,
 				9B5F7D1223BA053700E82772 /* Conversation.swift in Sources */,
 				9B1055D023ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
@@ -933,6 +942,7 @@
 				9B7E996423BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */,
 				9B1055B223AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
 				9BEDD0C523B35EE100157805 /* SettingViewController.swift in Sources */,
+				9B7249CE23BF165F0016FA91 /* ChangePasswordViewController.swift in Sources */,
 				9BEDD0B423B33F5400157805 /* UserListViewModel.swift in Sources */,
 				9BEDD0BE23B3487300157805 /* UIImageView+Helper.swift in Sources */,
 				9BFDE61A23B370AF00EA3886 /* ChatViewController.swift in Sources */,
@@ -973,6 +983,7 @@
 				9B5F7D0C23B9F9DE00E82772 /* FirebaseName.swift in Sources */,
 				9BFDE61823B370A300EA3886 /* SingleChatViewController.swift in Sources */,
 				9BEDD0B823B342ED00157805 /* Date+Helper.swift in Sources */,
+				9B7249D223BF172D0016FA91 /* ChangePasswordViewModel.swift in Sources */,
 				9BE5500423B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */,
 				9B5F7D1323BA053700E82772 /* Conversation.swift in Sources */,
 				9B1055D123ACA8BE009C1AF5 /* BaseViewModel.swift in Sources */,
@@ -1002,6 +1013,7 @@
 				9B7E996523BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */,
 				9B1055B323AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
 				9BEDD0C623B35EE100157805 /* SettingViewController.swift in Sources */,
+				9B7249CF23BF165F0016FA91 /* ChangePasswordViewController.swift in Sources */,
 				9BEDD0B523B33F5400157805 /* UserListViewModel.swift in Sources */,
 				9BEDD0BF23B3487300157805 /* UIImageView+Helper.swift in Sources */,
 				9BFDE61B23B370AF00EA3886 /* ChatViewController.swift in Sources */,
