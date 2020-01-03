@@ -211,10 +211,16 @@ class SingleChatViewModel {
         let userChatRef = FireBaseManager.shared.userChatsCollection.document(userId)
         return FireBaseManager.shared.documentExists(docRef: userChatRef)
             .flatMap { exists -> Observable<Void> in
+                var data: [String: Any] = [
+                    KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
+                    KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970
+                ]
                 if exists {
-                    return userChatRef.rx.updateData([KeyPath.kConversations: FieldValue.arrayUnion([conversationId])])
+                    data[KeyPath.kConversations] = FieldValue.arrayUnion([conversationId])
+                    return userChatRef.rx.updateData(data)
                 }
-                return userChatRef.rx.setData([KeyPath.kConversations: [conversationId]])
+                data[KeyPath.kConversations] =  [conversationId]
+                return userChatRef.rx.setData(data)
             }
     }
     

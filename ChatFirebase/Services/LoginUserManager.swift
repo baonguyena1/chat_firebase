@@ -13,7 +13,7 @@ import RxCocoa
 class LoginUserManager {
     static let shared = LoginUserManager()
     
-    private(set) lazy var user = BehaviorRelay<User>(value: User(from: [:]))
+    private(set) var user = BehaviorRelay<User>(value: User(from: [:]))
     
     private let bag = DisposeBag()
     
