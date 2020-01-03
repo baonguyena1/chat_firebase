@@ -17,12 +17,19 @@ class FireBaseManager {
     
     static let shared = FireBaseManager()
     
+    
+    // MARK: -  Properties
+    
     lazy var auth: Auth = {
         return Auth.auth()
     }()
     
     lazy var firestore: Firestore = {
         return Firestore.firestore()
+    }()
+    
+    lazy var storage: Storage = {
+        return Storage.storage()
     }()
     
     lazy var usersCollection: CollectionReference = {
@@ -42,8 +49,11 @@ class FireBaseManager {
     }()
     
     lazy var userProfileStorage = {
-        return Storage.storage().reference().child(FireBaseName.kUserProfiles)
+        return storage.reference().child(FireBaseName.kUserProfiles)
     }()
+    
+    
+    // MARK: - Common function
     
     func messagesCollection(conversation: String) -> CollectionReference {
         return FireBaseManager.shared.roomsCollection.document(conversation).collection(FireBaseName.kMessages)
@@ -104,6 +114,29 @@ class FireBaseManager {
         }
         
     }
+    
+    func offlineCloudFireStore() {
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = true
+        settings.cacheSizeBytes = FirestoreCacheSizeUnlimited
+        
+        self.firestore.settings = settings
+    }
+    
+    func uploadImage(_ image: UIImage, ref: StorageReference) -> Observable<Bool> {
+        guard let imageData = image.pngData() else {
+            return .just(false)
+        }
+        return ref.rx.putData(imageData)
+            .map { _ in true }
+    }
+    
+    func getUrl(reference: StorageReference) -> Observable<String> {
+        return reference.rx
+            .downloadURL()
+            .map { $0.absoluteString }
+    }
+    // MARK: -  Private function
     
     private func getUsers(listUser: [String]) -> Observable<[User]> {
         let users = listUser.compactMap { self.getUser(userId: $0) }

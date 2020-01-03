@@ -42,10 +42,10 @@ class UpdateUserInforViewModel: BaseViewModel {
         ]
         
         rx_isLoading.accept(true)
-        uploadImage(image, reference: reference)
+        FireBaseManager.shared.uploadImage(image, ref: reference)
             .flatMapLatest { (status) -> Observable<String> in
                 if status {
-                    return self.getUrl(reference: reference)
+                    return FireBaseManager.shared.getUrl(reference: reference)
                 } else {
                     return Observable.just("")
                 }
@@ -68,20 +68,6 @@ class UpdateUserInforViewModel: BaseViewModel {
             })
             .disposed(by: bag)
 
-    }
-    
-    private func uploadImage(_ image: UIImage, reference: StorageReference) -> Observable<Bool> {
-        guard let imageData = image.pngData() else {
-            return Observable.just(false)
-        }
-        return reference.rx.putData(imageData)
-            .map { _ in true }
-    }
-    
-    private func getUrl(reference: StorageReference) -> Observable<String> {
-        return reference.rx
-            .downloadURL()
-            .map { $0.absoluteString }
     }
     
     private func uploadUserInfo(_ values: [String: Any], document: DocumentReference) -> Observable<Void> {

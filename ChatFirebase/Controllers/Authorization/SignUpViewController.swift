@@ -23,6 +23,9 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
+        
         setupViewModel()
     }
     
@@ -33,6 +36,10 @@ class SignUpViewController: UIViewController {
     
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    private func setupUI() {
+        emailTextField.becomeFirstResponder()
     }
     
     private func setupViewModel() {

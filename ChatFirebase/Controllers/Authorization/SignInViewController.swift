@@ -62,7 +62,7 @@ class SignInViewController: UIViewController {
                 self?.performSegue(withIdentifier: Segue.kSignUp, sender: self)
             }
         }
-        
+        emailTextField.becomeFirstResponder()
     }
     
     private func initialViewModel() {
