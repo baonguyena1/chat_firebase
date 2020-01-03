@@ -14,6 +14,7 @@ class SettingViewController: UIViewController {
     
     @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var displayNameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var signoutView: UIView!
     
     private let bag = DisposeBag()
@@ -75,6 +76,7 @@ class SettingViewController: UIViewController {
             userAvatarImageView.setImage(with: avatar)            
         }
         displayNameLabel.text = profile.displayName
+        emailLabel.text = profile.email
     }
     
     private func showSignOutWarning() {
