@@ -24,9 +24,8 @@ class ChangePasswordViewModel: BaseViewModel {
     var oldPasswordSubject = BehaviorRelay<String>(value: "")
     
     var isValid: Observable<Bool> {
-        return Observable.zip(oldPasswordSubject.asObservable(), passwordSubject.asObservable())
-            .compactMap { (old, new) in
-                !old.isEmpty && !new.isEmpty && new.count >= 6
+        return Observable.combineLatest(oldPasswordSubject.asObservable(), passwordSubject.asObservable()) { (old, new) in
+            return !old.isEmpty && !new.isEmpty && new.count >= 6
         }
     }
     
