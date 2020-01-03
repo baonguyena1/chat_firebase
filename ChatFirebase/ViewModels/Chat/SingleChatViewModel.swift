@@ -117,25 +117,22 @@ class SingleChatViewModel {
             .disposed(by: bag)
     }
     
-    func getHistoryLog(sender: String, receiver: String) {
-        let senderChatRef = FireBaseManager.shared.userChatsCollection.document(sender)
-        let receiertChatRef = FireBaseManager.shared.userChatsCollection.document(receiver)
-        Observable.zip(FireBaseManager.shared.documentExists(docRef: senderChatRef),
-                       FireBaseManager.shared.documentExists(docRef: receiertChatRef))
-            .flatMap { (doc1, doc2) -> Observable<[String]> in
-                if doc1 && doc2 {
-                    return Observable.zip(self.getConversationUserChat(docRef: senderChatRef),
-                                          self.getConversationUserChat(docRef: receiertChatRef))
-                        .flatMap { (arg) -> Observable<[String]> in
-                            
-                            let (r1, r2) = arg
-                            return .just(Array(r1.intersection(r2)))
-                    }
+    func getHistoryLog(members: [String]) {
+        let userChatsRef = members.map { FireBaseManager.shared.userChatsCollection.document($0) }
+        let documentExists = userChatsRef.map { FireBaseManager.shared.documentExists(docRef: $0) }
+        Observable.zip(documentExists)
+            .flatMap { (results) -> Observable<[String]> in
+                let check = results.reduce(true) { (acc, next) in
+                    return acc && next
                 }
-                return .just([])
+                print("--------", check)
+                if !check {
+                    return .just([])
+                }
+                return self.getConversationUserChat(documents: userChatsRef)
             }
             .flatMap { (listConversation) -> Observable<String?> in
-                return self.findConversationBetween(sender: sender, receiver: receiver, inList: listConversation)
+                return self.findConversation(members: members, inList: listConversation)
             }
             .compactMap { $0 }
             .subscribe(onNext: { [weak self] (conversationId) in
@@ -161,6 +158,23 @@ class SingleChatViewModel {
     }
     
     // Find conversation between two user
+    
+    private func getConversationUserChat(documents: [DocumentReference]) -> Observable<[String]> {
+        let userChatAllMembers =  documents.map { self.getConversationUserChat(docRef: $0) }
+        return Observable.zip(userChatAllMembers)
+            .flatMap { (conversations) -> Observable<[String]> in
+                var results = [String]()
+                if let initial = conversations.first {
+                    let data = conversations.reduce(initial, { (acc, next) in
+                        acc.intersection(next)
+                    })
+                    results = Array(data)
+                }
+                print("-----", results)
+                return .just(results)
+        }
+    }
+    
     private func getConversationUserChat(docRef: DocumentReference) -> Observable<Set<String>> {
         FireBaseManager.shared.getDocument(docRef: docRef)
             .compactMap { (snapshot) -> Set<String> in
@@ -168,11 +182,12 @@ class SingleChatViewModel {
                 if let data = snapshot.data(), let conversations = data[KeyPath.kConversations] as? [String] {
                     results = Set(conversations)
                 }
+                print("-------", results)
                 return results
             }
     }
     
-    private func findConversationBetween(sender: String, receiver: String, inList list: [String]) -> Observable<String?> {
+    private func findConversation(members: [String], inList list: [String]) -> Observable<String?> {
         let conversations = list.map { (docId) -> Observable<DocumentSnapshot> in
             let docRef = FireBaseManager.shared.conversationsCollection.document(docId)
             return FireBaseManager.shared.getDocument(docRef: docRef)
@@ -181,7 +196,7 @@ class SingleChatViewModel {
             .flatMap { (snapshots) -> Observable<String?> in
                 for snapshot in snapshots where snapshot.data() != nil {
                     let data = snapshot.data()!
-                    if let members = data[KeyPath.kMembers] as? [String], members.count == 2, members.contains(sender), members.contains(receiver) {
+                    if let memberList = data[KeyPath.kMembers] as? [String], Set(memberList) == Set(members) {
                         return .just(snapshot.documentID)
                     }
                 }

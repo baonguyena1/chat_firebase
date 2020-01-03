@@ -75,9 +75,9 @@ class FriendListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? SingleChatViewController {
+        if let destination = segue.destination as? GroupChatViewController {
             if let friend = sender as? User {
-                destination.chatAccession = .friend(friendId: friend.documentID)
+                destination.chatAccession = .friend(listFriend: [friend.documentID])
             }
         }
     }

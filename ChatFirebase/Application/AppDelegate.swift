@@ -24,8 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.disabledToolbarClasses.append(SingleChatViewController.self)
-        IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(SingleChatViewController.self)
+        IQKeyboardManager.shared.disabledToolbarClasses.append(GroupChatViewController.self)
+        IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(GroupChatViewController.self)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         ApplicationNavigator.shared.setWindow(window: window)

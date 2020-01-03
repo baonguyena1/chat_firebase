@@ -48,10 +48,10 @@
 		9B59C46C23AC6C62004EFF80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B4218C423AC5C8E007F2041 /* LaunchScreen.storyboard */; };
 		9B59C46D23AC6C62004EFF80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B59C45323AC62C6004EFF80 /* GoogleService-Info.plist */; };
 		9B59C46E23AC6C62004EFF80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B4218C223AC5C8E007F2041 /* Assets.xcassets */; };
-		9B5F7D0223B991D200E82772 /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0123B991D200E82772 /* Conversation.storyboard */; };
-		9B5F7D0323B991D200E82772 /* Conversation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0123B991D200E82772 /* Conversation.storyboard */; };
-		9B5F7D0523B998D500E82772 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0423B998D500E82772 /* ConversationViewController.swift */; };
-		9B5F7D0623B998D500E82772 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0423B998D500E82772 /* ConversationViewController.swift */; };
+		9B5F7D0223B991D200E82772 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0123B991D200E82772 /* History.storyboard */; };
+		9B5F7D0323B991D200E82772 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0123B991D200E82772 /* History.storyboard */; };
+		9B5F7D0523B998D500E82772 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0423B998D500E82772 /* HistoryViewController.swift */; };
+		9B5F7D0623B998D500E82772 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0423B998D500E82772 /* HistoryViewController.swift */; };
 		9B5F7D0823B99E8000E82772 /* LoginUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0723B99E8000E82772 /* LoginUserManager.swift */; };
 		9B5F7D0923B99E8000E82772 /* LoginUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0723B99E8000E82772 /* LoginUserManager.swift */; };
 		9B5F7D0B23B9F9DE00E82772 /* FirebaseName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F7D0A23B9F9DE00E82772 /* FirebaseName.swift */; };
@@ -68,6 +68,8 @@
 		9B7249CF23BF165F0016FA91 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249CD23BF165F0016FA91 /* ChangePasswordViewController.swift */; };
 		9B7249D123BF172D0016FA91 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249D023BF172D0016FA91 /* ChangePasswordViewModel.swift */; };
 		9B7249D223BF172D0016FA91 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249D023BF172D0016FA91 /* ChangePasswordViewModel.swift */; };
+		9B7249D523BF22E70016FA91 /* GroupChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249D423BF22E70016FA91 /* GroupChatViewController.swift */; };
+		9B7249D623BF22E70016FA91 /* GroupChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7249D423BF22E70016FA91 /* GroupChatViewController.swift */; };
 		9B7E995E23BAFA1300EB7E2E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E995D23BAFA1300EB7E2E /* Message.swift */; };
 		9B7E995F23BAFA1300EB7E2E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E995D23BAFA1300EB7E2E /* Message.swift */; };
 		9B7E996123BAFAC300EB7E2E /* FireBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */; };
@@ -128,8 +130,8 @@
 		9BEDD0CA23B360D200157805 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0C823B360D200157805 /* SettingViewModel.swift */; };
 		9BEDF8CD23B5E37D007590A6 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BEDF8CC23B5E37D007590A6 /* Setting.storyboard */; };
 		9BEDF8CE23B5E37D007590A6 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BEDF8CC23B5E37D007590A6 /* Setting.storyboard */; };
-		9BFDE61723B370A300EA3886 /* SingleChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61623B370A300EA3886 /* SingleChatViewController.swift */; };
-		9BFDE61823B370A300EA3886 /* SingleChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61623B370A300EA3886 /* SingleChatViewController.swift */; };
+		9BFDE61723B370A300EA3886 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61623B370A300EA3886 /* ConversationViewController.swift */; };
+		9BFDE61823B370A300EA3886 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61623B370A300EA3886 /* ConversationViewController.swift */; };
 		9BFDE61A23B370AF00EA3886 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61923B370AF00EA3886 /* ChatViewController.swift */; };
 		9BFDE61B23B370AF00EA3886 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61923B370AF00EA3886 /* ChatViewController.swift */; };
 		A2D3935D4A449CFC4AB62B7F /* Pods_ChatFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1FF3D52656B8A6A1AF3040 /* Pods_ChatFirebase.framework */; };
@@ -186,8 +188,8 @@
 		9B4218DD23AC5C8E007F2041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B59C45323AC62C6004EFF80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B59C47423AC6C62004EFF80 /* ChatFirebase staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ChatFirebase staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B5F7D0123B991D200E82772 /* Conversation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Conversation.storyboard; sourceTree = "<group>"; };
-		9B5F7D0423B998D500E82772 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		9B5F7D0123B991D200E82772 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
+		9B5F7D0423B998D500E82772 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		9B5F7D0723B99E8000E82772 /* LoginUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUserManager.swift; sourceTree = "<group>"; };
 		9B5F7D0A23B9F9DE00E82772 /* FirebaseName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseName.swift; sourceTree = "<group>"; };
 		9B5F7D0E23B9FCE200E82772 /* ConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		9B7249CA23BEDB380016FA91 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		9B7249CD23BF165F0016FA91 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		9B7249D023BF172D0016FA91 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		9B7249D423BF22E70016FA91 /* GroupChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatViewController.swift; sourceTree = "<group>"; };
 		9B7E995D23BAFA1300EB7E2E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9B7E996023BAFAC300EB7E2E /* FireBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseModel.swift; sourceTree = "<group>"; };
 		9B7E996323BB02CE00EB7E2E /* SingleChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChatViewModel.swift; sourceTree = "<group>"; };
@@ -227,7 +230,7 @@
 		9BEDD0C423B35EE100157805 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9BEDD0C823B360D200157805 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		9BEDF8CC23B5E37D007590A6 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
-		9BFDE61623B370A300EA3886 /* SingleChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChatViewController.swift; sourceTree = "<group>"; };
+		9BFDE61623B370A300EA3886 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		9BFDE61923B370AF00EA3886 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B4F2B8AEC860B854AF434528 /* Pods-ChatFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase.release.xcconfig"; path = "Target Support Files/Pods-ChatFirebase/Pods-ChatFirebase.release.xcconfig"; sourceTree = "<group>"; };
 		BD3BF077FA6CBBB957282394 /* Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; path = "Target Support Files/Pods-ChatFirebase-ChatFirebaseUITests/Pods-ChatFirebase-ChatFirebaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -418,6 +421,7 @@
 		9B59C45B23AC6B3F004EFF80 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9B7249D323BF22B40016FA91 /* History */,
 				9BFDE61523B3708700EA3886 /* Chat */,
 				9BEDD0C023B3594500157805 /* Setting */,
 				9BEDD0B123B33CBD00157805 /* Friends */,
@@ -496,6 +500,14 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		9B7249D323BF22B40016FA91 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				9B5F7D0423B998D500E82772 /* HistoryViewController.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		9BE85A1323B5DBD600ACCBC4 /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,7 +535,7 @@
 				9BE54FE723B0AEE1007CFA48 /* Main.storyboard */,
 				9BE85A1E23B5E1B700ACCBC4 /* Friend.storyboard */,
 				9BEDF8CC23B5E37D007590A6 /* Setting.storyboard */,
-				9B5F7D0123B991D200E82772 /* Conversation.storyboard */,
+				9B5F7D0123B991D200E82772 /* History.storyboard */,
 				9BDC412123BB3A5E00016B81 /* Chat.storyboard */,
 			);
 			path = Storyboard;
@@ -578,8 +590,8 @@
 			children = (
 				9BE85A1723B5DDE300ACCBC4 /* Layout */,
 				9BFDE61923B370AF00EA3886 /* ChatViewController.swift */,
-				9BFDE61623B370A300EA3886 /* SingleChatViewController.swift */,
-				9B5F7D0423B998D500E82772 /* ConversationViewController.swift */,
+				9BFDE61623B370A300EA3886 /* ConversationViewController.swift */,
+				9B7249D423BF22E70016FA91 /* GroupChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -724,7 +736,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BE54FE823B0AEE1007CFA48 /* Main.storyboard in Resources */,
-				9B5F7D0223B991D200E82772 /* Conversation.storyboard in Resources */,
+				9B5F7D0223B991D200E82772 /* History.storyboard in Resources */,
 				9B1055AF23AC6EB2009C1AF5 /* Authorization.storyboard in Resources */,
 				9B1055AC23AC6DE8009C1AF5 /* .swiftlint.yml in Resources */,
 				9BE85A1F23B5E1B700ACCBC4 /* Friend.storyboard in Resources */,
@@ -757,7 +769,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BE54FE923B0AEE1007CFA48 /* Main.storyboard in Resources */,
-				9B5F7D0323B991D200E82772 /* Conversation.storyboard in Resources */,
+				9B5F7D0323B991D200E82772 /* History.storyboard in Resources */,
 				9B1055B023AC6EB2009C1AF5 /* Authorization.storyboard in Resources */,
 				9B1055AD23AC6DE8009C1AF5 /* .swiftlint.yml in Resources */,
 				9BE85A2023B5E1B700ACCBC4 /* Friend.storyboard in Resources */,
@@ -908,9 +920,9 @@
 				9BE5500023B1BEA0007CFA48 /* UpdateUserInfoViewController.swift in Sources */,
 				9BE85A1123B5C59E00ACCBC4 /* SenderUser.swift in Sources */,
 				9B15637F23BDFCF2003B8170 /* EditProfileViewController.swift in Sources */,
-				9B5F7D0523B998D500E82772 /* ConversationViewController.swift in Sources */,
+				9B5F7D0523B998D500E82772 /* HistoryViewController.swift in Sources */,
 				9B5F7D0B23B9F9DE00E82772 /* FirebaseName.swift in Sources */,
-				9BFDE61723B370A300EA3886 /* SingleChatViewController.swift in Sources */,
+				9BFDE61723B370A300EA3886 /* ConversationViewController.swift in Sources */,
 				9BEDD0B723B342ED00157805 /* Date+Helper.swift in Sources */,
 				9B7249D123BF172D0016FA91 /* ChangePasswordViewModel.swift in Sources */,
 				9BE5500323B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */,
@@ -941,6 +953,7 @@
 				9BDC412523BB4E9800016B81 /* Double+Helper.swift in Sources */,
 				9B7E996423BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */,
 				9B1055B223AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
+				9B7249D523BF22E70016FA91 /* GroupChatViewController.swift in Sources */,
 				9BEDD0C523B35EE100157805 /* SettingViewController.swift in Sources */,
 				9B7249CE23BF165F0016FA91 /* ChangePasswordViewController.swift in Sources */,
 				9BEDD0B423B33F5400157805 /* UserListViewModel.swift in Sources */,
@@ -979,9 +992,9 @@
 				9BE5500123B1BEA0007CFA48 /* UpdateUserInfoViewController.swift in Sources */,
 				9BE85A1223B5C59E00ACCBC4 /* SenderUser.swift in Sources */,
 				9B15638023BDFCF2003B8170 /* EditProfileViewController.swift in Sources */,
-				9B5F7D0623B998D500E82772 /* ConversationViewController.swift in Sources */,
+				9B5F7D0623B998D500E82772 /* HistoryViewController.swift in Sources */,
 				9B5F7D0C23B9F9DE00E82772 /* FirebaseName.swift in Sources */,
-				9BFDE61823B370A300EA3886 /* SingleChatViewController.swift in Sources */,
+				9BFDE61823B370A300EA3886 /* ConversationViewController.swift in Sources */,
 				9BEDD0B823B342ED00157805 /* Date+Helper.swift in Sources */,
 				9B7249D223BF172D0016FA91 /* ChangePasswordViewModel.swift in Sources */,
 				9BE5500423B1C2D7007CFA48 /* UpdateUserInforViewModel.swift in Sources */,
@@ -1012,6 +1025,7 @@
 				9BDC412623BB4E9800016B81 /* Double+Helper.swift in Sources */,
 				9B7E996523BB02CE00EB7E2E /* SingleChatViewModel.swift in Sources */,
 				9B1055B323AC6FC8009C1AF5 /* Reuseble.swift in Sources */,
+				9B7249D623BF22E70016FA91 /* GroupChatViewController.swift in Sources */,
 				9BEDD0C623B35EE100157805 /* SettingViewController.swift in Sources */,
 				9B7249CF23BF165F0016FA91 /* ChangePasswordViewController.swift in Sources */,
 				9BEDD0B523B33F5400157805 /* UserListViewModel.swift in Sources */,

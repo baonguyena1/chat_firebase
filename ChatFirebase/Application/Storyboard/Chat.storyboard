@@ -8,21 +8,68 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Single Chat View Controller-->
+        <!--Group Chat View Controller-->
         <scene sceneID="d1G-c5-8Br">
             <objects>
-                <viewController storyboardIdentifier="SingleChatViewController" id="E0L-pY-dbu" customClass="SingleChatViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupChatViewController" hidesBottomBarWhenPushed="YES" id="E0L-pY-dbu" customClass="GroupChatViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="un7-qC-KAT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JA5-Qq-tMV">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <connections>
+                                    <segue destination="rK4-uC-KLI" kind="embed" id="WtE-iw-tLv"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="JA5-Qq-tMV" firstAttribute="top" secondItem="xwR-Fh-mpc" secondAttribute="top" id="0a4-L1-jBA"/>
+                            <constraint firstItem="xwR-Fh-mpc" firstAttribute="trailing" secondItem="JA5-Qq-tMV" secondAttribute="trailing" id="jhI-Nh-Epi"/>
+                            <constraint firstItem="xwR-Fh-mpc" firstAttribute="bottom" secondItem="JA5-Qq-tMV" secondAttribute="bottom" id="p05-oP-KNe"/>
+                            <constraint firstItem="JA5-Qq-tMV" firstAttribute="leading" secondItem="xwR-Fh-mpc" secondAttribute="leading" id="tz5-i9-CpA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xwR-Fh-mpc"/>
                     </view>
                     <navigationItem key="navigationItem" id="n81-r3-6IR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lqe-20-mGx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104" y="-495"/>
+            <point key="canvasLocation" x="2013.0434782608697" y="-495.53571428571428"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2Tj-ms-8hW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OaS-il-NJ8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ynW-k7-0Ge">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="E0L-pY-dbu" kind="relationship" relationship="rootViewController" id="kKz-Ig-3i9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5SD-n7-kmu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1102.8985507246377" y="-495.53571428571428"/>
+        </scene>
+        <!--Conversation View Controller-->
+        <scene sceneID="WtV-Mn-Jmh">
+            <objects>
+                <viewController storyboardIdentifier="SingleChatViewController" id="rK4-uC-KLI" customClass="ConversationViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XPW-L5-iap">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="zea-lO-MNO"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fkL-RR-TL4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2864" y="-496"/>
         </scene>
     </scenes>
 </document>

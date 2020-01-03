@@ -13,7 +13,7 @@ enum StoryboardName: String {
     case Authorization
     case Friend
     case Setting
-    case Conversation
+    case History
     case Chat
 }
 
@@ -23,7 +23,7 @@ enum ChatType: String {
 
 enum ChatAccession {
     case history(conversationId: String)
-    case friend(friendId: String)
+    case friend(listFriend: [String])
 }
 
 enum ColorAssets {
