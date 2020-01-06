@@ -12,13 +12,7 @@ import RxCocoa
 import FirebaseFirestore
 import MessageKit
 
-//enum MessageChange {
-//    case added(message: [Message])
-//    case modified(message: Message)
-//    case removed (message: Message)
-//}
-
-class SingleChatViewModel {
+class ConversationViewModel {
     
     private let bag = DisposeBag()
     

@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JA5-Qq-tMV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
                                 <connections>
                                     <segue destination="rK4-uC-KLI" kind="embed" id="WtE-iw-tLv"/>
                                 </connections>
@@ -32,7 +32,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xwR-Fh-mpc"/>
                     </view>
-                    <navigationItem key="navigationItem" id="n81-r3-6IR"/>
+                    <navigationItem key="navigationItem" id="n81-r3-6IR">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="table.badge.more.fill" catalog="system" id="WrX-yi-tjd">
+                            <connections>
+                                <segue destination="xmi-wr-hxW" kind="show" id="yc2-an-TVd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lqe-20-mGx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -43,8 +49,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OaS-il-NJ8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ynW-k7-0Ge">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ynW-k7-0Ge">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -56,12 +62,67 @@
             </objects>
             <point key="canvasLocation" x="1102.8985507246377" y="-495.53571428571428"/>
         </scene>
+        <!--Group Info View Controller-->
+        <scene sceneID="Ipx-QR-cDq">
+            <objects>
+                <viewController storyboardIdentifier="GroupInfoViewController" id="xmi-wr-hxW" customClass="GroupInfoViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oCI-v7-cWx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfb-eZ-9Mr">
+                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C4f-qT-D9S">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vWT-KK-Ic2" userLabel="Content View">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="vWT-KK-Ic2" firstAttribute="trailing" secondItem="Gmx-Gr-eYX" secondAttribute="trailing" id="BMw-0j-9gY"/>
+                                            <constraint firstItem="vWT-KK-Ic2" firstAttribute="leading" secondItem="Gmx-Gr-eYX" secondAttribute="leading" id="CGr-BF-gvb"/>
+                                            <constraint firstItem="vWT-KK-Ic2" firstAttribute="top" secondItem="Gmx-Gr-eYX" secondAttribute="top" id="fCJ-KC-Xts"/>
+                                            <constraint firstAttribute="bottom" secondItem="vWT-KK-Ic2" secondAttribute="bottom" id="xXT-t6-9Wp"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="contentLayoutGuide" id="4AZ-zn-gzU"/>
+                                        <viewLayoutGuide key="frameLayoutGuide" id="Gmx-Gr-eYX"/>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="vWT-KK-Ic2" firstAttribute="width" secondItem="zfb-eZ-9Mr" secondAttribute="width" id="F1f-qA-KHr"/>
+                                    <constraint firstItem="C4f-qT-D9S" firstAttribute="top" secondItem="zfb-eZ-9Mr" secondAttribute="top" id="GS0-FT-ftY"/>
+                                    <constraint firstItem="C4f-qT-D9S" firstAttribute="leading" secondItem="zfb-eZ-9Mr" secondAttribute="leading" id="KBf-In-hMz"/>
+                                    <constraint firstAttribute="bottom" secondItem="C4f-qT-D9S" secondAttribute="bottom" id="KJB-Qv-0Ui"/>
+                                    <constraint firstItem="vWT-KK-Ic2" firstAttribute="height" secondItem="zfb-eZ-9Mr" secondAttribute="height" priority="250" id="dPY-Es-deg"/>
+                                    <constraint firstAttribute="trailing" secondItem="C4f-qT-D9S" secondAttribute="trailing" id="mXj-MC-qcA"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zfb-eZ-9Mr" firstAttribute="trailing" secondItem="Fxm-ED-1vx" secondAttribute="trailing" id="LVh-Jf-JQO"/>
+                            <constraint firstItem="zfb-eZ-9Mr" firstAttribute="leading" secondItem="Fxm-ED-1vx" secondAttribute="leading" id="oqN-82-5Qv"/>
+                            <constraint firstAttribute="bottom" secondItem="zfb-eZ-9Mr" secondAttribute="bottom" id="pa8-PN-Iih"/>
+                            <constraint firstItem="zfb-eZ-9Mr" firstAttribute="top" secondItem="Fxm-ED-1vx" secondAttribute="top" id="uUg-dO-2ME"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Fxm-ED-1vx"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="keW-ny-CJf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhR-6K-dTe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2894.202898550725" y="-1221.4285714285713"/>
+        </scene>
         <!--Conversation View Controller-->
         <scene sceneID="WtV-Mn-Jmh">
             <objects>
-                <viewController storyboardIdentifier="SingleChatViewController" id="rK4-uC-KLI" customClass="ConversationViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConversationViewController" id="rK4-uC-KLI" customClass="ConversationViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XPW-L5-iap">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="722"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="zea-lO-MNO"/>
@@ -72,4 +133,8 @@
             <point key="canvasLocation" x="2864" y="-496"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="table.badge.more.fill" catalog="system" width="64" height="44"/>
+    </resources>
+    <color key="tintColor" name="PrimaryColor"/>
 </document>

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ConversationViewModel {
+class HistoryViewModel {
     
     private let bag = DisposeBag()
     

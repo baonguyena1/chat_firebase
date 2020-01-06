@@ -130,6 +130,8 @@
 		9BEDD0CA23B360D200157805 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEDD0C823B360D200157805 /* SettingViewModel.swift */; };
 		9BEDF8CD23B5E37D007590A6 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BEDF8CC23B5E37D007590A6 /* Setting.storyboard */; };
 		9BEDF8CE23B5E37D007590A6 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BEDF8CC23B5E37D007590A6 /* Setting.storyboard */; };
+		9BF8B34723BF44CF0063172D /* GroupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8B34623BF44CF0063172D /* GroupInfoViewController.swift */; };
+		9BF8B34823BF44CF0063172D /* GroupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8B34623BF44CF0063172D /* GroupInfoViewController.swift */; };
 		9BFDE61723B370A300EA3886 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61623B370A300EA3886 /* ConversationViewController.swift */; };
 		9BFDE61823B370A300EA3886 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61623B370A300EA3886 /* ConversationViewController.swift */; };
 		9BFDE61A23B370AF00EA3886 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFDE61923B370AF00EA3886 /* ChatViewController.swift */; };
@@ -230,6 +232,7 @@
 		9BEDD0C423B35EE100157805 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9BEDD0C823B360D200157805 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		9BEDF8CC23B5E37D007590A6 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		9BF8B34623BF44CF0063172D /* GroupInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoViewController.swift; sourceTree = "<group>"; };
 		9BFDE61623B370A300EA3886 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		9BFDE61923B370AF00EA3886 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B4F2B8AEC860B854AF434528 /* Pods-ChatFirebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatFirebase.release.xcconfig"; path = "Target Support Files/Pods-ChatFirebase/Pods-ChatFirebase.release.xcconfig"; sourceTree = "<group>"; };
@@ -592,6 +595,7 @@
 				9BFDE61923B370AF00EA3886 /* ChatViewController.swift */,
 				9BFDE61623B370A300EA3886 /* ConversationViewController.swift */,
 				9B7249D423BF22E70016FA91 /* GroupChatViewController.swift */,
+				9BF8B34623BF44CF0063172D /* GroupInfoViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -933,6 +937,7 @@
 				9BE54FF723B0D3EE007CFA48 /* SignInViewModel.swift in Sources */,
 				9BE85A1523B5DBF000ACCBC4 /* ChatMessage.swift in Sources */,
 				9B7E995E23BAFA1300EB7E2E /* Message.swift in Sources */,
+				9BF8B34723BF44CF0063172D /* GroupInfoViewController.swift in Sources */,
 				9B7E996123BAFAC300EB7E2E /* FireBaseModel.swift in Sources */,
 				9B5F7D0F23B9FCE200E82772 /* ConversationViewModel.swift in Sources */,
 				9BEDD0AF23B3216D00157805 /* User.swift in Sources */,
@@ -1005,6 +1010,7 @@
 				9BE54FF823B0D3EE007CFA48 /* SignInViewModel.swift in Sources */,
 				9BE85A1623B5DBF000ACCBC4 /* ChatMessage.swift in Sources */,
 				9B7E995F23BAFA1300EB7E2E /* Message.swift in Sources */,
+				9BF8B34823BF44CF0063172D /* GroupInfoViewController.swift in Sources */,
 				9B7E996223BAFAC300EB7E2E /* FireBaseModel.swift in Sources */,
 				9B5F7D1023B9FCE200E82772 /* ConversationViewModel.swift in Sources */,
 				9BEDD0B023B3216D00157805 /* User.swift in Sources */,

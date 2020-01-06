@@ -10,7 +10,7 @@ import UIKit
 
 class GroupChatViewController: UIViewController {
     
-    private var conversationViewController: SingleChatViewController!
+    private var conversationViewController: ConversationViewController!
     
     var chatAccession: ChatAccession!
 
@@ -19,9 +19,10 @@ class GroupChatViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let singleChat = segue.destination as? SingleChatViewController {
+        if let singleChat = segue.destination as? ConversationViewController {
             self.conversationViewController = singleChat
             self.conversationViewController.chatAccession = self.chatAccession
+            self.observerConversation()
         }
     }
     
@@ -35,4 +36,11 @@ class GroupChatViewController: UIViewController {
         return conversationViewController.inputAccessoryView
     }
 
+    private func observerConversation() {
+        conversationViewController.conversationSubject
+            .subscribe(onNext: { [weak self] (conversation) in
+                self?.title = conversation.displayName
+            })
+            .disposed(by: conversationViewController.bag)
+    }
 }

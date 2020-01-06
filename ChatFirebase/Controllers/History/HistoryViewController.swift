@@ -18,7 +18,7 @@ class HistoryViewController: UIViewController {
     
     private let bag = DisposeBag()
     
-    private let viewModel = ConversationViewModel()
+    private let viewModel = HistoryViewModel()
     
     private var conversations = [Conversation]() {
         didSet {

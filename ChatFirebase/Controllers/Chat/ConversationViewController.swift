@@ -18,13 +18,15 @@ final class ConversationViewController: ChatViewController {
     
     let outgoingAvatarOverlap: CGFloat = 17.5
     
-    private let bag = DisposeBag()
+    let bag = DisposeBag()
     
-    private var viewModel: SingleChatViewModel!
+    private var viewModel: ConversationViewModel!
     
     private var conversation: Conversation?
     
     var chatAccession: ChatAccession!
+    
+    var conversationSubject = PublishRelay<Conversation>()
     
     override func viewDidLoad() {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
@@ -432,7 +434,7 @@ extension ConversationViewController {
 extension ConversationViewController {
     
     private func initialViewModel() {
-        viewModel = SingleChatViewModel(sender: currentSender() as! SenderUser)
+        viewModel = ConversationViewModel(sender: currentSender() as! SenderUser)
     }
     
     private func initialReactive() {
@@ -451,9 +453,10 @@ extension ConversationViewController {
             .disposed(by: bag)
         
         // Observe conversation when get the conversation
-        viewModel.conversation
+        viewModel.conversation.share()
             .subscribe(onNext: { [weak self] (conversation) in
                 self?.conversation = conversation
+                self?.conversationSubject.accept(conversation)
                 self?.viewModel.observeMessages(inConversation: conversation.documentID)
             })
             .disposed(by: bag)
@@ -468,8 +471,6 @@ extension ConversationViewController {
                 }
             })
             .disposed(by: bag)
-        
-        
     }
     
     private func chatMessageFromMessage(_ message: Message) -> ChatMessage {
