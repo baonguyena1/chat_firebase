@@ -1,22 +1,32 @@
 //
-//  MemberViewCell.swift
+//  AddPeopleViewCell.swift
 //  ChatFirebase
 //
-//  Created by Bao Nguyen on 12/25/19.
-//  Copyright © 2019 Bao Nguyen. All rights reserved.
+//  Created by Bao Nguyen on 1/6/20.
+//  Copyright © 2020 Bao Nguyen. All rights reserved.
 //
 
 import UIKit
+import RxSwift
 
-class MemberViewCell: UITableViewCell {
+class AddPeopleViewCell: UITableViewCell {
     
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    @IBOutlet weak var addButton: UIButton!
+    
+    public private(set) var bag = DisposeBag()
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        bag = DisposeBag()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,7 +34,7 @@ class MemberViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
     var user: User! {
         didSet {
             setupUI()
@@ -38,4 +48,5 @@ class MemberViewCell: UITableViewCell {
         displayNameLabel.text = user.displayName
         descriptionLabel.text = user.email
     }
+
 }

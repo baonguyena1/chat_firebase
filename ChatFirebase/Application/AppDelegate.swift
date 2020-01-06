@@ -10,6 +10,7 @@ import UIKit
 import FirebaseCore
 import IQKeyboardManagerSwift
 import Kingfisher
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         ApplicationNavigator.shared.setWindow(window: window)
         ApplicationNavigator.shared.checkIfUserIsSignedIn()
+        
+        // Debug detect memory leaks of RxSwift
+//        #if DEBUG
+//        _ = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { _ in
+//                print("Rx Resource count \(RxSwift.Resources.total)")
+//            })
+//        #endif
         
         return true
     }

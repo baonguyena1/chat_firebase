@@ -22,11 +22,11 @@ final class ConversationViewController: ChatViewController {
     
     private var viewModel: ConversationViewModel!
     
-    private var conversation: Conversation?
+    public private(set) var conversation: Conversation?
     
     var chatAccession: ChatAccession!
     
-    var conversationSubject = PublishRelay<Conversation>()
+    public private(set) var conversationSubject = PublishRelay<Conversation>()
     
     override func viewDidLoad() {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())

@@ -46,4 +46,6 @@ enum ImageAssets {
     static let ic_member_tabbar = UIImage(named: "ic_member_tabbar")
     static let ic_message_tabbar = UIImage(named: "ic_message_tabbar")
     static let ic_user_tabbar = UIImage(named: "ic_user_tabbar")
+    static let ic_uncheck = UIImage(named: "ic_uncheck")
+    static let ic_check = UIImage(named: "ic_check")
 }

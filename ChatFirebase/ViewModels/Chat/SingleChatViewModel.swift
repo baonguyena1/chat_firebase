@@ -119,7 +119,6 @@ class ConversationViewModel {
                 let check = results.reduce(true) { (acc, next) in
                     return acc && next
                 }
-                print("--------", check)
                 if !check {
                     return .just([])
                 }
@@ -164,7 +163,6 @@ class ConversationViewModel {
                     })
                     results = Array(data)
                 }
-                print("-----", results)
                 return .just(results)
         }
     }
@@ -176,7 +174,6 @@ class ConversationViewModel {
                 if let data = snapshot.data(), let conversations = data[KeyPath.kConversations] as? [String] {
                     results = Set(conversations)
                 }
-                print("-------", results)
                 return results
             }
     }

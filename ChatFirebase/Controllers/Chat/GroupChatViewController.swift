@@ -23,6 +23,11 @@ class GroupChatViewController: UIViewController {
             self.conversationViewController = singleChat
             self.conversationViewController.chatAccession = self.chatAccession
             self.observerConversation()
+        } else if let navigationController = segue.destination as? UINavigationController {
+            if let addPeopleController = navigationController.viewControllers.first as? AddPeopleViewController,
+                let conversation = self.conversationViewController.conversation {
+                addPeopleController.conversation = conversation
+            }
         }
     }
     
