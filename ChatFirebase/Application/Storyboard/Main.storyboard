@@ -28,10 +28,10 @@
             </objects>
             <point key="canvasLocation" x="-1584" y="-171"/>
         </scene>
-        <!--ConversationRootNavigation-->
+        <!--HistoryRootNavigation-->
         <scene sceneID="luA-Rg-U3h">
             <objects>
-                <viewControllerPlaceholder storyboardName="Conversation" referencedIdentifier="ConversationRootNavigation" id="M6q-iQ-yhr" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="History" referencedIdentifier="HistoryRootNavigation" id="M6q-iQ-yhr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="NtM-e3-IIc"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31q-T9-Y6a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -64,4 +64,5 @@
             <color red="1" green="0.53333333333333333" blue="0.41960784313725491" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <color key="tintColor" name="PrimaryColor"/>
 </document>

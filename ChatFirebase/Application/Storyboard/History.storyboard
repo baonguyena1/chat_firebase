@@ -12,7 +12,7 @@
         <!--Chats-->
         <scene sceneID="zeb-hX-xrw">
             <objects>
-                <viewController storyboardIdentifier="ConversationViewController" id="pIY-nI-4lT" customClass="ConversationViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryViewController" id="pIY-nI-4lT" customClass="HistoryViewController" customModule="ChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="blU-ML-Cxg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="244.92753623188409" y="-496.20535714285711"/>
         </scene>
-        <!--SingleChatViewController-->
+        <!--GroupChatViewController-->
         <scene sceneID="qvO-eO-E09">
             <objects>
-                <viewControllerPlaceholder storyboardName="Chat" referencedIdentifier="SingleChatViewController" id="Agh-fe-Xos" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Chat" referencedIdentifier="GroupChatViewController" id="Agh-fe-Xos" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="pW1-2c-zJA"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ng-h1-Tzz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -119,7 +119,7 @@
         <!--Navigation Controller-->
         <scene sceneID="FE2-Cw-Wq5">
             <objects>
-                <navigationController storyboardIdentifier="ConversationRootNavigation" automaticallyAdjustsScrollViewInsets="NO" id="GtX-Xp-2xJ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HistoryRootNavigation" automaticallyAdjustsScrollViewInsets="NO" id="GtX-Xp-2xJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ic_message_tabbar" id="iWx-NR-tl7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="RYB-HQ-leX">
@@ -145,4 +145,5 @@
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <color key="tintColor" name="PrimaryColor"/>
 </document>

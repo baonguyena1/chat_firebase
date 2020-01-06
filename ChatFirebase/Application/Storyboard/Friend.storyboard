@@ -107,10 +107,10 @@
             </objects>
             <point key="canvasLocation" x="244.92753623188409" y="-496.20535714285711"/>
         </scene>
-        <!--SingleChatViewController-->
+        <!--GroupChatViewController-->
         <scene sceneID="mas-YJ-7Sv">
             <objects>
-                <viewControllerPlaceholder storyboardName="Chat" referencedIdentifier="SingleChatViewController" id="2En-rq-Zbx" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Chat" referencedIdentifier="GroupChatViewController" id="2En-rq-Zbx" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="bDU-Eb-pv3"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TdE-pW-qCc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -146,4 +146,5 @@
             <color red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <color key="tintColor" name="PrimaryColor"/>
 </document>

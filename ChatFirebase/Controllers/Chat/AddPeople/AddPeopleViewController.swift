@@ -1,9 +1,9 @@
 //
-//  FriendListViewController.swift
+//  AddPeopleViewController.swift
 //  ChatFirebase
 //
-//  Created by Bao Nguyen on 12/23/19.
-//  Copyright © 2019 Bao Nguyen. All rights reserved.
+//  Created by Bao Nguyen on 1/6/20.
+//  Copyright © 2020 Bao Nguyen. All rights reserved.
 //
 
 import UIKit
@@ -11,13 +11,18 @@ import DZNEmptyDataSet
 import RxCocoa
 import RxSwift
 
-class FriendListViewController: UIViewController {
-
+class AddPeopleViewController: UIViewController {
+    
     @IBOutlet weak var userTableView: UITableView!
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    
+    var conversation: Conversation!
     
     private let bag = DisposeBag()
     
-    private let viewModel = UserListViewModel()
+    private let viewModel = AddPeopleViewModel()
+    
+    private var addMembers = BehaviorRelay<Set<String>>(value: Set<String>())
     
     private var users = [User]() {
         didSet {
@@ -28,10 +33,10 @@ class FriendListViewController: UIViewController {
     }
     
     private let searchController = UISearchController(searchResultsController: nil)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         initialTableView()
         
         initialReactive()
@@ -40,29 +45,48 @@ class FriendListViewController: UIViewController {
         
         observeMembers()
     }
-
+    
     private func initialTableView() {
         userTableView.emptyDataSetSource = self
         userTableView.tableFooterView = UIView()
     }
     
     private func observeMembers() {
-        viewModel.observeMembers()
+        viewModel.observeMembers(without: conversation.members)
     }
     
     private func initialReactive() {
+        self.addMembers.bind(to: viewModel.addMembers).disposed(by: bag)
+        
+        viewModel.addButtonEnabled.bind(to: addButton.rx.isEnabled).disposed(by: bag)
+        
+        viewModel.addMembers
+            .subscribe { [weak self] (_) in
+                DispatchQueue.main.async {
+                    self?.userTableView.reloadData()
+                }
+            }
+            .disposed(by: bag)
+        
         viewModel.members
             .subscribe(onNext: { [weak self] (members) in
                 self?.users = members
             })
             .disposed(by: bag)
         
-        userTableView.rx.itemSelected
-            .subscribe(onNext: { [weak self] (indexPath) in
-                guard let `self` = self else { return }
-                let friend = self.users[indexPath.row]
-                self.performSegue(withIdentifier: Segue.kFriendToSingleChat, sender: friend)
+        viewModel.rx_isLoading.bind(to: self.view.rx.isShowHUD)
+            .disposed(by: bag)
+        
+        viewModel.rx_error
+            .subscribe(onNext: { [weak self] (error) in
+                self?.showError(message: error)
             })
+            .disposed(by: bag)
+        
+        viewModel.addMembersSuccess
+            .subscribe { [weak self] (_) in
+                self?.dismiss(animated: true, completion: nil)
+            }
             .disposed(by: bag)
     }
     
@@ -73,29 +97,38 @@ class FriendListViewController: UIViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? GroupChatViewController {
-            if let friend = sender as? User {
-                destination.chatAccession = .friend(listFriend: [friend.documentID])
-            }
-        }
+
+    @IBAction func cancelTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func addTapped(_ sender: Any) {
+        viewModel.addMembersToConversation(members: Array(viewModel.addMembers.value), conversation: conversation.documentID)
+    }
+    
 }
 
-extension FriendListViewController: UITableViewDataSource, UITableViewDelegate {
+extension AddPeopleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(ofType: MemberViewCell.self, at: indexPath)
-        cell.user = users[indexPath.row]
+        let cell = tableView.dequeueReusableCell(ofType: AddPeopleViewCell.self, at: indexPath)
+        let user = users[indexPath.row]
+        cell.user = user
+        cell.addButton.setImage(viewModel.isMemberContains(user.documentID) ? ImageAssets.ic_check : ImageAssets.ic_uncheck, for: .normal)
+        cell.addButton.rx.controlEvent(.touchUpInside)
+            .subscribe { [weak self] (_) in
+                self?.viewModel.addOrRemoveMember(user.documentID)
+            }
+            .disposed(by: cell.bag)
         return cell
     }
+    
 }
 
-extension FriendListViewController: DZNEmptyDataSetSource {
+extension AddPeopleViewController: DZNEmptyDataSetSource {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return ImageAssets.placeholder_message_empty!
     }
@@ -125,7 +158,7 @@ extension FriendListViewController: DZNEmptyDataSetSource {
     }
 }
 
-extension FriendListViewController: UISearchResultsUpdating {
+extension AddPeopleViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
     }
