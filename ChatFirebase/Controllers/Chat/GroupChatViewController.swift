@@ -20,6 +20,7 @@ class GroupChatViewController: UIViewController {
         super.viewDidLoad()
         
         groupInfoButton.isEnabled = false
+        self.title = Localizable.kChats
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

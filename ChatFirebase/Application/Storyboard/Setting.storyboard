@@ -71,7 +71,7 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="P7f-sQ-vSd">
-                                                        <rect key="frame" x="0.0" y="307.5" width="414" height="169.5"/>
+                                                        <rect key="frame" x="0.0" y="307.5" width="414" height="161"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IDM-b8-s8K" userLabel="Change Password">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56.5"/>
@@ -216,10 +216,10 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aI-aJ-1TY" userLabel="SignOut View">
-                                                                <rect key="frame" x="0.0" y="113" width="414" height="56.5"/>
+                                                                <rect key="frame" x="0.0" y="113" width="414" height="48"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isx-EU-96a">
-                                                                        <rect key="frame" x="20" y="0.0" width="374" height="48.5"/>
+                                                                        <rect key="frame" x="20" y="0.0" width="374" height="40"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BYc-bp-qPz">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
@@ -256,22 +256,12 @@
                                                                                     </label>
                                                                                 </subviews>
                                                                             </stackView>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8j-qZ-VYt" userLabel="Line View">
-                                                                                <rect key="frame" x="0.0" y="48" width="374" height="0.5"/>
-                                                                                <color key="backgroundColor" name="SeparatorColor"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="0.5" id="g7L-UE-hex"/>
-                                                                                </constraints>
-                                                                            </view>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                         <constraints>
                                                                             <constraint firstItem="BYc-bp-qPz" firstAttribute="leading" secondItem="isx-EU-96a" secondAttribute="leading" id="4WN-xa-0HS"/>
                                                                             <constraint firstAttribute="trailing" secondItem="BYc-bp-qPz" secondAttribute="trailing" id="61j-Z4-gF2"/>
-                                                                            <constraint firstItem="e8j-qZ-VYt" firstAttribute="top" secondItem="BYc-bp-qPz" secondAttribute="bottom" constant="8" id="8F4-Xq-jUc"/>
-                                                                            <constraint firstItem="e8j-qZ-VYt" firstAttribute="leading" secondItem="OMz-SU-qX4" secondAttribute="leading" id="UB6-X3-eVK"/>
-                                                                            <constraint firstItem="e8j-qZ-VYt" firstAttribute="trailing" secondItem="aA4-9F-ZOz" secondAttribute="trailing" id="oSl-Uf-Ohj"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="e8j-qZ-VYt" secondAttribute="bottom" id="q8Y-Nb-Gvh"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="BYc-bp-qPz" secondAttribute="bottom" id="QVn-8F-Whh"/>
                                                                             <constraint firstItem="BYc-bp-qPz" firstAttribute="top" secondItem="isx-EU-96a" secondAttribute="top" id="yci-72-UAO"/>
                                                                         </constraints>
                                                                     </view>

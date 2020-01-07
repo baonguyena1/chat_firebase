@@ -128,8 +128,9 @@ class GroupInfoViewController: UIViewController {
             .disposed(by: bag)
         
         imagePickerController.selectedImage
-            .subscribe(onNext: { (image) in
-                
+            .subscribe(onNext: { [weak self] (image) in
+                guard let `self` = self else { return }
+                self.viewModel.changeGroupPhoto(image: image, previousLink: self.conversation.avatar, conversation: self.conversation.documentID)
             })
             .disposed(by: bag)
     }
@@ -155,6 +156,14 @@ class GroupInfoViewController: UIViewController {
         }
         alertController.addAction(changeAvatar)
         
+        if !conversation.avatar.isEmpty {
+            let removeAvatar = UIAlertAction(title: Localizable.kRemoveChatPhoto, style: .default) { [weak self] (action) in
+                guard let `self` = self else { return }
+                self.viewModel.removePhoto(self.conversation.avatar, conversation: self.conversation.documentID)
+            }
+            alertController.addAction(removeAvatar)
+        }
+        
         let cancel = UIAlertAction(title: Localizable.kCancel, style: .destructive)
         alertController.addAction(cancel)
         self.present(alertController, animated: true, completion: nil)
@@ -170,13 +179,13 @@ class GroupInfoViewController: UIViewController {
         let cancelAction = UIAlertAction(title: Localizable.kCancel, style: .cancel)
         alertController.addAction(cancelAction)
         
-        let okAction = UIAlertAction(title: Localizable.kOk, style: .default) { [weak self] (action) in
+        let doneAction = UIAlertAction(title: Localizable.kDone, style: .default) { [weak self] (action) in
             if let name = alertController.textFields?.first?.text, !name.isEmpty,
                 let conversationId = self?.conversation.documentID {
                 self?.viewModel.changeGroupName(name: name, conversation: conversationId)
             }
         }
-        alertController.addAction(okAction)
+        alertController.addAction(doneAction)
         self.present(alertController, animated: true, completion: nil)
     }
     

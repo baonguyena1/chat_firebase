@@ -15,6 +15,7 @@ class Conversation: FireBaseModel {
     var lastMessageId: String!
     var lastMessage: Message!
     var name: String!
+    var avatar: String!
     
     var displayName: String {
         let currentUserId = FireBaseManager.shared.auth.currentUser?.uid
@@ -24,9 +25,12 @@ class Conversation: FireBaseModel {
         return name
     }
     
-    var avatar: String {
+    var groupAvatar: [String] {
+        if !avatar.isEmpty {
+            return [avatar]
+        }
         let currentUserId = FireBaseManager.shared.auth.currentUser?.uid
-        return users.first(where: { $0.documentID != currentUserId })?.avatar ?? ""
+        return activeUsers.filter { $0.documentID != currentUserId }.compactMap { $0.avatar }
     }
     
     var activeUsers: [User] {
@@ -56,6 +60,12 @@ class Conversation: FireBaseModel {
             self.name = name
         } else {
             self.name = ""
+        }
+        
+        if let avatar = json[KeyPath.kAvatar] as? String {
+            self.avatar = avatar
+        } else {
+            self.avatar = ""
         }
         super.init(from: json)
     }

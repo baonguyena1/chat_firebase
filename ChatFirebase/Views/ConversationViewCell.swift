@@ -32,7 +32,7 @@ class ConversationViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        avatarImageView.setImage(with: conversation.avatar, placeholder: nil)
+        avatarImageView.setImage(with: conversation.groupAvatar.first ?? "", placeholder: nil)
         displayNameLabel.text = conversation.displayName
         descriptionLabel.text = conversation.lastMessage.message
     }

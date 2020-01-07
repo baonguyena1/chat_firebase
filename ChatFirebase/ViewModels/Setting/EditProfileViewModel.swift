@@ -26,17 +26,7 @@ class EditProfileViewModel: BaseViewModel {
         let storageRef = FireBaseManager.shared.userProfileStorage.child(userId).child(UUID().uuidString.lowercased() + ".png")
         
         rx_isLoading.accept(true)
-        FireBaseManager.shared.uploadImage(image, ref: storageRef)
-            .flatMap { (success) -> Observable<String> in
-                if !success {
-                    return .just("")
-                }
-                return Observable.zip(FireBaseManager.shared.getUrl(reference: storageRef),
-                                      self.deleteImage(urlString: previousImageUrl))
-                    .compactMap { (url, _) -> String in
-                        return url
-                    }
-            }
+        FireBaseManager.shared.uploadGetDelete(image, previousLink: previousImageUrl, reference: storageRef)
             .flatMap { (url) -> Observable<Void> in
                 var data: [String: Any] = [KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970]
                 if let name = name {
@@ -58,13 +48,6 @@ class EditProfileViewModel: BaseViewModel {
                 self?.rx_isLoading.accept(false)
             })
             .disposed(by: bag)
-    }
-    
-    private func deleteImage(urlString: String) -> Observable<Void> {
-        return FireBaseManager.shared.storage
-            .reference(forURL: urlString)
-            .rx.delete()
-            .catchErrorJustReturn(())
     }
     
 }
