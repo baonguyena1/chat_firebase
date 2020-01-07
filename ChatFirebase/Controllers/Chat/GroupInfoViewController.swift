@@ -16,6 +16,8 @@ class GroupInfoViewController: UIViewController {
     
     @IBOutlet weak var avatarTitleStackView: UIStackView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var leaveGroupLabel: UILabel!
+    @IBOutlet weak var deleteGroupStackView: UIStackView!
     
     var conversation: Conversation!
     
@@ -43,7 +45,7 @@ class GroupInfoViewController: UIViewController {
                 addPeopleController.conversation = self.conversation
             }
         } else if let memberController = segue.destination as? GroupMemberViewController {
-            memberController.members = self.conversation.users
+            memberController.members = self.conversation.activeUsers
         }
     }
     
@@ -55,7 +57,7 @@ class GroupInfoViewController: UIViewController {
     
     private func setupUI() {
         avatarTitleStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        guard let users = conversation.users else { return }
+        let users = conversation.activeUsers
         if users.count >= 3 {
             avatarTitleStackView.addArrangedSubview(buildCircleImageView(imageUrl: users[0].avatar ?? ""))
             avatarTitleStackView.addArrangedSubview(buildCircleImageView(imageUrl: users[1].avatar ?? ""))
@@ -68,6 +70,9 @@ class GroupInfoViewController: UIViewController {
             }
         }
         titleLabel.text = conversation.displayName
+        leaveGroupLabel.isHidden = users.count < 3
+        let currentUserId = LoginUserManager.shared.user.value.documentID!
+        deleteGroupStackView.isHidden = !conversation.admins.contains(currentUserId)
     }
     
     private func observeConversation() {
@@ -125,16 +130,23 @@ class GroupInfoViewController: UIViewController {
             }
             .disposed(by: bag)
         
+        viewModel.deleteGroup
+            .subscribe { [weak self] (_) in
+                self?.navigationController?.popToRootViewController(animated: true)
+        }
+        .disposed(by: bag)
+        
         imagePickerController.selectedImage
-            .subscribe(onNext: { (image) in
-                
+            .subscribe(onNext: { [weak self] (image) in
+                guard let `self` = self else { return }
+                self.viewModel.changeGroupPhoto(image: image, previousLink: self.conversation.avatar, conversation: self.conversation.documentID)
             })
             .disposed(by: bag)
     }
     
     @objc
     private func avatarTapped(_ gesture: UITapGestureRecognizer) {
-        if conversation.users.count <= 2 {
+        if conversation.activeMembers.count <= 2 {
             return
         }
         showEditAlert()
@@ -153,6 +165,14 @@ class GroupInfoViewController: UIViewController {
         }
         alertController.addAction(changeAvatar)
         
+        if !conversation.avatar.isEmpty {
+            let removeAvatar = UIAlertAction(title: Localizable.kRemoveChatPhoto, style: .default) { [weak self] (action) in
+                guard let `self` = self else { return }
+                self.viewModel.removePhoto(self.conversation.avatar, conversation: self.conversation.documentID)
+            }
+            alertController.addAction(removeAvatar)
+        }
+        
         let cancel = UIAlertAction(title: Localizable.kCancel, style: .destructive)
         alertController.addAction(cancel)
         self.present(alertController, animated: true, completion: nil)
@@ -168,13 +188,13 @@ class GroupInfoViewController: UIViewController {
         let cancelAction = UIAlertAction(title: Localizable.kCancel, style: .cancel)
         alertController.addAction(cancelAction)
         
-        let okAction = UIAlertAction(title: Localizable.kOk, style: .default) { [weak self] (action) in
+        let doneAction = UIAlertAction(title: Localizable.kDone, style: .default) { [weak self] (action) in
             if let name = alertController.textFields?.first?.text, !name.isEmpty,
                 let conversationId = self?.conversation.documentID {
                 self?.viewModel.changeGroupName(name: name, conversation: conversationId)
             }
         }
-        alertController.addAction(okAction)
+        alertController.addAction(doneAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -194,5 +214,21 @@ class GroupInfoViewController: UIViewController {
         guard let userId = LoginUserManager.shared.user.value.documentID, !userId.isEmpty,
             let conversationId = conversation.documentID else { return }
         viewModel.leaveGroup(user: userId, conversation: conversationId)
+    }
+    
+    @IBAction func deleteGroupTapped(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: Localizable.kAreYouSureWantToDeleteGroup, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: Localizable.kCancel, style: .cancel)
+        alert.addAction(cancel)
+        
+        let ok = UIAlertAction(title: Localizable.kOk, style: .destructive) { [weak self] (action) in
+            self?.deleteGroup()
+        }
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func deleteGroup() {
+        viewModel.deteleConversation(conversation: conversation.documentID, activeMembers: conversation.activeMembers)
     }
 }

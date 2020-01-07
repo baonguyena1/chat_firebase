@@ -10,13 +10,13 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseFunctions
 import RxFirebase
 import RxSwift
 
 class FireBaseManager {
     
     static let shared = FireBaseManager()
-    
     
     // MARK: -  Properties
     
@@ -30,6 +30,10 @@ class FireBaseManager {
     
     lazy var storage: Storage = {
         return Storage.storage()
+    }()
+    
+    lazy var function: Functions = {
+        return Functions.functions()
     }()
     
     lazy var usersCollection: CollectionReference = {
@@ -52,6 +56,9 @@ class FireBaseManager {
         return storage.reference().child(FireBaseName.kUserProfiles)
     }()
     
+    lazy var chatAvatarStorage = {
+        return storage.reference().child(FireBaseName.kChats)
+    }()
     
     // MARK: - Common function
     
@@ -123,7 +130,32 @@ class FireBaseManager {
         self.firestore.settings = settings
     }
     
-    func uploadImage(_ image: UIImage, ref: StorageReference) -> Observable<Bool> {
+    func uploadAndGetImageURL(_ image: UIImage, reference: StorageReference) -> Observable<String> {
+        return uploadImage(image, ref: reference)
+            .flatMapLatest { (status) -> Observable<String> in
+                if status {
+                    return self.getUrl(reference: reference)
+                } else {
+                    return Observable.just("")
+                }
+        }
+    }
+    
+    func uploadGetDelete(_ image: UIImage, previousLink: String, reference: StorageReference) -> Observable<String> {
+        return uploadImage(image, ref: reference)
+            .flatMap { (success) -> Observable<String> in
+                if !success {
+                    return .just("")
+                }
+                return Observable.zip(self.getUrl(reference: reference),
+                                      self.deleteImage(urlString: previousLink))
+                    .compactMap { (url, _) -> String in
+                        return url
+                }
+        }
+    }
+    
+    private func uploadImage(_ image: UIImage, ref: StorageReference) -> Observable<Bool> {
         guard let imageData = image.pngData() else {
             return .just(false)
         }
@@ -131,10 +163,21 @@ class FireBaseManager {
             .map { _ in true }
     }
     
-    func getUrl(reference: StorageReference) -> Observable<String> {
+    private func getUrl(reference: StorageReference) -> Observable<String> {
         return reference.rx
             .downloadURL()
             .map { $0.absoluteString }
+    }
+    
+    func deleteImage(urlString: String) -> Observable<Void> {
+        let validUrl = URL(string: urlString)
+        if validUrl == nil {
+            return .just(())
+        }
+        return storage
+            .reference(forURL: urlString)
+            .rx.delete()
+            .catchErrorJustReturn(())
     }
     // MARK: -  Private function
     

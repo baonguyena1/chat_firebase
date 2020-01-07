@@ -52,7 +52,7 @@ class AddPeopleViewController: UIViewController {
     }
     
     private func observeMembers() {
-        viewModel.observeMembers(without: conversation.members)
+        viewModel.observeMembers(without: conversation.activeMembers)
     }
     
     private func initialReactive() {

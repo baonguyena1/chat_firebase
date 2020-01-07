@@ -36,6 +36,8 @@ class ConversationViewModel {
         self.sentMessageStatus.accept(true)
         createConversation(data: [
                 KeyPath.kMembers: members,
+                KeyPath.kActiveMembers: members,
+                KeyPath.kAdmins: [sender],
                 KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
                 KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970
             ])

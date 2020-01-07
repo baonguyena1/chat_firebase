@@ -21,6 +21,8 @@ class GroupInfoViewModel: BaseViewModel {
     
     private(set) var leaveGroup = PublishRelay<Void>()
     
+    private(set) var deleteGroup = PublishRelay<Void>()
+    
     func observeConversation(conversationId: String) {
         FireBaseManager.shared.observeConversation(conversation: conversationId)
             .compactMap { $0 }
@@ -41,7 +43,7 @@ class GroupInfoViewModel: BaseViewModel {
                 KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
                 KeyPath.kName: name
             ])
-            .subscribe(onNext: { [weak self] (_) in
+            .subscribe(onNext: { (_) in
                 
             }, onError: { [weak self] (error) in
                 self?.rx_error.accept(error.localizedDescription)
@@ -52,8 +54,47 @@ class GroupInfoViewModel: BaseViewModel {
             .disposed(by: bag)
     }
     
-    func changeGroupPhoto(image: UIImage, conversation: String) {
-        
+    func changeGroupPhoto(image: UIImage, previousLink: String, conversation: String) {
+        let imagename = UUID().uuidString.lowercased()
+        let reference = FireBaseManager.shared.chatAvatarStorage.child(conversation).child(imagename + ".png")
+        rx_isLoading.accept(true)
+        FireBaseManager.shared.uploadGetDelete(image, previousLink: previousLink, reference: reference)
+            .flatMap { (url) -> Observable<Void> in
+                let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
+                let data: [String: Any] = [
+                    KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
+                    KeyPath.kAvatar: url
+                ]
+                return conversationRef.rx.updateData(data)
+            }
+            .subscribe(onNext: { (_) in
+                
+            }, onError: { [weak self] (error) in
+                self?.rx_error.accept(error.localizedDescription)
+                self?.rx_isLoading.accept(false)
+            }, onCompleted: { [weak self] in
+                self?.rx_isLoading.accept(false)
+            })
+            .disposed(by: bag)
+    }
+    
+    func removePhoto(_ photo: String, conversation: String) {
+        rx_isLoading.accept(true)
+        let updatedData: [String: Any] = [
+            KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
+            KeyPath.kAvatar: FieldValue.delete()
+        ]
+        let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
+        Observable.zip(FireBaseManager.shared.deleteImage(urlString: photo), conversationRef.rx.updateData(updatedData))
+            .subscribe(onNext: { (_, _) in
+                
+            }, onError: { [weak self] (error) in
+                self?.rx_error.accept(error.localizedDescription)
+                self?.rx_isLoading.accept(false)
+            }, onCompleted: { [weak self] in
+                self?.rx_isLoading.accept(false)
+            })
+            .disposed(by: bag)
     }
     
     func leaveGroup(user: String, conversation: String) {
@@ -64,16 +105,17 @@ class GroupInfoViewModel: BaseViewModel {
             }, onError: { [weak self] (error) in
                 self?.rx_error.accept(error.localizedDescription)
                 self?.rx_isLoading.accept(false)
-            }, onCompleted: {[weak self] in
+            }, onCompleted: { [weak self] in
                 self?.rx_isLoading.accept(false)
             })
+            .disposed(by: bag)
     }
     
     private func leaveConversation(user: String, conversation: String) -> Observable<Void> {
         let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
         let data: [String: Any] = [
             KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
-            KeyPath.kMembers: FieldValue.arrayRemove([user])
+            KeyPath.kActiveMembers: FieldValue.arrayRemove([user])
         ]
         return conversationRef.rx.updateData(data)
     }
@@ -86,4 +128,48 @@ class GroupInfoViewModel: BaseViewModel {
         ]
         return userChatRef.rx.updateData(data)
     }
+    
+    func deteleConversation(conversation: String, activeMembers: [String]) {
+        let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
+        
+        let db = FireBaseManager.shared.firestore
+        let batch = db.batch()
+        
+        // Delete convesation auto trigger and delete message in rooms in Firebase Functions
+        batch.deleteDocument(conversationRef)
+        
+        let updatedData: [String: Any] = [
+            KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
+            KeyPath.kConversations: FieldValue.arrayRemove([conversation])
+        ]
+        // Map batch action
+        activeMembers.map { FireBaseManager.shared.userChatsCollection.document($0) }.forEach { batch.updateData(updatedData, forDocument: $0) }
+        
+        self.rx_isLoading.accept(true)
+        batch.rx.commit()
+            .subscribe(onNext: { [weak self] (_) in
+                self?.deleteGroup.accept(())
+            }, onError: { [weak self] (error) in
+                self?.rx_error.accept(error.localizedDescription)
+                self?.rx_isLoading.accept(false)
+            }, onCompleted: { [weak self] in
+                self?.rx_isLoading.accept(false)
+            })
+        .disposed(by: bag)
+        
+    }
+    
+    private func deleteUserChatLog(users: [String], conversation: String) -> Observable<Void> {
+        let db = FireBaseManager.shared.firestore
+        let batch = db.batch()
+        
+        let updatedData: [String: Any] = [
+            KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
+            KeyPath.kConversations: FieldValue.arrayRemove([conversation])
+        ]
+        // Map batch action
+        users.map { FireBaseManager.shared.userChatsCollection.document($0) }.forEach { batch.updateData(updatedData, forDocument: $0) }
+        return batch.rx.commit()
+    }
+    
 }

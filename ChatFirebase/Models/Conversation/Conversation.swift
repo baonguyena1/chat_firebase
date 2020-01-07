@@ -11,21 +11,31 @@ import Foundation
 class Conversation: FireBaseModel {
     var members: [String]!
     var users: [User]!
+    var activeMembers: [String]!
+    var admins: [String]!
     var lastMessageId: String!
     var lastMessage: Message!
     var name: String!
+    var avatar: String!
     
     var displayName: String {
         let currentUserId = FireBaseManager.shared.auth.currentUser?.uid
         if name.isEmpty {
-            return users.filter { $0.documentID != currentUserId }.compactMap { $0.displayName }.joined(separator: ", ")
+            return activeUsers.filter { $0.documentID != currentUserId }.compactMap { $0.displayName }.joined(separator: ", ")
         }
         return name
     }
     
-    var avatar: String {
+    var groupAvatar: [String] {
+        if !avatar.isEmpty {
+            return [avatar]
+        }
         let currentUserId = FireBaseManager.shared.auth.currentUser?.uid
-        return users.first(where: { $0.documentID != currentUserId })?.avatar ?? ""
+        return activeUsers.filter { $0.documentID != currentUserId }.compactMap { $0.avatar }
+    }
+    
+    var activeUsers: [User] {
+        return self.users.filter { activeMembers.contains($0.documentID) }
     }
     
     required init(from json: JSON) {
@@ -33,6 +43,12 @@ class Conversation: FireBaseModel {
             self.members = members
         } else {
             self.members = []
+        }
+        
+        if let activeMembers = json[KeyPath.kActiveMembers] as? [String] {
+            self.activeMembers = activeMembers
+        } else {
+            self.activeMembers = []
         }
         
         if let lastMessageId = json[KeyPath.kLastMessageId] as? String {
@@ -45,6 +61,17 @@ class Conversation: FireBaseModel {
             self.name = name
         } else {
             self.name = ""
+        }
+        
+        if let avatar = json[KeyPath.kAvatar] as? String {
+            self.avatar = avatar
+        } else {
+            self.avatar = ""
+        }
+        if let admins = json[KeyPath.kAdmins] as? [String] {
+            self.admins = admins
+        } else {
+            self.admins = []
         }
         super.init(from: json)
     }

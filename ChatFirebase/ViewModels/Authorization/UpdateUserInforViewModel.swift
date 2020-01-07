@@ -42,14 +42,7 @@ class UpdateUserInforViewModel: BaseViewModel {
         ]
         
         rx_isLoading.accept(true)
-        FireBaseManager.shared.uploadImage(image, ref: reference)
-            .flatMapLatest { (status) -> Observable<String> in
-                if status {
-                    return FireBaseManager.shared.getUrl(reference: reference)
-                } else {
-                    return Observable.just("")
-                }
-            }
+        FireBaseManager.shared.uploadAndGetImageURL(image, reference: reference)
             .flatMapLatest { (avatarUrl) -> Observable<Void> in
                 if !avatarUrl.isEmpty {
                     values[KeyPath.kAvatar] = avatarUrl

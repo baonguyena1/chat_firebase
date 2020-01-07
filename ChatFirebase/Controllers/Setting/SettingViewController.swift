@@ -81,10 +81,10 @@ class SettingViewController: UIViewController {
     
     private func showSignOutWarning() {
         let alertController = UIAlertController(title: nil, message: Localizable.kAreYouSureWantToSignOut, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: Localizable.kNo, style: .destructive, handler: nil))
         alertController.addAction(UIAlertAction(title: Localizable.kYes, style: .default, handler: { [weak self] action in
             self?.viewModel.signOut()
         }))
-        alertController.addAction(UIAlertAction(title: Localizable.kNo, style: .destructive, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
 }

@@ -15,4 +15,5 @@ struct FireBaseName {
     static let kUserChats = "userChats"
     static let kUserProfiles = "user_profiles"
     static let kMessages = "messages"
+    static let kChats = "chats"
 }
