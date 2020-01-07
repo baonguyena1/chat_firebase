@@ -51,4 +51,7 @@ struct Localizable {
     static let kSending = "Sending...".localized
     static let kCancel = "Cancel".localized
     static let kAa = "Aa".localized
+    static let kChangeName = "Change Name".localized
+    static let kChangeChatPhoto = "Change Chat Photo".localized
+    static let kOk = "Ok".localized
 }

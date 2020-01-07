@@ -30,6 +30,8 @@ final class ConversationViewController: ChatViewController {
     
     override func viewDidLoad() {
         messagesCollectionView = MessagesCollectionView(frame: .zero, collectionViewLayout: CustomMessagesFlowLayout())
+        
+        additionalBottomInset = 30
 
         super.viewDidLoad()
         
