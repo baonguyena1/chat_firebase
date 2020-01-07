@@ -40,6 +40,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="groupInfoButton" destination="WrX-yi-tjd" id="WMN-CI-HT6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lqe-20-mGx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -404,6 +407,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="xdG-LP-4q4"/>
                     <connections>
                         <outlet property="avatarTitleStackView" destination="Jom-We-Rad" id="eGm-YS-25z"/>
+                        <outlet property="leaveGroupLabel" destination="onk-W9-ktu" id="iLN-pN-QCs"/>
                         <outlet property="titleLabel" destination="E9t-R2-BG3" id="Xh1-jU-BpO"/>
                     </connections>
                 </viewController>

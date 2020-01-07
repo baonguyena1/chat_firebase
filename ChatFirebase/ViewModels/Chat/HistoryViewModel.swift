@@ -22,13 +22,12 @@ class HistoryViewModel {
             .listen()
             .flatMapLatest { (snapshot) -> Observable<Conversation?> in
                 guard let data = snapshot.data(),
-                    let conversations = data[KeyPath.kConversations] as? [String] else {
+                    let conversations = data[KeyPath.kConversations] as? [String], !conversations.isEmpty else {
                         return Observable.just(nil)
                 }
                 let conversationsObservable = conversations.compactMap { FireBaseManager.shared.observeConversation(conversation: $0) }
                 return Observable.merge(conversationsObservable)
             }
-            .compactMap { $0 }
             .subscribe(onNext: { [weak self] (conversation) in
                 self?.addConversation(conversation: conversation)
             }, onError: { (error) in
@@ -37,7 +36,10 @@ class HistoryViewModel {
             .disposed(by: bag)
     }
     
-    private func addConversation(conversation: Conversation) {
+    private func addConversation(conversation: Conversation?) {
+        guard let conversation = conversation else {
+            return self.conversations.accept([])
+        }
         var conversations = self.conversations.value
         if let index = conversations.firstIndex(where: { $0.documentID == conversation.documentID }) {
             conversations[index] = conversation

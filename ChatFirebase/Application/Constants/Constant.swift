@@ -37,6 +37,7 @@ struct KeyPath {
     static let kMessageType = "message_type"
     static let kDocumentID = "documentID"
     static let kSenderId = "sender_id"
+    static let kActiveMembers = "active_members"
 }
 
 struct Localizable {

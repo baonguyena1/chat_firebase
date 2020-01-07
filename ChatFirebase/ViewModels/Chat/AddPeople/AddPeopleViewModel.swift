@@ -102,7 +102,8 @@ class AddPeopleViewModel: BaseViewModel {
         let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
         let data: [String: Any] = [
             KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
-            KeyPath.kMembers: FieldValue.arrayUnion(members)
+            KeyPath.kMembers: FieldValue.arrayUnion(members),
+            KeyPath.kActiveMembers: FieldValue.arrayUnion(members)
         ]
         return conversationRef.rx.updateData(data)
     }

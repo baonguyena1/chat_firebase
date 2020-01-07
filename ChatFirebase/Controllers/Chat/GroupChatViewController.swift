@@ -10,12 +10,16 @@ import UIKit
 
 class GroupChatViewController: UIViewController {
     
+    @IBOutlet weak var groupInfoButton: UIBarButtonItem!
+    
     private var conversationViewController: ConversationViewController!
     
     var chatAccession: ChatAccession!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        groupInfoButton.isEnabled = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -49,6 +53,7 @@ class GroupChatViewController: UIViewController {
         conversationViewController.conversationSubject
             .subscribe(onNext: { [weak self] (conversation) in
                 self?.title = conversation.displayName
+                self?.groupInfoButton.isEnabled = true
             })
             .disposed(by: conversationViewController.bag)
     }

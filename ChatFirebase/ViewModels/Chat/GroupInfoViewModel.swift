@@ -67,13 +67,14 @@ class GroupInfoViewModel: BaseViewModel {
             }, onCompleted: {[weak self] in
                 self?.rx_isLoading.accept(false)
             })
+            .disposed(by: bag)
     }
     
     private func leaveConversation(user: String, conversation: String) -> Observable<Void> {
         let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
         let data: [String: Any] = [
             KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
-            KeyPath.kMembers: FieldValue.arrayRemove([user])
+            KeyPath.kActiveMembers: FieldValue.arrayRemove([user])
         ]
         return conversationRef.rx.updateData(data)
     }

@@ -16,6 +16,7 @@ class GroupInfoViewController: UIViewController {
     
     @IBOutlet weak var avatarTitleStackView: UIStackView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var leaveGroupLabel: UILabel!
     
     var conversation: Conversation!
     
@@ -43,7 +44,7 @@ class GroupInfoViewController: UIViewController {
                 addPeopleController.conversation = self.conversation
             }
         } else if let memberController = segue.destination as? GroupMemberViewController {
-            memberController.members = self.conversation.users
+            memberController.members = self.conversation.activeUsers
         }
     }
     
@@ -55,7 +56,7 @@ class GroupInfoViewController: UIViewController {
     
     private func setupUI() {
         avatarTitleStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        guard let users = conversation.users else { return }
+        let users = conversation.activeUsers
         if users.count >= 3 {
             avatarTitleStackView.addArrangedSubview(buildCircleImageView(imageUrl: users[0].avatar ?? ""))
             avatarTitleStackView.addArrangedSubview(buildCircleImageView(imageUrl: users[1].avatar ?? ""))
@@ -68,6 +69,7 @@ class GroupInfoViewController: UIViewController {
             }
         }
         titleLabel.text = conversation.displayName
+        leaveGroupLabel.isHidden = users.count < 3
     }
     
     private func observeConversation() {
@@ -134,7 +136,7 @@ class GroupInfoViewController: UIViewController {
     
     @objc
     private func avatarTapped(_ gesture: UITapGestureRecognizer) {
-        if conversation.users.count <= 2 {
+        if conversation.activeMembers.count <= 2 {
             return
         }
         showEditAlert()
