@@ -476,8 +476,10 @@ extension ConversationViewController {
     }
     
     private func chatMessageFromMessage(_ message: Message) -> ChatMessage {
-        guard let user = self.conversation?.users.first(where: { message.senderId == $0.documentID } ) else { fatalError() }
-        let sender = SenderUser(senderId: user.documentID, displayName: user.displayName ?? "")
+        var sender = SenderUser(senderId: UUID().uuidString.lowercased(), displayName: Localizable.kRemovedUser)
+        if let user = self.conversation?.users.first(where: { message.senderId == $0.documentID } ) {
+            sender = SenderUser(senderId: user.documentID, displayName: user.displayName ?? "")
+        }
         return ChatMessage(text: message.message, user: sender, messageId: message.documentID, date: message.createdAt.date)
     }
     

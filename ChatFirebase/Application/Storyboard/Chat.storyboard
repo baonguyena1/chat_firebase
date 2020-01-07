@@ -342,14 +342,18 @@
                                                                     <outletCollection property="gestureRecognizers" destination="Cy6-2X-ffd" appends="YES" id="FdM-1N-loT"/>
                                                                 </connections>
                                                             </stackView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave Groups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onk-W9-ktu">
+                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave Groups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onk-W9-ktu">
                                                                 <rect key="frame" x="0.0" y="135" width="354" height="30"/>
+                                                                <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="3h0-DV-bP5"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="EtD-co-dtU" appends="YES" id="l8N-ic-JHC"/>
+                                                                </connections>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
@@ -412,6 +416,11 @@
                 <tapGestureRecognizer id="Cy6-2X-ffd">
                     <connections>
                         <segue destination="tSY-Ig-rYy" kind="presentation" id="14P-om-TyE"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="EtD-co-dtU">
+                    <connections>
+                        <action selector="leaveGroupTapped:" destination="L6y-2h-S2f" id="jb0-UQ-mqF"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

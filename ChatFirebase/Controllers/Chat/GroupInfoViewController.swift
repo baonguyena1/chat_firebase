@@ -119,6 +119,12 @@ class GroupInfoViewController: UIViewController {
             })
             .disposed(by: bag)
         
+        viewModel.leaveGroup
+            .subscribe { [weak self] (_) in
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
+            .disposed(by: bag)
+        
         imagePickerController.selectedImage
             .subscribe(onNext: { (image) in
                 
@@ -172,5 +178,21 @@ class GroupInfoViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func leaveGroupTapped(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: Localizable.kAreYouSureWantToLeaveYourGroup, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: Localizable.kCancel, style: .cancel)
+        alert.addAction(cancel)
+        
+        let ok = UIAlertAction(title: Localizable.kOk, style: .destructive) { [weak self] (action) in
+            self?.leaveGroup()
+        }
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
     
+    private func leaveGroup() {
+        guard let userId = LoginUserManager.shared.user.value.documentID, !userId.isEmpty,
+            let conversationId = conversation.documentID else { return }
+        viewModel.leaveGroup(user: userId, conversation: conversationId)
+    }
 }

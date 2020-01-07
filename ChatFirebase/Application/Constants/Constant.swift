@@ -54,4 +54,6 @@ struct Localizable {
     static let kChangeName = "Change Name".localized
     static let kChangeChatPhoto = "Change Chat Photo".localized
     static let kOk = "Ok".localized
+    static let kAreYouSureWantToLeaveYourGroup = "Are you sure want to leave your group?".localized
+    static let kRemovedUser = "Removed User".localized
 }
