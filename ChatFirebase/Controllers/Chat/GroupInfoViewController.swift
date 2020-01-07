@@ -17,6 +17,7 @@ class GroupInfoViewController: UIViewController {
     @IBOutlet weak var avatarTitleStackView: UIStackView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var leaveGroupLabel: UILabel!
+    @IBOutlet weak var deleteGroupStackView: UIStackView!
     
     var conversation: Conversation!
     
@@ -70,6 +71,8 @@ class GroupInfoViewController: UIViewController {
         }
         titleLabel.text = conversation.displayName
         leaveGroupLabel.isHidden = users.count < 3
+        let currentUserId = LoginUserManager.shared.user.value.documentID!
+        deleteGroupStackView.isHidden = !conversation.admins.contains(currentUserId)
     }
     
     private func observeConversation() {
@@ -126,6 +129,12 @@ class GroupInfoViewController: UIViewController {
                 self?.navigationController?.popToRootViewController(animated: true)
             }
             .disposed(by: bag)
+        
+        viewModel.deleteGroup
+            .subscribe { [weak self] (_) in
+                self?.navigationController?.popToRootViewController(animated: true)
+        }
+        .disposed(by: bag)
         
         imagePickerController.selectedImage
             .subscribe(onNext: { [weak self] (image) in
@@ -205,5 +214,21 @@ class GroupInfoViewController: UIViewController {
         guard let userId = LoginUserManager.shared.user.value.documentID, !userId.isEmpty,
             let conversationId = conversation.documentID else { return }
         viewModel.leaveGroup(user: userId, conversation: conversationId)
+    }
+    
+    @IBAction func deleteGroupTapped(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: Localizable.kAreYouSureWantToDeleteGroup, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: Localizable.kCancel, style: .cancel)
+        alert.addAction(cancel)
+        
+        let ok = UIAlertAction(title: Localizable.kOk, style: .destructive) { [weak self] (action) in
+            self?.deleteGroup()
+        }
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func deleteGroup() {
+        viewModel.deteleConversation(conversation: conversation.documentID, activeMembers: conversation.activeMembers)
     }
 }

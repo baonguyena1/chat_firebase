@@ -38,6 +38,7 @@ struct KeyPath {
     static let kDocumentID = "documentID"
     static let kSenderId = "sender_id"
     static let kActiveMembers = "active_members"
+    static let kAdmins = "admins"
 }
 
 struct Localizable {
@@ -60,4 +61,5 @@ struct Localizable {
     static let kChats = "Chats".localized
     static let kDone = "Done".localized
     static let kRemoveChatPhoto = "Remove Chat Photo".localized
+    static let kAreYouSureWantToDeleteGroup = "Are you sure want to detele group?".localized
 }

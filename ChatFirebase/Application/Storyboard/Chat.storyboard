@@ -242,7 +242,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-qe-HmU">
-                                                        <rect key="frame" x="30" y="170.5" width="354" height="165"/>
+                                                        <rect key="frame" x="30" y="170.5" width="354" height="213.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREFERENCES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6V-Zg-yc3">
                                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="30"/>
@@ -345,8 +345,46 @@
                                                                     <outletCollection property="gestureRecognizers" destination="Cy6-2X-ffd" appends="YES" id="FdM-1N-loT"/>
                                                                 </connections>
                                                             </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nyv-cF-IeL">
+                                                                <rect key="frame" x="0.0" y="135" width="354" height="40.5"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNl-7X-es1">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="354" height="40"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Group" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cN-o1-rJR">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="354" height="40"/>
+                                                                                <gestureRecognizers/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="40" id="vSp-P6-fQ8"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="6cN-o1-rJR" secondAttribute="trailing" id="IQa-xX-Yeo"/>
+                                                                            <constraint firstItem="6cN-o1-rJR" firstAttribute="leading" secondItem="RNl-7X-es1" secondAttribute="leading" id="KUS-L2-iMM"/>
+                                                                            <constraint firstItem="6cN-o1-rJR" firstAttribute="top" secondItem="RNl-7X-es1" secondAttribute="top" id="UGF-FF-pcU"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="6cN-o1-rJR" secondAttribute="bottom" id="v8h-rV-fAd"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RtD-ua-iw6" userLabel="Line View">
+                                                                        <rect key="frame" x="0.0" y="40" width="354" height="0.5"/>
+                                                                        <color key="backgroundColor" name="SeparatorColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="0.5" id="n16-0C-jb8"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                                <gestureRecognizers/>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="7uF-Kw-beL" appends="YES" id="XBA-sx-rgv"/>
+                                                                </connections>
+                                                            </stackView>
                                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave Groups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onk-W9-ktu">
-                                                                <rect key="frame" x="0.0" y="135" width="354" height="30"/>
+                                                                <rect key="frame" x="0.0" y="183.5" width="354" height="30"/>
                                                                 <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="3h0-DV-bP5"/>
@@ -407,6 +445,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="xdG-LP-4q4"/>
                     <connections>
                         <outlet property="avatarTitleStackView" destination="Jom-We-Rad" id="eGm-YS-25z"/>
+                        <outlet property="deleteGroupStackView" destination="Nyv-cF-IeL" id="ZVb-ug-BZX"/>
                         <outlet property="leaveGroupLabel" destination="onk-W9-ktu" id="iLN-pN-QCs"/>
                         <outlet property="titleLabel" destination="E9t-R2-BG3" id="Xh1-jU-BpO"/>
                     </connections>
@@ -425,6 +464,11 @@
                 <tapGestureRecognizer id="EtD-co-dtU">
                     <connections>
                         <action selector="leaveGroupTapped:" destination="L6y-2h-S2f" id="jb0-UQ-mqF"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="7uF-Kw-beL">
+                    <connections>
+                        <action selector="deleteGroupTapped:" destination="L6y-2h-S2f" id="LPI-iR-hdA"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

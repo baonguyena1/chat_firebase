@@ -12,6 +12,7 @@ class Conversation: FireBaseModel {
     var members: [String]!
     var users: [User]!
     var activeMembers: [String]!
+    var admins: [String]!
     var lastMessageId: String!
     var lastMessage: Message!
     var name: String!
@@ -66,6 +67,11 @@ class Conversation: FireBaseModel {
             self.avatar = avatar
         } else {
             self.avatar = ""
+        }
+        if let admins = json[KeyPath.kAdmins] as? [String] {
+            self.admins = admins
+        } else {
+            self.admins = []
         }
         super.init(from: json)
     }

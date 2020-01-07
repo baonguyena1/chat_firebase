@@ -10,13 +10,13 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import FirebaseFunctions
 import RxFirebase
 import RxSwift
 
 class FireBaseManager {
     
     static let shared = FireBaseManager()
-    
     
     // MARK: -  Properties
     
@@ -30,6 +30,10 @@ class FireBaseManager {
     
     lazy var storage: Storage = {
         return Storage.storage()
+    }()
+    
+    lazy var function: Functions = {
+        return Functions.functions()
     }()
     
     lazy var usersCollection: CollectionReference = {
