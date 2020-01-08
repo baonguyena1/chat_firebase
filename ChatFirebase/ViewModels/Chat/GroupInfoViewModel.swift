@@ -131,6 +131,7 @@ class GroupInfoViewModel: BaseViewModel {
     
     func deteleConversation(conversation: String, activeMembers: [String]) {
         let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
+        self.rx_isLoading.accept(true)
         conversationRef.rx.delete()
             .subscribe(onNext: { [weak self] (_) in
                 self?.deleteGroup.accept(())

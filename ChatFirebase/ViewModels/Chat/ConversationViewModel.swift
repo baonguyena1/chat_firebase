@@ -22,7 +22,7 @@ class ConversationViewModel {
     
     private(set) var initialChatStatus = PublishRelay<Bool>()
     
-    private(set) var conversation = PublishRelay<Conversation>()
+    private(set) var conversation = PublishRelay<Conversation?>()
     
     private(set) var messages = BehaviorRelay<[Message]>(value: [])
 
@@ -54,7 +54,6 @@ class ConversationViewModel {
     
     func observeConversation(conversationId: String) {
         FireBaseManager.shared.observeConversation(conversation: conversationId)
-            .compactMap { $0 }
             .subscribe(onNext: { [weak self] (conversation) in
                 self?.conversation.accept(conversation)
             }, onError: { (error) in

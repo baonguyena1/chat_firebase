@@ -98,7 +98,9 @@ class FireBaseManager {
                 return conversationRef.rx
                     .listen()
                     .flatMapLatest{ [weak self] (snapshot) -> Observable<Conversation?> in
-                        
+                        if !snapshot.exists {
+                            return .just(nil)
+                        }
                         guard let `self` = self, var data = snapshot.data() else {
                             return  Observable.just(nil)
                         }
