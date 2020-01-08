@@ -316,23 +316,6 @@ extension ConversationViewController: MessagesDisplayDelegate {
             break
         }
     }
-//    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-//        // Cells are reused, so only add a button here once. For real use you would need to
-//        // ensure any subviews are removed if not needed
-//        accessoryView.subviews.forEach { $0.removeFromSuperview() }
-//        accessoryView.backgroundColor = .clear
-//        
-//        let shouldShow = Int.random(in: 0...10) == 0
-//        guard shouldShow else { return }
-//        
-//        let button = UIButton(type: .infoLight)
-//        button.tintColor = ColorAssets.primaryColor
-//        accessoryView.addSubview(button)
-//        button.frame = accessoryView.bounds
-//        button.isUserInteractionEnabled = false // respond to accessoryView tap through `MessageCellDelegate`
-//        accessoryView.layer.cornerRadius = accessoryView.frame.height / 2
-//        accessoryView.backgroundColor = ColorAssets.primaryColor.withAlphaComponent(0.3)
-//    }
     
     // MARK: - Location Messages
     
@@ -450,7 +433,9 @@ extension ConversationViewController {
         
         viewModel.messages
             .subscribe(onNext: { [weak self] (messages) in
-                let list = self?.generateChatMessage(messages) ?? []
+                let list: [ChatMessage] = (self?.generateChatMessage(messages) ?? []).lazy.sorted { (m1, m2) -> Bool in
+                    return m1.sentDate < m2.sentDate
+                }
                 self?.messageList = list
                 DispatchQueue.main.async { [weak self] in
                     self?.messagesCollectionView.reloadData()
@@ -461,7 +446,7 @@ extension ConversationViewController {
     }
     
     private func generateChatMessage(_ messages: [Message]) -> [ChatMessage] {
-        return messages.compactMap { message in
+        return messages.lazy.compactMap { message in
             guard let user = self.conversation?.users.first(where: { (user) -> Bool in user.documentID == message.senderId }) else { return nil }
             let sender = SenderUser(senderId: user.documentID, displayName: user.displayName ?? "")
             switch message.messagaType {
@@ -472,12 +457,6 @@ extension ConversationViewController {
                 default: return nil
             }
         }
-    }
-    
-    private func chatMessageFromMessage(_ message: Message) -> ChatMessage {
-        guard let user = self.conversation?.users.first(where: { message.senderId == $0.documentID } ) else { fatalError() }
-        let sender = SenderUser(senderId: user.documentID, displayName: user.displayName ?? "")
-        return ChatMessage(text: message.message, user: sender, messageId: message.documentID, date: message.createdAt.date)
     }
     
     private func initialData() {

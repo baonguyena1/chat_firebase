@@ -204,7 +204,7 @@ class ConversationViewModel {
             }
             return nil
         }
-        return Observable.merge(actions)
+        return Observable.concat(actions)
     }
     private func createTextMessage(sender: String, conversation: String, data: String) -> Observable<String> {
         let content: [String: Any] = [
