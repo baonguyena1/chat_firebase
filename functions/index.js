@@ -1,4 +1,5 @@
 const functions = require('firebase-functions');
+const _ = require('underscore');
 
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
@@ -15,17 +16,21 @@ const batchSize = 10;
 //  response.send("Hello from Firebase!");
 // });
 
-exports.deleteMessageRoom = functions.firestore
+/**
+ * Trigger delete all messages in the room of the conversation when delete conversation
+ */
+
+exports.deleteRoomWhenDeleteConversationTrigger = functions.firestore
     .document('conversations/{conversationId}')
     .onDelete((snapshot, context) => {
         console.log('delete conversation ' + context.params.conversationId);
         var batch = db.batch();
         const path = 'rooms/' + context.params.conversationId + '/messages';
-        deleteCollection(path)
+        deleteMessageCollection(path)
         .then(() => {
             console.log('Delete rooms message');
             const roomPath = 'rooms/' + context.params.conversationId;
-            return deleteRoom(roomPath)
+            return deleteDocument(roomPath)
         })
         .then(result => {
             console.log('Delete Room ' + result);
@@ -36,15 +41,15 @@ exports.deleteMessageRoom = functions.firestore
         });
     });
 
-function deleteCollection(path) {
+function deleteMessageCollection(path) {
     let collectionRef = db.collection(path);
     let query = collectionRef.limit(batchSize);
     return new Promise((resolve, reject) => {
-        deleteQueryBatch(query, batchSize, resolve, reject);
+        deleteMessageQueryBatch(query, batchSize, resolve, reject);
     });
 }
 
-function deleteQueryBatch(query, batchSize, resolve, reject) {
+function deleteMessageQueryBatch(query, batchSize, resolve, reject) {
     query.get()
         .then(snapshot => {
             if (snapshot.size === 0) {
@@ -64,13 +69,57 @@ function deleteQueryBatch(query, batchSize, resolve, reject) {
                 return resolve();
             }
             return process.nextTick(() => {
-                deleteQueryBatch(query, batchSize, resolve, reject);
+                deleteMessageQueryBatch(query, batchSize, resolve, reject);
             });
         })
         .catch(reject);
 }
 
-function deleteRoom(path) {
+function deleteDocument(path) {
     let documentRef = db.doc(path);
     return documentRef.delete();
+}
+
+/**
+ * Check and delete user chat when update the user chat log
+ * if the conversations is null or empty, need remove it
+ */
+
+ exports.checkUserChatWhenUpdateTrigger = functions.firestore
+    .document('userChats/{userId}')
+    .onUpdate((snapshot, context) => {
+        
+        console.log('[BEGIN] checkUserChatWhenUpdateTrigger ', context.params.userId);
+        let documentPath = 'userChats/' + context.params.userId;
+        let documentRef = db.doc(documentPath);
+        documentRef.get()
+        .then(snapshot => {
+            return verifyDocument(snapshot);
+        })
+        .then(() => {
+            return deleteDocument(documentPath);
+        })
+        .then(result => {
+            console.log('[END] checkUserChatWhenUpdateTrigger');
+            return null;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    });
+
+function verifyDocument(snapshot) {
+    console.log('[BEGIN] verifyDocument');
+    return new Promise((resolve, reject) => {
+        if (!snapshot.exists) {
+            console.log('No such document!');
+            return reject(new Error('No such document!'));
+        }
+        let conversations = snapshot.data()['conversations'];
+        if (_.isUndefined(conversations) || _.isNull(conversations) || _.isEmpty(conversations)) {
+            console.log('Can delete document ', snapshot);
+            return resolve(null);
+        }
+        return reject(new Error('Conversations is not empty!'));
+    });
 }
