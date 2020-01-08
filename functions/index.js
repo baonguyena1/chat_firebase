@@ -23,10 +23,17 @@ const batchSize = 10;
 exports.deleteRoomWhenDeleteConversationTrigger = functions.firestore
     .document('conversations/{conversationId}')
     .onDelete((snapshot, context) => {
-        console.log('delete conversation ' + context.params.conversationId);
-        var batch = db.batch();
+        
+        const conversationId = context.params.conversationId;
+        const activeMembers = snapshot.data()['active_members'];
         const path = 'rooms/' + context.params.conversationId + '/messages';
-        deleteMessageCollection(path)
+        console.log('delete conversation ' + conversationId);
+
+        deleteConversationInUserChat(conversationId, activeMembers)
+        .then(result => {
+            console.log(result);
+            return deleteMessageCollection(path)
+        })
         .then(() => {
             console.log('Delete rooms message');
             const roomPath = 'rooms/' + context.params.conversationId;
@@ -78,6 +85,26 @@ function deleteMessageQueryBatch(query, batchSize, resolve, reject) {
 function deleteDocument(path) {
     let documentRef = db.doc(path);
     return documentRef.delete();
+}
+
+/**
+ * 
+ * @param {*} conversation : String conversation id
+ * @param {*} activeMembers : [String] list id active members in conversation
+ */
+function deleteConversationInUserChat(conversation, activeMembers) {
+    console.log('[BEGIN] deleteConversationInUserChat, conversation: ', conversation, ' active members: ', activeMembers);
+    let batch = db.batch();
+    activeMembers.forEach((member) => {
+        let documentRef = db.doc('userChats/' + member);
+        let updatedData = {
+            'updated_at': Date.now(),
+            'conversations': admin.firestore.FieldValue.arrayRemove(conversation)
+        };
+        batch.update(documentRef, updatedData)
+    });
+    console.log('[END] deleteConversationInUserChat');
+    return batch.commit();
 }
 
 /**
