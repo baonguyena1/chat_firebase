@@ -18,8 +18,6 @@ class ConversationViewModel {
     
     private(set) var conversationId = PublishRelay<String>()
     
-    private(set) var sentMessageStatus = PublishRelay<Bool>()
-    
     private(set) var initialChatStatus = PublishRelay<Bool>()
     
     private(set) var conversation = PublishRelay<Conversation?>()
@@ -33,7 +31,6 @@ class ConversationViewModel {
     }
     
     func setupNewConversation(members: [String], sender: String, data: [Any]) {
-        self.sentMessageStatus.accept(true)
         createConversation(data: [
                 KeyPath.kMembers: members,
                 KeyPath.kActiveMembers: members,
@@ -46,8 +43,6 @@ class ConversationViewModel {
                 self?.conversationId.accept(conversationId)
             }, onError: { (error) in
                 Logger.error(error.localizedDescription)
-            }, onCompleted: { [weak self] in
-                self?.sentMessageStatus.accept(false)
             })
             .disposed(by: bag)
     }
@@ -136,14 +131,11 @@ class ConversationViewModel {
     }
     
     func createNewMessages(sender: String, conversation: String, data: [Any]) {
-        self.sentMessageStatus.accept(true)
         createMessages(sender: sender, conversation: conversation, data: data)
             .subscribe(onNext: { (_) in
                 Logger.log("")
             }, onError: { (error) in
                 Logger.error(error.localizedDescription)
-            }, onCompleted: { [weak self] in
-                self?.sentMessageStatus.accept(false)
             })
             .disposed(by: bag)
     }
@@ -202,30 +194,49 @@ class ConversationViewModel {
     }
     
     private func createMessages(sender: String, conversation: String, data: [Any]) -> Observable<Void> {
-        let actions = data.map {
-            self.createMessage(sender: sender, conversationId: conversation, data: $0)
-                .flatMap { _  -> Observable<Void> in
-                    return .just(())
+        let actions = data.compactMap { value -> Observable<Void>? in
+            if let str = value as? String {
+                return self.createTextMessage(sender: sender, conversation: conversation, data: str)
+                    .flatMap { _ in Observable.just(()) }
+            } else if let image = value as? UIImage {
+                return createImageMessage(sender: sender, conversation: conversation, data: image)
+                    .flatMap { _ in Observable.just(()) }
             }
+            return nil
         }
         return Observable.merge(actions)
     }
+    private func createTextMessage(sender: String, conversation: String, data: String) -> Observable<String> {
+        let content: [String: Any] = [
+            KeyPath.kSenderId: sender,
+            KeyPath.kMessage: data,
+            KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
+            KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
+            KeyPath.kMessageType: ChatType.text.rawValue
+        ]
+        return createMessage(content: content, conversation: conversation)
+    }
     
-    /// Create message in conversation
-    /// - Parameter data:
-    private func createMessage(sender: String, conversationId: String, data: Any) -> Observable<String> {
-        let messages = FireBaseManager.shared.messagesCollection(conversation: conversationId)
-        if let str = data as? String {
-            let content: [String: Any] = [
-                KeyPath.kSenderId: sender,
-                KeyPath.kMessage: str,
-                KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
-                KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
-                KeyPath.kMessageType: ChatType.text.rawValue
-            ]
-            return messages.rx.addDocument(data: content)
-                .flatMap { Observable.just($0.documentID) }
-        }
-        return Observable.just("")
+    private func createMessage(content: JSON, conversation: String) -> Observable<String> {
+        let messages = FireBaseManager.shared.messagesCollection(conversation: conversation)
+        return messages.rx.addDocument(data: content)
+            .flatMap { Observable.just($0.documentID) }
+    }
+    
+    private func createImageMessage(sender: String, conversation: String, data: UIImage) -> Observable<String> {
+        let imageName = UUID().uuidString.lowercased()
+        let imageRef = FireBaseManager.shared.chatConversationStorage.child(conversation).child(sender).child(imageName + ".png")
+        return FireBaseManager.shared
+            .uploadAndGetImageURL(data, reference: imageRef)
+            .flatMap { (url) -> Observable<String> in
+                let content: [String: Any] = [
+                    KeyPath.kSenderId: sender,
+                    KeyPath.kPhoto: url,
+                    KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
+                    KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
+                    KeyPath.kMessageType: ChatType.photo.rawValue
+                ]
+                return self.createMessage(content: content, conversation: conversation)
+            }
     }
 }

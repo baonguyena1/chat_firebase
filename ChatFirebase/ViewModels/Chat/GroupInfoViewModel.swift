@@ -58,7 +58,7 @@ class GroupInfoViewModel: BaseViewModel {
         let imagename = UUID().uuidString.lowercased()
         let reference = FireBaseManager.shared.chatAvatarStorage.child(conversation).child(imagename + ".png")
         rx_isLoading.accept(true)
-        FireBaseManager.shared.uploadGetDelete(image, previousLink: previousLink, reference: reference)
+        FireBaseManager.shared.uploadGetDeletePreviousImage(image, previousLink: previousLink, reference: reference)
             .flatMap { (url) -> Observable<Void> in
                 let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
                 let data: [String: Any] = [

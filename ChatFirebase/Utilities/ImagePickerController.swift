@@ -13,7 +13,7 @@ import RxCocoa
 
 class ImagePickerController {
     
-    private var picker: YPImagePicker!
+    internal var picker: YPImagePicker!
     
     private(set) var selectedImage = PublishRelay<UIImage>()
     let bag = DisposeBag()
@@ -66,5 +66,53 @@ class ImagePickerController {
     
     func showPicker(inController controller: UIViewController) {
         controller.present(picker, animated: true, completion: nil)
+    }
+}
+
+class MultipleImagePicker: ImagePickerController {
+    
+    private(set) var selectedMedias = PublishRelay<[YPMediaItem]>()
+    
+    override init() {
+        super.init()
+        var config = YPImagePickerConfiguration()
+        // General
+        config.isScrollToChangeModesEnabled = true
+        config.usesFrontCamera = true
+        config.showsPhotoFilters = false
+        config.showsVideoTrimmer = false
+        config.shouldSaveNewPicturesToAlbum = false
+        config.albumName = "ChatFirebase"
+        config.startOnScreen = YPPickerScreen.library
+        config.screens = [.library, .photo]
+        config.showsCrop = .rectangle(ratio: 1.2)
+        config.targetImageSize = YPImageSize.original
+        config.overlayView = UIView()
+        config.hidesStatusBar = true
+        config.hidesBottomBar = false
+        config.preferredStatusBarStyle = UIStatusBarStyle.default
+        config.maxCameraZoomFactor = 1.0
+        
+        // Library
+        config.library.options = nil
+        config.library.isSquareByDefault = true
+        config.library.minWidthForItem = nil
+        config.library.mediaType = YPlibraryMediaType.photo
+        config.library.defaultMultipleSelection = true
+        config.library.maxNumberOfItems = 6
+        config.library.minNumberOfItems = 1
+        config.library.numberOfItemsInRow = 4
+        config.library.spacingBetweenItems = 1.0
+        config.library.skipSelectionsGallery = false
+        config.library.preselectedItems = nil
+        
+        // Gallery
+        config.gallery.hidesRemoveButton = false
+        self.picker = YPImagePicker(configuration: config)
+        
+        picker.didFinishPicking { [unowned picker, weak self] (items, cancelled) in
+            self?.selectedMedias.accept(items)
+            picker?.dismiss(animated: true, completion: nil)
+        }
     }
 }

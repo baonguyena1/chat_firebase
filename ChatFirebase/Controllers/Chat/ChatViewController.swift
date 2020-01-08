@@ -254,17 +254,12 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         messageInputBar.inputTextView.placeholder = Localizable.kSending
         DispatchQueue.global(qos: .default).async { [weak self] in
             self?.sendMessages(components)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.messageInputBar.sendButton.stopAnimating()
+                self?.messageInputBar.inputTextView.placeholder = Localizable.kAa
+                
+            }
         }
-//        DispatchQueue.global(qos: .default).async {
-//            // fake send request task
-//            sleep(1)
-//            DispatchQueue.main.async { [weak self] in
-//                self?.messageInputBar.sendButton.stopAnimating()
-//                self?.messageInputBar.inputTextView.placeholder = "Aa"
-//                self?.insertMessages(components)
-//                self?.messagesCollectionView.scrollToBottom(animated: true)
-//            }
-//        }
     }
     
     @objc func sendMessages(_ data: [Any]) {
