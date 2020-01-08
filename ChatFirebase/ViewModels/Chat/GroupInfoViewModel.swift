@@ -131,22 +131,7 @@ class GroupInfoViewModel: BaseViewModel {
     
     func deteleConversation(conversation: String, activeMembers: [String]) {
         let conversationRef = FireBaseManager.shared.conversationsCollection.document(conversation)
-        
-        let db = FireBaseManager.shared.firestore
-        let batch = db.batch()
-        
-        // Delete convesation auto trigger and delete message in rooms in Firebase Functions
-        batch.deleteDocument(conversationRef)
-        
-        let updatedData: [String: Any] = [
-            KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
-            KeyPath.kConversations: FieldValue.arrayRemove([conversation])
-        ]
-        // Map batch action
-        activeMembers.map { FireBaseManager.shared.userChatsCollection.document($0) }.forEach { batch.updateData(updatedData, forDocument: $0) }
-        
-        self.rx_isLoading.accept(true)
-        batch.rx.commit()
+        conversationRef.rx.delete()
             .subscribe(onNext: { [weak self] (_) in
                 self?.deleteGroup.accept(())
             }, onError: { [weak self] (error) in
@@ -157,19 +142,6 @@ class GroupInfoViewModel: BaseViewModel {
             })
         .disposed(by: bag)
         
-    }
-    
-    private func deleteUserChatLog(users: [String], conversation: String) -> Observable<Void> {
-        let db = FireBaseManager.shared.firestore
-        let batch = db.batch()
-        
-        let updatedData: [String: Any] = [
-            KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
-            KeyPath.kConversations: FieldValue.arrayRemove([conversation])
-        ]
-        // Map batch action
-        users.map { FireBaseManager.shared.userChatsCollection.document($0) }.forEach { batch.updateData(updatedData, forDocument: $0) }
-        return batch.rx.commit()
     }
     
 }

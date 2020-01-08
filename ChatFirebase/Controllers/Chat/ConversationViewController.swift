@@ -414,7 +414,7 @@ extension ConversationViewController {
                 viewModel.createNewMessages(sender: currentSender().senderId, conversation: conversationId, data: data)
             case .friend(let listFriend):   // Initial new conversation
                 let members = [currentSender().senderId] + listFriend
-                viewModel.initialConversation(members: members, sender: currentSender().senderId, data: data)
+                viewModel.setupNewConversation(members: members, sender: currentSender().senderId, data: data)
         }
     }
     

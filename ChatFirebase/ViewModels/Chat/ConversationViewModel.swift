@@ -32,7 +32,7 @@ class ConversationViewModel {
         self.sender = sender
     }
     
-    func initialConversation(members: [String], sender: String, data: [Any]) {
+    func setupNewConversation(members: [String], sender: String, data: [Any]) {
         self.sentMessageStatus.accept(true)
         createConversation(data: [
                 KeyPath.kMembers: members,
@@ -41,7 +41,6 @@ class ConversationViewModel {
                 KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
                 KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970
             ])
-            .flatMap { conversationId in self.createUserChat(listUser: members, conversationId: conversationId).map { conversationId } }
             .flatMap { conversationId in self.createMessages(sender: sender, conversation: conversationId, data: data).map { conversationId } }
             .subscribe(onNext: { [weak self] (conversationId) in
                 self?.conversationId.accept(conversationId)
@@ -203,37 +202,12 @@ class ConversationViewModel {
             .flatMap { Observable.just($0.documentID) }
     }
     
-    /// Create the User Chat Log
-    /// - Parameters:
-    ///   - listUser: user in the conversation
-    ///   - conversationId: conversation id
-    private func createUserChat(listUser: [String], conversationId: String) -> Observable<Void> {
-        let chatLogs = listUser.map { self.createUserChatLog(userId: $0, conversationId: conversationId) }
-        return Observable.zip(chatLogs)
-            .flatMap { _ in Observable.just(()) }
-    }
-    
-    private func createUserChatLog(userId: String, conversationId: String) -> Observable<Void> {
-        let userChatRef = FireBaseManager.shared.userChatsCollection.document(userId)
-        return FireBaseManager.shared.documentExists(docRef: userChatRef)
-            .flatMap { exists -> Observable<Void> in
-                var data: [String: Any] = [
-                    KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
-                    KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970
-                ]
-                if exists {
-                    data[KeyPath.kConversations] = FieldValue.arrayUnion([conversationId])
-                    return userChatRef.rx.updateData(data)
-                }
-                data[KeyPath.kConversations] =  [conversationId]
-                return userChatRef.rx.setData(data)
-            }
-    }
-    
     private func createMessages(sender: String, conversation: String, data: [Any]) -> Observable<Void> {
         let actions = data.map {
             self.createMessage(sender: sender, conversationId: conversation, data: $0)
-                .flatMap { self.updateLastMessage(toConversation: conversation, messageId: $0) }
+                .flatMap { _  -> Observable<Void> in
+                    return .just(())
+            }
         }
         return Observable.merge(actions)
     }
@@ -255,14 +229,4 @@ class ConversationViewModel {
         }
         return Observable.just("")
     }
-    
-    private func updateLastMessage(toConversation conversationId: String, messageId: String) -> Observable<Void> {
-        let conversation = FireBaseManager.shared.conversationsCollection.document(conversationId)
-        let data = [
-            KeyPath.kLastMessageId: messageId
-        ]
-        return conversation.rx.updateData(data)
-    }
-    
-    
 }

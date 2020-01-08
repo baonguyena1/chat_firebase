@@ -150,3 +150,82 @@ function verifyDocument(snapshot) {
         return reject(new Error('Conversations is not empty!'));
     });
 }
+
+/**
+ * Trigger when create new conversation
+ */
+exports.createUserChatsWhenCreateNewConversationTrigger = functions.firestore
+.document('conversations/{conversationId}')
+.onCreate((snapshot, context) => {
+    
+    let conversationId = context.params.conversationId;
+    let members = snapshot.data()['active_members'];
+    console.log('[BEGIN] checkWhenCreateNewConversationTrigger');
+    let batch = db.batch();
+    createUserChatLog(members, conversationId, batch)
+    .then(() => {
+        return batch.commit();
+    })
+    .then(result => {
+        console.log(result);
+        return;
+    })
+    .catch(err => {
+        console.error(err);
+    })
+});
+
+/**
+ * Create user chats when create new conversation
+ * @param {[String]} users : list user id in conversation
+ * @param {String} conversation : conversation id
+ * @param {Batch} batch: firebase batch
+ */
+function createUserChatLog(users, conversation, batch) {
+    var promises = [];
+    users.forEach(user => {
+        
+        let documentRef = db.doc('userChats/' + user);
+        let promise = documentRef.get()
+        .then(snapshot => {
+            var updatedData = {
+                'created_at': Date.now(),
+                'updated_at': Date.now(),
+            };
+            if (snapshot.exists) {
+                updatedData.conversations = admin.firestore.FieldValue.arrayUnion(conversation)
+                batch.update(documentRef, updatedData);
+            } else {
+                updatedData.conversations = [conversation];
+                batch.create(documentRef, updatedData);
+            }
+            return;
+        });
+        promises.push(promise);
+    });
+    return Promise.all(promises);
+}
+
+exports.updateLastMessageSendConversationWhenCreateMessageTrigger = functions.firestore
+.document('rooms/{conversationId}/messages/{messageId}')
+.onCreate((snapshot, context) => {
+
+    let conversationId = context.params.conversationId;
+    let messageId = context.params.messageId;
+    console.log('[BEGIN] updateLastMessageSendConversationWhenCreateMessageTrigger', conversationId, messageId);
+    let updatedData = {
+        'last_message_id': messageId,
+        'updated_at': Date.now()
+    }
+    let documentRef = db.doc('conversations/' + conversationId);
+
+    documentRef.update(updatedData)
+    .then(result => {
+        console.log(result);
+        console.log('[END] updateLastMessageSendConversationWhenCreateMessageTrigger');
+        return;
+    })
+    .catch(err => {
+        console.error(err);
+    })
+});
