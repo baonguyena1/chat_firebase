@@ -194,24 +194,27 @@ class ConversationViewModel {
     }
     
     private func createMessages(sender: String, conversation: String, data: [Any]) -> Observable<Void> {
+        var baseTime = Date().milisecondTimeIntervalSince1970
         let actions = data.compactMap { value -> Observable<Void>? in
             if let str = value as? String {
-                return self.createTextMessage(sender: sender, conversation: conversation, data: str)
+                baseTime = baseTime + 1
+                return self.createTextMessage(sender: sender, conversation: conversation, data: str, time: baseTime)
                     .flatMap { _ in Observable.just(()) }
             } else if let image = value as? UIImage {
-                return createImageMessage(sender: sender, conversation: conversation, data: image)
+                baseTime = baseTime + 1
+                return createImageMessage(sender: sender, conversation: conversation, data: image, time: baseTime)
                     .flatMap { _ in Observable.just(()) }
             }
             return nil
         }
-        return Observable.concat(actions)
+        return Observable.merge(actions)
     }
-    private func createTextMessage(sender: String, conversation: String, data: String) -> Observable<String> {
+    private func createTextMessage(sender: String, conversation: String, data: String, time: Double) -> Observable<String> {
         let content: [String: Any] = [
             KeyPath.kSenderId: sender,
             KeyPath.kMessage: data,
-            KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
-            KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
+            KeyPath.kCreatedAt: time,
+            KeyPath.kUpdatedAt: time,
             KeyPath.kMessageType: ChatType.text.rawValue
         ]
         return createMessage(content: content, conversation: conversation)
@@ -223,7 +226,7 @@ class ConversationViewModel {
             .flatMap { Observable.just($0.documentID) }
     }
     
-    private func createImageMessage(sender: String, conversation: String, data: UIImage) -> Observable<String> {
+    private func createImageMessage(sender: String, conversation: String, data: UIImage, time: Double) -> Observable<String> {
         let imageName = UUID().uuidString.lowercased()
         let imageRef = FireBaseManager.shared.chatConversationStorage.child(conversation).child(sender).child(imageName + ".png")
         return FireBaseManager.shared
@@ -232,8 +235,8 @@ class ConversationViewModel {
                 let content: [String: Any] = [
                     KeyPath.kSenderId: sender,
                     KeyPath.kPhoto: url,
-                    KeyPath.kCreatedAt: Date().milisecondTimeIntervalSince1970,
-                    KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970,
+                    KeyPath.kCreatedAt: time,
+                    KeyPath.kUpdatedAt: time,
                     KeyPath.kMessageType: ChatType.photo.rawValue
                 ]
                 return self.createMessage(content: content, conversation: conversation)
