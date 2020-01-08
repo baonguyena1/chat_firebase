@@ -60,6 +60,10 @@ class FireBaseManager {
         return storage.reference().child(FireBaseName.kChats)
     }()
     
+    lazy var chatConversationStorage = {
+        return storage.reference().child(FireBaseName.kConversations)
+    }()
+    
     // MARK: - Common function
     
     func messagesCollection(conversation: String) -> CollectionReference {
@@ -98,7 +102,9 @@ class FireBaseManager {
                 return conversationRef.rx
                     .listen()
                     .flatMapLatest{ [weak self] (snapshot) -> Observable<Conversation?> in
-                        
+                        if !snapshot.exists {
+                            return .just(nil)
+                        }
                         guard let `self` = self, var data = snapshot.data() else {
                             return  Observable.just(nil)
                         }
@@ -141,7 +147,7 @@ class FireBaseManager {
         }
     }
     
-    func uploadGetDelete(_ image: UIImage, previousLink: String, reference: StorageReference) -> Observable<String> {
+    func uploadGetDeletePreviousImage(_ image: UIImage, previousLink: String, reference: StorageReference) -> Observable<String> {
         return uploadImage(image, ref: reference)
             .flatMap { (success) -> Observable<String> in
                 if !success {

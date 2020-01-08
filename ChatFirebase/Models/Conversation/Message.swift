@@ -12,6 +12,7 @@ class Message: FireBaseModel {
     var message: String!
     var messagaType: String!
     var senderId: String!
+    var photo: String!
     
     required init(from json: JSON) {
         if let message = json[KeyPath.kMessage] as? String {
@@ -24,6 +25,12 @@ class Message: FireBaseModel {
             self.messagaType = messagaType
         } else {
             self.messagaType = ""
+        }
+        
+        if let photo = json[KeyPath.kPhoto] as? String {
+            self.photo = photo
+        } else {
+            self.photo = ""
         }
         
         if let senderId = json[KeyPath.kSenderId] as? String {

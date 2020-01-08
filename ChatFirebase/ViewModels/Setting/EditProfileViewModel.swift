@@ -26,7 +26,7 @@ class EditProfileViewModel: BaseViewModel {
         let storageRef = FireBaseManager.shared.userProfileStorage.child(userId).child(UUID().uuidString.lowercased() + ".png")
         
         rx_isLoading.accept(true)
-        FireBaseManager.shared.uploadGetDelete(image, previousLink: previousImageUrl, reference: storageRef)
+        FireBaseManager.shared.uploadGetDeletePreviousImage(image, previousLink: previousImageUrl, reference: storageRef)
             .flatMap { (url) -> Observable<Void> in
                 var data: [String: Any] = [KeyPath.kUpdatedAt: Date().milisecondTimeIntervalSince1970]
                 if let name = name {

@@ -13,6 +13,7 @@ import InputBarAccessoryView
 import RxSwift
 import RxCocoa
 import RxFirebase
+import YPImagePicker
 
 final class ConversationViewController: ChatViewController {
     
@@ -21,6 +22,8 @@ final class ConversationViewController: ChatViewController {
     let bag = DisposeBag()
     
     private var viewModel: ConversationViewModel!
+    
+    private var imagePicker: MultipleImagePicker!
     
     public private(set) var conversation: Conversation?
     
@@ -40,44 +43,17 @@ final class ConversationViewController: ChatViewController {
         initialReactive()
         
         initialData()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        MockSocket.shared.connect(with: [SampleData.shared.nathan, SampleData.shared.wu])
-//            .onTypingStatus { [weak self] in
-//                self?.setTypingIndicatorViewHidden(false)
-//        }.onNewMessage { [weak self] message in
-//            self?.setTypingIndicatorViewHidden(true, performUpdates: {
-//                self?.insertMessage(message)
-//            })
-//        }
     }
     
     override func loadFirstMessages() {
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            let count = UserDefaults.standard.mockMessagesCount()
-//            SampleData.shared.getAdvancedMessages(count: count) { messages in
-//                DispatchQueue.main.async {
-//                    self.messageList = messages
-//                    self.messagesCollectionView.reloadData()
-//                    self.messagesCollectionView.scrollToBottom()
-//                }
-//            }
-//        }
     }
     
     override func loadMoreMessages() {
-//        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
-//            SampleData.shared.getAdvancedMessages(count: 20) { messages in
-//                DispatchQueue.main.async {
-//                    self.messageList.insert(contentsOf: messages, at: 0)
-//                    self.messagesCollectionView.reloadDataAndKeepOffset()
-//                    self.refreshControl.endRefreshing()
-//                }
-//            }
-//        }
     }
     
     override func configureMessageCollectionView() {
@@ -145,6 +121,21 @@ final class ConversationViewController: ChatViewController {
                 item.imageView?.backgroundColor = UIColor(white: 0.85, alpha: 1)
             })
         }
+        
+        configureLeftBarItems()
+    }
+    
+    private func configureLeftBarItems() {
+        let leftItems = [
+            makeButton(named: "ic_camera")
+                .onTouchUpInside{ [weak self] _ in
+                    self?.showImagePicker()
+                },
+            InputBarButtonItem.fixedSpace(10)
+        ]
+        leftItems.forEach { $0.tintColor = .lightGray }
+        messageInputBar.setStackViewItems(leftItems, forStack: .left, animated: true)
+        messageInputBar.setLeftStackViewWidthConstant(to: 46, animated: true)
     }
     
     // MARK: - Helpers
@@ -175,24 +166,15 @@ final class ConversationViewController: ChatViewController {
     private func makeButton(named: String) -> InputBarButtonItem {
         return InputBarButtonItem()
             .configure {
-                $0.spacing = .fixed(10)
                 $0.image = UIImage(named: named)?.withRenderingMode(.alwaysTemplate)
-                $0.setSize(CGSize(width: 25, height: 25), animated: false)
+                $0.setSize(CGSize(width: 36, height: 36), animated: false)
                 $0.tintColor = UIColor(white: 0.8, alpha: 1)
         }.onSelected {
             $0.tintColor = ColorAssets.primaryColor
         }.onDeselected {
             $0.tintColor = UIColor(white: 0.8, alpha: 1)
-        }.onTouchUpInside {
+        }.onTouchUpInside { _ in
             print("Item Tapped")
-            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let action = UIAlertAction(title: Localizable.kCancel, style: .cancel, handler: nil)
-            actionSheet.addAction(action)
-            if let popoverPresentationController = actionSheet.popoverPresentationController {
-                popoverPresentationController.sourceView = $0
-                popoverPresentationController.sourceRect = $0.frame
-            }
-            self.navigationController?.present(actionSheet, animated: true, completion: nil)
         }
     }
     
@@ -324,23 +306,16 @@ extension ConversationViewController: MessagesDisplayDelegate {
         avatarView.layer.borderColor = ColorAssets.primaryColor.cgColor
     }
     
-//    func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-//        // Cells are reused, so only add a button here once. For real use you would need to
-//        // ensure any subviews are removed if not needed
-//        accessoryView.subviews.forEach { $0.removeFromSuperview() }
-//        accessoryView.backgroundColor = .clear
-//        
-//        let shouldShow = Int.random(in: 0...10) == 0
-//        guard shouldShow else { return }
-//        
-//        let button = UIButton(type: .infoLight)
-//        button.tintColor = ColorAssets.primaryColor
-//        accessoryView.addSubview(button)
-//        button.frame = accessoryView.bounds
-//        button.isUserInteractionEnabled = false // respond to accessoryView tap through `MessageCellDelegate`
-//        accessoryView.layer.cornerRadius = accessoryView.frame.height / 2
-//        accessoryView.backgroundColor = ColorAssets.primaryColor.withAlphaComponent(0.3)
-//    }
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        guard let messageType = message as? ChatMessage else { return }
+        switch messageType.kind {
+            case .photo(let media as ImageMediaItem):
+                imageView.backgroundColor = .lightGray
+                imageView.setImage(with: media.urlString ?? "")
+            default:
+            break
+        }
+    }
     
     // MARK: - Location Messages
     
@@ -411,16 +386,14 @@ extension ConversationViewController {
         }
         switch chatAccession {
             case .history(let conversationId):
+                if conversation == nil {
+                    return
+                }
                 viewModel.createNewMessages(sender: currentSender().senderId, conversation: conversationId, data: data)
             case .friend(let listFriend):   // Initial new conversation
                 let members = [currentSender().senderId] + listFriend
-                viewModel.initialConversation(members: members, sender: currentSender().senderId, data: data)
+                viewModel.setupNewConversation(members: members, sender: currentSender().senderId, data: data)
         }
-    }
-    
-    private func finishSentMessage() {
-        self.messageInputBar.sendButton.stopAnimating()
-        self.messageInputBar.inputTextView.placeholder = Localizable.kAa
     }
 }
 
@@ -440,13 +413,6 @@ extension ConversationViewController {
     }
     
     private func initialReactive() {
-        viewModel.sentMessageStatus
-            .filter { !$0 }
-            .subscribe(onNext: { [weak self] (_) in
-                self?.finishSentMessage()
-            })
-            .disposed(by: bag)
-        
         // Observe conversation id when create the new conversation
         viewModel.conversationId
             .subscribe(onNext: { [weak self] (conversationId) in
@@ -458,14 +424,18 @@ extension ConversationViewController {
         viewModel.conversation.share()
             .subscribe(onNext: { [weak self] (conversation) in
                 self?.conversation = conversation
-                self?.conversationSubject.accept(conversation)
-                self?.viewModel.observeMessages(inConversation: conversation.documentID)
+                if let conversation = conversation {
+                    self?.conversationSubject.accept(conversation)
+                    self?.viewModel.observeMessages(inConversation: conversation.documentID)
+                }
             })
             .disposed(by: bag)
         
         viewModel.messages
             .subscribe(onNext: { [weak self] (messages) in
-                let list = messages.compactMap { self?.chatMessageFromMessage($0) }
+                let list: [ChatMessage] = (self?.generateChatMessage(messages) ?? []).lazy.sorted { (m1, m2) -> Bool in
+                    return m1.sentDate < m2.sentDate
+                }
                 self?.messageList = list
                 DispatchQueue.main.async { [weak self] in
                     self?.messagesCollectionView.reloadData()
@@ -475,10 +445,18 @@ extension ConversationViewController {
             .disposed(by: bag)
     }
     
-    private func chatMessageFromMessage(_ message: Message) -> ChatMessage {
-        guard let user = self.conversation?.users.first(where: { message.senderId == $0.documentID } ) else { fatalError() }
-        let sender = SenderUser(senderId: user.documentID, displayName: user.displayName ?? "")
-        return ChatMessage(text: message.message, user: sender, messageId: message.documentID, date: message.createdAt.date)
+    private func generateChatMessage(_ messages: [Message]) -> [ChatMessage] {
+        return messages.lazy.compactMap { message in
+            guard let user = self.conversation?.users.first(where: { (user) -> Bool in user.documentID == message.senderId }) else { return nil }
+            let sender = SenderUser(senderId: user.documentID, displayName: user.displayName ?? "")
+            switch message.messagaType {
+                case ChatType.text.rawValue:
+                    return ChatMessage(text: message.message, user: sender, messageId: message.documentID, date: message.createdAt.date)
+                case ChatType.photo.rawValue:
+                    return ChatMessage(urlString: message.photo, user: sender, messageId: message.documentID, date: message.createdAt.date)
+                default: return nil
+            }
+        }
     }
     
     private func initialData() {
@@ -499,5 +477,24 @@ extension ConversationViewController {
         Logger.log("\(id)")
         self.chatAccession = .history(conversationId: id)
         viewModel.observeConversation(conversationId: id)
+    }
+}
+
+extension ConversationViewController {
+    private func showImagePicker() {
+        imagePicker = MultipleImagePicker()
+        imagePicker.selectedMedias
+            .subscribe(onNext: { [weak self] (items) in
+                for item in items {
+                    switch item {
+                        case .photo(let photo):
+                            UIPasteboard.general.image = photo.image
+                            self?.messageInputBar.inputTextView.paste(self)
+                        case .video(let video): break
+                    }
+                }
+            })
+            .disposed(by: bag)
+        imagePicker.showPicker(inController: self)
     }
 }

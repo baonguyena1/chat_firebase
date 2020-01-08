@@ -16,7 +16,7 @@ class AddPeopleViewController: UIViewController {
     @IBOutlet weak var userTableView: UITableView!
     @IBOutlet weak var addButton: UIBarButtonItem!
     
-    var conversation: Conversation!
+    var conversation: Conversation?
     
     private let bag = DisposeBag()
     
@@ -52,7 +52,9 @@ class AddPeopleViewController: UIViewController {
     }
     
     private func observeMembers() {
-        viewModel.observeMembers(without: conversation.activeMembers)
+        if let conversation = conversation {
+            viewModel.observeMembers(without: conversation.activeMembers)
+        }
     }
     
     private func initialReactive() {
@@ -103,7 +105,9 @@ class AddPeopleViewController: UIViewController {
     }
     
     @IBAction func addTapped(_ sender: Any) {
-        viewModel.addMembersToConversation(members: Array(viewModel.addMembers.value), conversation: conversation.documentID)
+        if let conversation = conversation {
+            viewModel.addMembersToConversation(members: Array(viewModel.addMembers.value), conversation: conversation.documentID)            
+        }
     }
     
 }

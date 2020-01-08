@@ -19,6 +19,7 @@ enum StoryboardName: String {
 
 enum ChatType: String {
     case text = "TEXT"
+    case photo = "PHOTO"
 }
 
 enum ChatAccession {
@@ -48,4 +49,5 @@ enum ImageAssets {
     static let ic_user_tabbar = UIImage(named: "ic_user_tabbar")
     static let ic_uncheck = UIImage(named: "ic_uncheck")
     static let ic_check = UIImage(named: "ic_check")
+    static let ic_camera = UIImage(named: "ic_camera")
 }

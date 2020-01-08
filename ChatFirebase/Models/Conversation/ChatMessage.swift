@@ -23,8 +23,9 @@ private struct CoordinateItem: LocationItem {
     
 }
 
-private struct ImageMediaItem: MediaItem {
+struct ImageMediaItem: MediaItem {
     
+    var urlString: String?
     var url: URL?
     var image: UIImage?
     var placeholderImage: UIImage
@@ -36,6 +37,11 @@ private struct ImageMediaItem: MediaItem {
         self.placeholderImage = UIImage()
     }
     
+    init(urlString: String?) {
+        self.urlString = urlString
+        self.size = CGSize(width: 240, height: 240)
+        self.placeholderImage = UIImage()
+    }
 }
 
 private struct MessageAudiotem: AudioItem {
@@ -102,6 +108,11 @@ class ChatMessage: MessageType {
     
     convenience init(image: UIImage, user: SenderUser, messageId: String, date: Date) {
         let mediaItem = ImageMediaItem(image: image)
+        self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
+    }
+    
+    convenience init(urlString: String?, user: SenderUser, messageId: String, date: Date) {
+        let mediaItem = ImageMediaItem(urlString: urlString)
         self.init(kind: .photo(mediaItem), user: user, messageId: messageId, date: date)
     }
     
